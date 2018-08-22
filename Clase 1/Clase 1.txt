@@ -1,0 +1,49 @@
+TECNOLOGIAS: PAGINAS WEB (CLIENTE / NAVEGADOR): HTML/CSS/JAVASCRIPT + AJAX (SERVIDOR)
+
+HTML: ESTRUCTURA
+CSS: ESTILO
+JS: LOGICA
+
+JSON -> JS OBJECT NOTATION (COMUNICA CON EL SERVIDOR)
+SPA -> SINGLE PAGE APPLICATION (simula en el navegador una app de escritorio para no usar tantos recursos)
+
+FRAMEWORKS: JQUERY ("hacer mas escribiendo menos", reemplaza JS), BOOTSTRAP (animaciones y diseño, reemplaza JS y CSS), 
+TYPESCRIPT ("transpila" (traduce) a JS), BOWER (administra paquetes para frontend, sirve para linkear todos los frameworks
+que estoy usando), VISUAL STUDIO CODE (editor de texto - DESCARGAR)
+
+1er parcial -> ABM (ej. blogging) con servidor nodejs (profe)
+2do parcial -> sin backend (local storage) (javascript -> aprueba, typescript -> promociona)
+
+TYPESCRIPT se ve en la 2da parte de la materia, necesario para aprobar
+
+10 clases + 4 entre parciales y recup (14 total)
+
+Practicar DEBUGGING y busqueda de soluciones en internet (w3schools - w3c)
+
+VISUAL STUDIO CODE - PAGINAS WEB
+Arranca por index.html
+! + TAB -> Arma plantilla de página web
+CTRL + S -> Guardar
+F5 o SHIFT + F5 para actualizar / liberar cache
+
+<!DOCTYPE html> -> HTML5 
+HTML no es un lenguaje de programacion sino de marcado
+
+<head> del head solo se ve el Title
+
+<html lang="es"> lang es un modificador de la etiqueta. 
+<meta charset="UTF-8"> -> JUEGO DE CARACTERES
+
+Tener todos los exploradores y hacer que la página que creamos funcione en la mayor cantidad posible
+En clase usamos CHROME
+
+br + tab = <br> (break, salto de linea)
+<p> (parrafo) para escribir dentro del body
+<h> (header) -> <h1> a <h6> SEMANTICAS (h1 tiene mucha importancia y va bajando hasta h6, titulo subtitulo etc)
+<b> (negrita) / <strong> -> ETIQUETA SEMANTICA (lo que esta dentro tiene IMPORTANCIA, sirve mucho para busquedas)
+<i> (italica) / <en> (enfasis) -> SEMANTICA
+lorem (frase para simular texto) www.lipsum.com -> generador de parrafos
+
+SHIFT + ALT + F -> ORDENA EL CODIGO
+
+Para anidar etiquetas, no importa el orden, se complementan

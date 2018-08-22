@@ -1,0 +1,10 @@
+frontend -> lab
+backend -> prog
+
+final -> hacer frontend para servidor programado en prog
+
+TODAS las materias son promocionables
+
+1er parcial -> 2 partes
+Pautas para aprobar la materia
+Pautas para promocionar
