@@ -1,4 +1,4 @@
-ï»¿TECNOLOGIAS: PAGINAS WEB (CLIENTE / NAVEGADOR): HTML/CSS/JAVASCRIPT + AJAX (SERVIDOR)
+TECNOLOGIAS: PAGINAS WEB (CLIENTE / NAVEGADOR): HTML/CSS/JAVASCRIPT + AJAX (SERVIDOR)
 
 HTML: ESTRUCTURA
 CSS: ESTILO
@@ -7,7 +7,7 @@ JS: LOGICA
 JSON -> JS OBJECT NOTATION (COMUNICA CON EL SERVIDOR)
 SPA -> SINGLE PAGE APPLICATION (simula en el navegador una app de escritorio para no usar tantos recursos)
 
-FRAMEWORKS: JQUERY ("hacer mas escribiendo menos", reemplaza JS), BOOTSTRAP (animaciones y diseï¿½o, reemplaza JS y CSS), 
+FRAMEWORKS: JQUERY ("hacer mas escribiendo menos", reemplaza JS), BOOTSTRAP (animaciones y diseño, reemplaza JS y CSS), 
 TYPESCRIPT ("transpila" (traduce) a JS), BOWER (administra paquetes para frontend, sirve para linkear todos los frameworks
 que estoy usando), VISUAL STUDIO CODE (editor de texto - DESCARGAR)
 
@@ -22,7 +22,7 @@ Practicar DEBUGGING y busqueda de soluciones en internet (w3schools - w3c)
 
 VISUAL STUDIO CODE - PAGINAS WEB
 Arranca por index.html
-! + TAB -> Arma plantilla de pï¿½gina web
+! + TAB -> Arma plantilla de página web
 CTRL + S -> Guardar
 F5 o SHIFT + F5 para actualizar / liberar cache
 
@@ -31,55 +31,64 @@ HTML no es un lenguaje de programacion sino de marcado
 
 <head> del head solo se ve el Title
 
-<html lang="es"> lang es un modificador de la etiqueta. (propiedad) 
+<html lang="es"> lang es un modificador de la etiqueta. 
 <meta charset="UTF-8"> -> JUEGO DE CARACTERES
 
-Tener todos los exploradores y hacer que la pï¿½gina que creamos funcione en la mayor cantidad posible
+Tener todos los exploradores y hacer que la página que creamos funcione en la mayor cantidad posible
 En clase usamos CHROME
+
+ETIQUETAS
 
 br + tab = <br> (break, salto de linea)
 <p> (parrafo) para escribir dentro del body
 <h> (header) -> <h1> a <h6> SEMANTICAS (h1 tiene mucha importancia y va bajando hasta h6, titulo subtitulo etc)
 <b> (negrita) / <strong> -> ETIQUETA SEMANTICA (lo que esta dentro tiene IMPORTANCIA, sirve mucho para busquedas)
-<i> (italica) / <em> (enfasis) -> SEMANTICA
+<i> (italica) / <en> (enfasis) -> SEMANTICA
+<a href="pagina2.html">Ir a la página 2</a> (hipervinculo)
+
+<ol> ordered list
+<ul> unordered list
+
+<dl> definition list 
+<dt> definition term
+<dd> definition data
+
+<table> tabla
+<tr> table row
+<td> table data (celdas)
+<th> table header
+<caption> titulo de tabla
+
+<a name="Parrafo 2"></a>
+<a href="#Parrafo 2">Ir al segundo parrafo</a> (hipervinculo hacia donde puse el "name")
+
 lorem (frase para simular texto) www.lipsum.com -> generador de parrafos
 
-SHIFT + ALT + F -> ORDENA EL CODIGO
+ALT + SHIFT + F -> ORDENA EL CODIGO
+
+VER RUTAS RELATIVAS PARA ACCEDER A LOS ARCHIVOS (JPG ETC)
 
 Para anidar etiquetas, no importa el orden, se complementan
 
-HIPERVINCULOS
-<a name="Parrafo 3"></a>
-<a href="#Parrafo 3">Ir al tercer parrafo</a>
+C + TAB = COMENTARIOS
 
-LISTAS
-<ul> unordered list -> <li> list item
-<ol> ordered list
+*******HACER HIPERVINCULO AL CLICKEAR IMAGEN, QUE MANDE A OTRA IMAGEN Y DESPUES DE NUEVO A LA PAGINA PRINCIPAL********* (TERMINAR - IMAGENES CELU)
 
-<dt> description term (name)
-<dl> description list -> <dd> description data
+CARACTERES ESPECIALES (google) - w3schools
+Espacio en blanco &nbsp;
 
-TABLAS
-<table>
-<caption> nombre de la tabla
-<tr> table row -> <th> table header
-	       -> <td> table data (cell)
+FORMS (envio de informacion - evento del boton submit)
+<form action="" method=""></form>
 
-<th rowspan="2">DC Comics</th> -> Cantidad de filas que abarca el header
-th colspan -> Columnas
+ACTION: A QUIEN LE PASAMOS LA INFORMACION? (PHP)
+METHOD (GET, POST): GET -> CABECERA (SELECT, PEDIR INFORMACION) 
+		    POST -> CUERPO (UPDATE, DELETE, INSERT)
 
-CARACTERES ESPECIALES (google)
-&nbsp; -> ESPACIO
+CONTROLES: 
+INPUT <input type="text"> -> TEXTBOX
 
-FORMS
-input -> textbox
-label
+<label for="nombre">Ingrese nombre:</label>
+<br>
+<input type="text" name="nombre" id="nombre">
 
-The <label> element is used to associate a text label with a form <input> field. 
-The label is used to tell users the value that should be entered in the associated input field.
-
-<form> <label for="favorite-animal">Favorite Animal</label>
-<br> 
-<input name="favorite-animal" id="favorite-animal"> </form>
-
-Read more: https://html.com/tags/label/#ixzz5OsUsDHPE
+FOR TIENE QUE TENER LO MISMO QUE ID! -> ASOCIA LABEL CON TEXTBOX
