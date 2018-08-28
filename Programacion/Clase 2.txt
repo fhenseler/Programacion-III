@@ -1,0 +1,79 @@
+﻿Prog orientada a objetos + comunicación a servidor (PHP)
+Backend API RES - JSON
+Aprendemos a programar en PHP (basado en la POO de C#). -> php.net y w3schools
+
+PARCIALES en etapas: ABM y listado de una entidad en particular
+Se puede traer código hecho en casa y modificarlo.
+
+TP Final -> con nota. Se busca una funcionalidad (ABM). 
+Lograr TODO el circuito ALTA -> BAJA -> MODIF -> LISTADO
+Loguearse, registrarse, almacenar datos (BACKEND sin importar FRONTEND)
+
+Backend -> En PHP. HTML/CSS/TYPESCRIPT (LAB 3) ó ANGULAR (LAB 4).
+Frontend -> Puede estar en un servidor y controla datos vs base de datos, sistema de validación
+
+El backend del TP de Prog 3 sirve para el frontend de LAB 3 y 4.
+
+CONSEGUIR E INSTALAR servidor (gratis o pago) (APACHE, en casa instalar XAMPP primero) (recibe y devuelve información)
+ASEGURAR estar corriendo en el servidor y solucionar ese error.
+
+Explican conceptos generales para el backend, que pueda funcionar en cualquier sistema.
+
+Trabajamos con base de datos MYSQL o MariaDB.
+
+Comunicación con el servidor -> http://localhost:8080/ en Chrome
+El servidor está en una carpeta (Windows): XAMPP -> HTDOC (HYpertext document)
+
+http://localhost:8080/Henseler (mi carpeta: C/XAMPP/htdoc/Henseler)
+
+CREAR ARCHIVO PHP
+Instrucción ECHO (muestra un mensaje)
+Variables dinámicas (cambian de tipo) - $nombre 
+
+Formas de concatenar
+echo "Hola".$nombre;
+echo "Hola $nombre";
+
+Funciones
+Recibe 2 numeros y retorna su suma:
+function Sum()
+{
+    return 1 + 2;
+}
+echo Sum();
+
+Debugging (HACER SIEMPRE)
+var_dump($nombre);
+var_dump(Sum());
+
+ARRAYS
+Arrays comunes, arrays key+value
+
+STDCLASS (Standard Class)
+Crear un objeto estandar $obj
+
+Acceder al campo Nombre:
+$obj->Nombre = "Federico";
+
+Referenciar archivos (ej. funciones a index) - IMPORTANTE
+2 formas: Cuando el archivo es totalmente necesario
+En index.php: 
+require "funciones.php";
+
+Cuando el archivo no es indispensable
+include "funciones.php";
+
+require_once para que no se haga el require más de una vez
+include_once
+(siempre usamos estos, ver diferencia entre require e include)
+
+CLASES Y METODOS
+STATIC VS INSTANCIA (no mezclar)
+Ver bien
+
+Aplicar TODO LO DE POO a PHP!!!! 
+
+TRAER SERVIDOR (LOGIN + PASSWORD) CON ALGUN MENSAJE SUBIDO (BUSCAR HOSTING GRATIS)
+LA UNICA FORMA DE ENTREGAR TP ES WEB (NO SE CORRIGE NADA LOCAL)
+00webhost
+hostinger
