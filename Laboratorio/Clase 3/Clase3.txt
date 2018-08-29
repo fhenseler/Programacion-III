@@ -1,0 +1,33 @@
+(FORMULARIOS) SUBMIT -> JUNTA TODA LA INFO DEL FORMULARIO Y LA ENVIA AL SERVIDOR.
+
+XAMPP->HTDOCS (PHP+FRONTEND)
+
+INPUT TYPES -> EN RADIO BUTTON EL NAME TIENE QUE SER IGUAL PARA QUE AL SELECCIONAR UNO SE ANULE EL OTRO
+EL VALUE ES EL VALOR QUE SE MANDA AL SERVIDOR. (Debería ser lo mismo que el nombre que le pongamos al radio button)
+<input type="radio" name="editorial" id="" value="DC Comics">DC Comics<br>
+
+<input type="hidden">
+<input type="password">
+<input type="email">
+<input type="text">
+
+VER TODOS LOS INPUT TYPES (FORM) W3SCHOOLS
+
+FIELDSET = GROUPBOX DE C# (Agrupa)
+
+CONTROLES DE AUDIO/VIDEO <audio><video> (tener en cuenta)
+
+MANEJO DE EVENTOS - HTML EVENTS (W3SCHOOLS)
+
+
+SCRIPTS
+
+index.html
+<script src = "./scripts/test.js"></script> 
+(INCLUIR LOS SCRIPTS EN EL ARCHIVO DESDE UNA CARPETA APARTE)
+
+
+CLASES
+Para agrupar elementos que tienen las mismas características.
+Etiquetas semánticas (para dar importancia y relevancia en búsquedas) / etiquetas estándar (ej <header><nav><main>)
+<div> class="contenedor";
