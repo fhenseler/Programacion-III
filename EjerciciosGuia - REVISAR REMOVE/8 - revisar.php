@@ -1,7 +1,7 @@
 <?php
 $num = 22;
 
-$f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+$f = new NumberFormatter("es", NumberFormatter::SPELLOUT);
 
 if($num > 20 && $num < 60)
 {
