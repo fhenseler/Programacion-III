@@ -22,7 +22,8 @@ Because the data is appended to the URL, there is a hard limit to the amount of 
 Different browsers have different limits, but you'll start to have problems around the 1KB-2KB mark.
 POST data is included in the body of the HTTP request and isn't visible in the URL. 
 As such, there's no limit to the amount of data you can transfer over POST.
-If the HTTP connection is using SSL/TLS, then GET parameters are also encrypted but can show up in other places such as the web server logs and will be accessible to browser plugins and possibly other applications as well. POST data is encrypted and does not leak in any other way.
+If the HTTP connection is using SSL/TLS, then GET parameters are also encrypted but can show up in other places such as the web server logs and will be accessible to browser plugins and possibly other applications as well. 
+POST data is encrypted and does not leak in any other way.
 *************************************************************************************************************************
 
 COOKIES (están quedando en desuso)
