@@ -1,0 +1,67 @@
+Postman - Aplicación (USAR) Sirve para evitar el uso de frontend y probar nuestras aplicaciones.
+XAMPP
+
+Información encriptada - dentro del envío (POST)
+Info no encriptada - aparece directamente en la dirección.(GET)
+
+COMUNICACIÓN SERVIDOR-PC + VARIABLES GLOBALES (index.php)
+Los verbos HTTP definen lo que espera el que envía y el que recibe.
+Variables reservadas (arrays):
+$_GET http://localhost:8080/VerbosHTTP/index.php (pc a servidor)  
+var_dump($_GET); / var_dump($_GET[]);
+$_POST
+$_REQUEST (GET + POST)
+PARAMS (key, value)
+
+VALIDAR TODO EN PHP
+
+*************************************************************************************************************************
+GET data is appended to the URL as a query string:
+https://example.com/index.html?user=admin&password=whoops
+Because the data is appended to the URL, there is a hard limit to the amount of data you can transfer. 
+Different browsers have different limits, but you'll start to have problems around the 1KB-2KB mark.
+POST data is included in the body of the HTTP request and isn't visible in the URL. 
+As such, there's no limit to the amount of data you can transfer over POST.
+If the HTTP connection is using SSL/TLS, then GET parameters are also encrypted but can show up in other places such as the web server logs and will be accessible to browser plugins and possibly other applications as well. POST data is encrypted and does not leak in any other way.
+*************************************************************************************************************************
+
+COOKIES (están quedando en desuso)
+$_COOKIE (crea una cookie y la lee)
+$_SETCOOKIE
+$_SESSION
+
+JSON WEB TOKEN (jwt.io)
+
+*************************************************************************************************************************
+
+ARCHIVOS (sólo leer y escribir, no modificarlos) 
+archivos.php
+
+file exists
+mkdir
+JSON (VER BIEN ESTO)
+
+*************************************************************************************************************************
+
+1ER PARCIAL (ALTA, ARCHIVOS, JSON)
+
+CARGA DE USUARIO (usuario, clave) -> parametros q recibe archivo x post.
+Archivo toma el dato y va a tener creada la clase "usuario" con (nombre, clave, constructor, tostring, tojson)
+Crear clase usuario (carpeta Clases).
+POST -> ARCHIVO (CREAR CARPETA Y ARCHIVO) recibe nombre y clave, llama al constructor de usuario y lo construye.
+Luego, guardar el dato en el archivo mediante el tostring (to json) asi el objeto devuelve transformado el json
+(o hacerlo x afuera). Este metodo apunta el usuario al listado, y el listado guarda en datos.json
+Finalmente, salgo y muestro el listado de todos los nombres ingresados.
+
+PREPARAR TODO ESTO Y QUE SEA ADAPTABLE!!!!!! (PARCIAL)
+
+GUARDAR Y LEER DESDE ARCHIVO 
+Archivo.php recibe 2 parametros, funcion GuardarEnArchivo(objeto) y lo guarda en archivo como viene.
+En archivo.php solo tiene que estar ese metodo estatico. (FUNCIONES ESTATICAS)
+
+guardar como json -> decode (MANEJAR JSON)
+
+github octaviovillegas/estacionamiento EJEMPLO VER
+
+muc_358@hotmail.com
+
