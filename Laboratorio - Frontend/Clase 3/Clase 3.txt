@@ -1,0 +1,24 @@
+CSS b�sico (�nica clase)
+Cascading Style Sheets
+
+1) Estilo del navegador (default)
+2) Estilos propios
+3) Estilo definido de manera inline (en la etiqueta HTML)
+
+Desacoplar las diferentes responsabilidades de la p�gina HTML
+- Enmarcar HTML
+- CSS (archivo .css referenciado a nuestro HTML)
+- JavaScript
+
+Usamos librerías (ej Bootstrap) -> .css que descargamos de internet e inyectamos en nuestro HTML
+
+CSS -> Selectores:
+
+h1 //selector (aplica a TODOS los h1 de nuestra página)
+{
+   //regla -> background.color = red; //atributo //valor
+}
+
+<link rel="stylesheet" href="./css/index.css">
+
+Selector de clase:
