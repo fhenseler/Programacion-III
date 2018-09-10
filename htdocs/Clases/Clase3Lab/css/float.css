@@ -1,0 +1,34 @@
+/*Float sirve para sacar del flujo y hacer el elemento "flotante" para poder acomodarlo al lado de otros elementos*/
+
+div
+{
+    border: green 2px solid;
+    overflow: auto;
+}
+
+img
+{
+    float: left;
+    width: 10%;
+    margin: 5px;
+}
+
+p
+{
+    /*clear: left; No admite nada flotante a la izquierda*/
+}
+
+.transicion /*Las clases llevan punto adelante*/
+{
+    width: 100px;
+    height: 100px;
+    background-color: mediumslateblue;
+    transition: width 12s, height 3s, background-color 12s;
+}
+
+.transicion:hover /*Pseudoclase - Aplica a todos los elementos de la clase transicion cuando se les hace hover*/
+{
+    width: 300px;
+    height: 400px;
+    background-color: tomato;
+}

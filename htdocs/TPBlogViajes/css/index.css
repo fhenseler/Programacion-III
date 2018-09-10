@@ -1,0 +1,159 @@
+body
+{
+    background-color: lightpink;
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    padding: 0px;
+}
+
+h1
+{
+    font-size: 20px;
+    color: #1276b8;
+    margin-left: 250px;
+    padding: 5px;
+}
+
+h2
+{
+    font-size: 20px;
+    color: #1276b8;
+    padding: 5px;
+    margin-left: 75px;
+}
+
+h3
+{
+    font-size: 20px;
+    color: white;
+    margin-left: 230px;
+    padding: 10px 20px 10px 20px;
+}
+
+img
+{
+    width: 35%;
+    height: 20%;
+    padding: 10px 10px 10px 10px;
+    margin-right: 20px;
+    margin-left: 250px;
+}
+
+img.float
+{
+    float: left;
+    width: 35%;
+    height: 20%;
+}
+
+p
+{
+    margin-left: 250px;
+    text-align: left;
+    word-spacing: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 20px;
+}
+
+button
+{
+    display: block;
+    background-color: #1276b8;
+    border: none;
+    float: left;
+    color: white;
+    width: 10%;
+    height: 50%;
+    padding: 10px;
+    margin-left: 250px;
+}
+
+/*NAVIGATION BAR*/
+ul 
+{
+    list-style-type: none;
+    padding: 10px;
+    overflow: hidden;
+    background-color: rgb(167, 1, 109);
+    font-size: 1;
+}
+
+li 
+{
+    float: left;
+    margin-left: 75px;
+    font-size: 15px;
+}
+
+li a 
+{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+li a:hover 
+{
+    background-color: #1276b8;
+}
+
+/*******************************************************************/
+.column 
+{
+    float: left;
+    padding: 0px;
+    width: 65%;
+}
+
+/* Left and right column */
+nav 
+{
+    float: left;
+    width: 35%;
+}
+
+nav li
+{
+    display: block;
+    float: left;
+    text-align: left;
+    padding: 2px;
+}
+
+nav ul
+{
+    flex-direction: column;
+    list-style-type: none;
+    margin-right: 200px;
+    padding: 0px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 1;
+}
+
+/* Clear floats after the columns */
+section:after
+{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.footertext
+{
+    text-align: left; 
+    width: 250px; 
+    font-size: 11px; 
+    color: white; 
+    margin-bottom: 30px;
+    line-height: 12px;
+}
+
+.footerli
+{
+    margin-left: 0px;
+    font-size: 10px;
+}

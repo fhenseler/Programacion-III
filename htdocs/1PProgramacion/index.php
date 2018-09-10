@@ -1,5 +1,5 @@
 <?php
-require_once '../1PClases/usuario.php';
+require_once './1PClases/usuario.php';
 
 $carpeta = '../1PArchivos';
 if (!file_exists($carpeta)) {
@@ -31,4 +31,5 @@ else
 $_user = new Usuario($_nombre, $_clave);
 echo $_user->ToString();
 var_dump($_user);
+Usuario::Guardar($_user);
 ?>
