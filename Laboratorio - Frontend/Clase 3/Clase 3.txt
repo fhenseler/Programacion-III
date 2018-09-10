@@ -22,3 +22,22 @@ h1 //selector (aplica a TODOS los h1 de nuestra página)
 <link rel="stylesheet" href="./css/index.css">
 
 Selector de clase:
+
+Ejemplo inline:
+<div class = "miClase" style = "background-color: brown"> (Es preponderante sobre el resto, pisa los demás)
+
+Margin y Padding ("box model"):
+Margin: distancia entre párrafo y borde del div ("hacia afuera").
+Padding: dirección (right, left, etc) ("hacia adentro").
+
+F12 - Consola del desarrollador (margin padding etc, APRENDER)
+DEBUG JAVASCRIPT (console.log) o pestaña Watch
+
+Se pueden concatenar muchas propiedades del mismo tipo en una sóla línea (seguir el orden)
+
+https://fontawesome.com/
+PARA INCLUIR ICONOS!
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <button>
+            <i class="fas fa-crow"></i>Test
+    </button>
