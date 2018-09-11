@@ -1,0 +1,29 @@
+EJERCICIO
+Funciones + Postman
+
+Clase Producto:
+Atributos:
+Nombre
+Codigo Barra
+
+ToString con ambos atributos para probar el objeto en Postman
+
+Constructor (recibe ambos parametros)
+
+index.php: 
+Recibe ambos parametros por post para hacer el ingreso y dar el alta.
+Crear nuevo objeto "producto" con los parametros recibidos por post.
+
+PASAR Y TOMAR ARCHIVO POR Postman
+
+FUNCIONES PARCIAL
+if para ver si existe el archivo o no en la carpeta actual antes de moverlo
+
+MoverArchivo(origen, destino)
+Cambiar fecha del archivo original y meterlo en Backup
+Guardar el nuevo archivo en la carpeta actual
+(Al subir la foto, la foto se guarda SI O SI en la carpeta actual)
+
+Devolver un .json compuesto por NOMBRE + CODIGO + FULLPATH foto (toJSON)
+Hacer una función que devuelva (mediante GET) una tabla con la info (en Postman la foto da error)
+

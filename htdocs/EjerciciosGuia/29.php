@@ -1,4 +1,5 @@
 <html>
+<body>
 <form action="#" method="get">
 <select name="Color">
     <option value="Red">Red</option>
