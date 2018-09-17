@@ -1,8 +1,8 @@
 <html>
 <form action="#" method="get">
-<php echo 'Ingrese clave: '; ?>
+<?php echo 'Ingrese clave: '; ?>
 <input type="password" name= "psw1">
-<php echo 'Reingrese clave: '; ?>
+<?php echo 'Reingrese clave: '; ?>
 <input type="password" name= "psw2">
 <input type="submit" name= "submit" value="Confirmar">
 </form>

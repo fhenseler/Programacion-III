@@ -1,11 +1,10 @@
 <html>
 <body>
-    <select name = "row">;
     <form action="#" method="post">
+    <select name = "row">;
     <?php
     $start = 1;
     $end = 50;
-    //echo '<select name = "row">';
     echo 'Amount of rows: ';
     for($i = $start; $i <= $end; $i++){
         echo "<option>{$i}</option>";
@@ -18,13 +17,9 @@
         echo "<option>{$i}</option>";
     }
     echo '</select>';
-    echo '<input type="submit" name= "submit" value="Generar Tabla" onclick="createTable(1, 2)"></button>';
-    ?>
-    </form>
-    </select>
-    
-</body>
-</html>
+    echo '<input type="submit" name= "submit" value="Generar Tabla">';
+    ?>    
+    </form>  
 
 <?php
 /* Utilizando tags de Html (<table>, <tr> y <td>) se pide generar en forma dinámica una tabla.
@@ -33,8 +28,13 @@ estos controles contendrá valores desde el 1 hasta el 50.
 Al pulsar el control <input> (type=”button”) con la leyenda “Generar Tabla”, se invocará a un
 procedimiento que creará la tabla a partir de la cantidad seleccionada de filas y columnas. */
 
-function createTable($row_val, $col_val)
-{  
+if(isset($_POST['submit']))
+{
+    $row_val = $_POST['row'];  // Storing Selected Value In Variable
+    var_dump($row_val);
+    $col_val = $_POST['column']; 
+    var_dump($col_val);
+
     echo '<table style="width:100%">';
     for($i = 0; $i < $row_val; $i++)
     {
@@ -48,17 +48,10 @@ function createTable($row_val, $col_val)
     }
     echo '</table>';
 }
-
-if(isset($_POST['submit']))
-{
-    $row_val = $_POST['row'];  // Storing Selected Value In Variable
-    var_dump($row_val);
-    $col_val = $_POST['column']; 
-    var_dump($col_val);
-}
 else
 {
     echo 'err';
 }
-
 ?>
+</body>
+</html>

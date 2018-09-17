@@ -1,7 +1,7 @@
 <?php
-require_once './1PClases/usuario.php';
+require_once './clases/usuario.php';
 
-$carpeta = '../1PArchivos';
+$carpeta = '../archivos';
 if (!file_exists($carpeta)) {
     mkdir($carpeta, 0777, true);
 }
@@ -31,5 +31,6 @@ else
 $_user = new Usuario($_nombre, $_clave);
 echo $_user->ToString();
 var_dump($_user);
+$_user->jsonSerialize();
 Usuario::Guardar($_user);
 ?>

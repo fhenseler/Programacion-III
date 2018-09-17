@@ -1,6 +1,5 @@
 <html>
-<body>
-<form action="#" method="get">
+<form action="#" method="post">
 <select name="Color">
     <option value="Red">Red</option>
     <option value="Green">Green</option>
@@ -8,45 +7,38 @@
     <option value="Pink">Pink</option>
     <option value="Yellow">Yellow</option>
 </select>
-<input type="button" name= "button" value="Cambiar Color" onclick="myFunction();">
+<input type="submit" name= "submit" value="Cambiar Color">
 </form>
 
-<?php
-function myFunction()
-{   
-    if(isset($_GET['button']))
+<?php 
+    if(isset($_POST['submit']))
     {  
-        $selected_val = $_GET['Color'];
-        echo 'ok';
+        $selected_val = $_POST['Color'];
+        switch($selected_val)
+        {
+            case 'Red':     
+            echo '<body style="background-color:red"></body>';
+                break;
+            case 'Green':
+            echo '<body style="background-color:green"></body>';
+                break;
+            case 'Blue':
+            echo '<body style="background-color:blue"></body>';
+                break;
+            case 'Pink':
+            echo '<body style="background-color:pink"></body>';
+                break;
+            case 'Yellow':
+            echo '<body style="background-color:yellow"></body>';
+                break;
+            default:
+            echo '<body style="background-color:black"></body>';
+                break;
+        }
     }
     else
     {
         echo 'error';
     }
-
-    switch($selected_val)
-    {
-        case 'Red':     
-        echo '<body style="background-color:red">';
-            break;
-        case 'Green':
-        echo '<body style="background-color:green">';
-            break;
-        case 'Blue':
-        echo '<body style="background-color:blue">';
-            break;
-        case 'Pink':
-        echo '<body style="background-color:pink">';
-            break;
-        case 'Yellow':
-        echo '<body style="background-color:yellow">';
-            break;
-        default:
-        echo '<body style="background-color:black">';
-            break;
-    }
-}
 ?>
-
-</body>
 </html>
