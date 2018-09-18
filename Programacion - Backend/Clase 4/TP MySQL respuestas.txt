@@ -1,0 +1,17 @@
+1) SELECT * FROM productos ORDER BY pNombre
+2) SELECT * FROM `proveedores` WHERE `Localidad` = 'Quilmes'
+3) SELECT * FROM `envíos` WHERE `Cantidad` >= 200 AND `Cantidad` <= 300
+4) SELECT SUM(`Cantidad`) FROM `envíos`
+5) SELECT pNumero FROM envíos LIMIT 3
+6)
+7)
+8) SELECT SUM(`Cantidad`) FROM `envíos` WHERE envíos.Numero = 102
+9) SELECT `pNumero` FROM `envíos` WHERE Numero = 101
+10)
+11) INSERT INTO `productos` (`pNumero`,`pNombre`,`Precio`,`Tamaño`) VALUES (NULL,'Chocolate', '25.85', 'Chico')
+12) INSERT INTO `proveedores` (`Numero`, `Nombre`,`Domicilio`,`Localidad`) VALUES (103, 'Federico', 'RdE 1235', 'Quilmes')
+13) INSERT INTO `proveedores` (`Numero`,`Nombre`,`Localidad`) VALUES (107, 'Rosales', 'La Plata')
+14) UPDATE Productos SET Precio= 97.50 WHERE Tamaño = 'Grande'
+15)
+16) DELETE FROM productos WHERE pNumero = 1
+17) 

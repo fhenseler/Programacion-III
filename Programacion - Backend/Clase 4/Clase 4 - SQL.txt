@@ -1,0 +1,47 @@
+XAMPP - MySQL
+http://localhost:8080/phpmyadmin/ (administrador de base de datos)
+
+Cotejamiento - utfspanish2
+
+Base de datos relacional (las tablas se relacionan por medio de PK y FK).
+
+OPERACIONES BÁSICAS
+
+INSERT INTO `personas` (`id`,`nombre`,`apellido`,`legajo`) VALUES (NULL,'Federico','Henseler',1111); 
+SELECT * FROM `personas` WHERE 1 
+* = Proyección -> Columnas que va a mostrar (si se pone sirve como comodín, muestra TODAS las columnas)
+WHERE = Restricción -> Condición a cumplir para mostrar. Ej: id = 1. (<, >, <=, LIKE, NOT)
+UPDATE `personas` SET `nombre`='Test' WHERE `id` = 1;
+DELETE FROM `personas` WHERE 1;
+
+Foreign Key: Registro que apunta a otra tabla (por ej. Localidad, casos de palabras que se repiten)
+Proveedor - Localidad (relación 1 a 1)
+Localidad - Proveedor (relación 1 a muchos)
+
+Relaciones muchos a muchos (Proveedor - Producto) - NO SE PUEDE EN SQL, por eso usamos 
+una tabla intermedia (Envíos).
+
+SELECT para relacionar 2 tablas:
+SELECT * FROM `envíos`, `proveedores` WHERE envíos.Numero = proveedores.Numero
+
+INNERJOIN / LEFTJOIN / RIGHTJOIN (otras maneras de unir tablas)
+SELECT FROM envíos AS e
+INNER JOIN proveedores AS p ON e.numero = p.numero;
+
+ALIAS
+SELECT column_name AS alias_name
+
+FUNCIONES DE AGREGACIÓN (Cálculo sobre columnas)
+COUNT, AVG, SUM, MIN, MAX
+SELECT COUNT(*) AS Cantidad FROM envíos
+SELECT SUM(`Cantidad`) FROM envíos
+
+GROUP BY
+SELECT SUM(`Cantidad`) AS Cantidad
+FROM `envíos`
+GROUP BY `Numero`
+
+PROCEDIMIENTOS (Para no dar acceso a la base de datos - en hosting gratis no funcionan)
+RUTINAS -> AGREGAR 
+CALL `TestRutina`();
+
