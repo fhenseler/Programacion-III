@@ -1,0 +1,1 @@
+ <table border=1><th> Nombre </th><th> Apellido </th><th> E-Mail </th><th> Foto </th><tr> <td> {"nombre":"Juli","apellido":"Henseler","email":"jhens@outlook.com","foto":null} </td> <td> </td> <td>  </td><td>  </td></tr> </table>

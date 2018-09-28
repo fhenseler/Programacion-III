@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var mascota = {}; //Creo un objeto
+    mascota.nombre = "Kim"; //Creo el atributo "Nombre" y lo inicializo
+    mascota.tipo = "Gato";
+    alert(mascota.nombre);
+
+    //Otra forma     
+    var persona = 
+    {
+        nombre: "Federico",
+        apellido: "Henseler",
+        Edad: 27
+    };
+    console.log(persona);
+
+    //Otra forma
+    var alumno = new Object();
+    alumno.nombre = "Julian";
+    alumno.edad = 25
+    console.log(alumno);
+
+    //FUNCION CONSTRUCTORA
+    function Heroe(nombre, apellido, alias, edad)
+    {   
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.alias = alias;
+        this.edad = edad;
+
+        this.Saludar = function()
+        {
+            alert("Hola! Soy " + this.alias);
+        }
+    }
+
+    var Superman = new Heroe("Clark", "Kent", "Superman", 35);
+    // console.log(Superman);
+    var Flash = new Heroe("Barry", "Allen", "Flash", 29);
+    // console.log(Flash);
+
+    // alert(Superman.nombre);
+    // alert(Superman['apellido']);
+
+    // var propiedad = "edad";
+    // alert(Superman[propiedad]);
+
+    Heroe.prototype.poder = "Volar"; //Agrego el poder "Volar" a todos los heroes
+
+    Superman.poder = "Volar"; //Agrego solo al objeto "Superman"
+
+    //"For in"
+    for(var propiedad in Superman)
+    {
+        alert(Superman[propiedad]);
+        //alert(propiedad);
+    }
+
+    // delete Superman.edad;
+
+    // for(var propiedad in Superman)
+    // {
+    //     alert(Superman[propiedad]);
+    //     //alert(propiedad);
+    // }
+
+    for(var propiedad in Flash)
+    {
+        alert(Flash[propiedad]);
+        //alert(propiedad);
+    }
+    Superman.Saludar();
+    </script>
+</body>
+</html>

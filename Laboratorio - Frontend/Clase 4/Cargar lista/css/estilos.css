@@ -1,0 +1,10 @@
+#tablaPersonas
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#tablaPersonas td
+{
+    border: 1px solid black;
+}
