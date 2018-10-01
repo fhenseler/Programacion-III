@@ -1,65 +1,100 @@
 <?php
-class Archivo{
-
+class Archivo
+{
 	public static function Subir()
 	{
-		$retorno["Exito"] = TRUE;
+	//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
+	$destino = "archivos/" . $_FILES["foto"]["name"];
 
-		//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
-		$archivoTmp = date("Ymd_His") . ".jpg";
-		$destino = "archivos/" . $archivoTmp;
-		
-		$tipoArchivo = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
+	$uploadOk = TRUE;
 
-		//VERIFICO EL TAMAÑO MAXIMO QUE PERMITO SUBIR
-		if ($_FILES["archivo"]["size"] > 500000) {
-			$retorno["Exito"] = FALSE;
-			$retorno["Mensaje"] = "El archivo es demasiado grande. Verifique!!!";
-			return $retorno;
-		}
+	//PATHINFO RETORNA UN ARRAY CON INFORMACION DEL PATH
+	//RETORNA : NOMBRE DEL DIRECTORIO; NOMBRE DEL ARCHIVO; EXTENSION DEL ARCHIVO
 
-		//OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
-		//IMAGEN, RETORNA FALSE
-		$esImagen = getimagesize($_FILES["archivo"]["tmp_name"]);
+	//PATHINFO_DIRNAME - retorna solo nombre del directorio
+	//PATHINFO_BASENAME - retorna solo el nombre del archivo (con la extension)
+	//PATHINFO_EXTENSION - retorna solo extension
+	//PATHINFO_FILENAME - retorna solo el nombre del archivo (sin la extension)
 
-		if($esImagen === FALSE) {//NO ES UNA IMAGEN
-			$retorno["Exito"] = FALSE;
-			$retorno["Mensaje"] = "S&oacute;lo son permitidas IMAGENES.";
-			return $retorno;
-		}
-		else {// ES UNA IMAGEN
+	var_dump(pathinfo($destino));
+	//die();
 
-			//SOLO PERMITO CIERTAS EXTENSIONES
-			if($tipoArchivo != "jpg" && $tipoArchivo != "jpeg" && $tipoArchivo != "gif"
-				&& $tipoArchivo != "png") {
-				$retorno["Exito"] = FALSE;
-				$retorno["Mensaje"] = "S&oacute;lo son permitidas imagenes con extensi&oacute;n JPG, JPEG, PNG o GIF.";
-				return $retorno;
-			}
-		}
-		
-		if (!move_uploaded_file($_FILES["archivo"]["tmp_name"], $destino)) {
+	$tipoArchivo = pathinfo($destino, PATHINFO_EXTENSION);
 
-			$retorno["Exito"] = FALSE;
-			$retorno["Mensaje"] = "Ocurrio un error al subir el archivo. No pudo guardarse.";
-			return $retorno;
-		}
-		else{
-			$retorno["Mensaje"] = "Archivo subido exitosamente!!!"; 
-			$retorno["PathTemporal"] = $archivoTmp;
-			
-			return $retorno;
-		}
-	}
-
-	public static function Borrar($path)
+	//VERIFICO QUE EL ARCHIVO NO EXISTA
+	if (file_exists($destino)) 
 	{
-		return unlink($path);
+		echo "El archivo ya existe. Verifique!!!";
+		$uploadOk = FALSE;
+	}
+	//VERIFICO EL TAMAÑO MAXIMO QUE PERMITO SUBIR
+	if ($_FILES["foto"]["size"] > 10000000) 
+	{
+		echo "El archivo es demasiado grande. Verifique!!!";
+		$uploadOk = FALSE;
 	}
 
-	public static function Mover($pathOrigen, $pathDestino)
+	//VERIFICO SI ES UNA IMAGEN O NO
+	var_dump(getimagesize($_FILES["foto"]["tmp_name"]));
+	//die();
+
+	//OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
+	//IMAGEN, RETORNA FALSE
+	$esImagen = getimagesize($_FILES["foto"]["tmp_name"]);
+
+	if($esImagen === FALSE) //NO ES UNA IMAGEN
 	{
-		return copy($pathOrigen, $pathDestino);
+		//SOLO PERMITO CIERTAS EXTENSIONES
+		if($tipoArchivo != "doc" && $tipoArchivo != "txt" && $tipoArchivo != "rar") 
+		{
+			echo "Solo son permitidos archivos con extension DOC, TXT o RAR.";
+			$uploadOk = FALSE;
+		}
 	}
+	else // ES UNA IMAGEN
+	{
+		//SOLO PERMITO CIERTAS EXTENSIONES
+		if($tipoArchivo != "jpg" && $tipoArchivo != "jpeg" && $tipoArchivo != "gif" && $tipoArchivo != "png") 
+		{
+			echo "Solo son permitidas imagenes con extension JPG, JPEG, PNG o GIF.";
+			$uploadOk = FALSE;
+		}
+
+	}
+
+	//VERIFICO SI HUBO ALGUN ERROR, CHEQUEANDO $uploadOk
+	if ($uploadOk === FALSE) 
+	{
+
+		echo "<br/>NO SE PUDO SUBIR EL ARCHIVO.";
+
+	}
+	else //MUEVO EL ARCHIVO DEL TEMPORAL AL DESTINO FINAL
+	{
+		if (move_uploaded_file($_FILES["foto"]["tmp_name"], $destino)) 
+		{
+			echo "<br/>El archivo ". basename( $_FILES["foto"]["name"]). " ha sido subido exitosamente.";
+		} 
+		else 
+		{
+		echo "<br/>Lamentablemente ocurri&oacute; un error y no se pudo subir el archivo.";
+		}
+	}
+	return $uploadOk;
+}
+
+public static function Borrar($path)
+{
+	return unlink($path);
+}
+
+// MoverArchivo(origen, destino)
+// Cambiar fecha del archivo original y meterlo en Backup
+// Guardar el nuevo archivo en la carpeta actual
+// (Al subir la foto, la foto se guarda SI O SI en la carpeta actual)
+public static function Mover($pathOrigen, $pathDestino)
+{
+	return copy($pathOrigen, $pathDestino);
+}
 }
 ?>

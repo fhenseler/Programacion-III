@@ -66,72 +66,135 @@ class Alumno implements JsonSerializable
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
-//--METODO DE CLASE
-	public static function TraerUnAlumno($apellido) 
-	{
-		$alumno = new Alumno();
-		
-		$a = fopen("./archivos/alumnos.json", "r");
-		
-		while(!feof($a)){
-			$arr = explode("-", fgets($a));
-
-			if(count($arr) > 1)
-			{
-				if($arr[0] == $apellido)
-				{
-					$alumno->SetFoto($arr[3]);
-					$alumno->SetEmail($arr[2]);
-					$alumno->SetNombre($arr[1]);
-					$alumno->SetApellido($arr[0]);
-					break;
-				}
-			}
-		}
-		fclose($a);
-		
-		return $alumno;				
-	}
+//--METODOS
 	
 	public static function TraerTodosLosAlumnos()
 	{
 		// Read JSON file
 		$json = file_get_contents('./archivos/alumnos.json');
 
+		for ($i = 0; $i <= 31; ++$i)
+		{
+			$json = str_replace(chr($i), "", $json); 
+		}
+		$json = str_replace(chr(127), "", $json);
+
+		if (0 === strpos(bin2hex($json), 'efbbbf')) {
+			$json= substr($json, 3);
+		 }
+
 		//Decode JSON
-		$json_data = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $json), true );
-		//$json_data = json_decode($json,true);
-		var_dump($json_data);
-		return $json_data;
+		$json= json_decode($json, true);
+		return $json;
     }
 	
 	public static function Modificar($p)
 	{
-		$arrAlumnos = array();
+		$hoy = date('m-d-Y_hia');
 		$jsonAlumnos = Alumno::TraerTodosLosAlumnos();
-		var_dump($jsonAlumnos);
-		foreach ($jsonAlumnos as $alumno) 
+		array_push($jsonAlumnos, $p);
+		$archivo=fopen("./archivos/alumnos.json", "w");
+		$i = 0;
+		foreach($jsonAlumnos as $alumno) 
 		{
-			if($alumno["email"] == $p->email)
-			{
+			$oldname = $alumno["foto"]["name"];
+			$alumno = json_encode($alumno, true);
+			$alumno = json_decode($alumno, true);
+			if($alumno['email'] == $p->GetEmail()) 
+			{	
+				unset($jsonAlumnos[$i]);
+				Archivo::Mover('./archivos/' . $oldname, './backup/' . $p->GetApellido() . '-' . $hoy . '.' . "jpg");
+				unlink('./archivos/' . $oldname);
 				Alumno::CargarAlumno($p);
-				//Revisar
-			}		
+				break;
+			}
+			$i++;
+		}
+		fwrite($archivo, json_encode($jsonAlumnos, JSON_PRETTY_PRINT));
+		fclose($archivo);
+	}
+
+	public static function BorrarAlumno($p)
+	{
+		$jsonAlumnos = Alumno::TraerTodosLosAlumnos();
+		$archivo=fopen("./archivos/alumnos.json", "w");
+		$i = 0;
+		foreach($jsonAlumnos as $alumno) 
+		{
+			$alumno = json_encode($alumno, true);
+			$alumno = json_decode($alumno, true);
+			if($alumno['email'] == $p->GetEmail()) 
+			{
+				unset($jsonAlumnos[$i]);
+				break;
+			}
+			$i++;
+		}
+		fwrite($archivo, json_encode($jsonAlumnos, JSON_PRETTY_PRINT));
+		fclose($archivo);
+	}
+
+	public static function CargarAlumno($p)
+	{
+		$newArray = array();
+		$retorno = false;
+		$jsonAlumnos = Alumno::TraerTodosLosAlumnos();
+		$archivo=fopen("./archivos/alumnos.json", "w");
+		if($jsonAlumnos == NULL)
+		{
+			array_push($newArray, $p);
+			fwrite($archivo, json_encode($newArray, JSON_PRETTY_PRINT));
+			fclose($archivo);
+			$retorno = true;	
+		}
+		else
+		{
+			array_push($jsonAlumnos, $p);
+			fwrite($archivo, json_encode($jsonAlumnos, JSON_PRETTY_PRINT));
+			fclose($archivo);
+			$retorno = true;
+		}
+		return $retorno;
+	}	
+	
+	public function ExisteAlumno()
+	{
+		$jsonAlumnos = Alumno::TraerTodosLosAlumnos();
+		$retorno = false;
+		if($jsonAlumnos != NULL)
+		{
+			foreach ($jsonAlumnos as $alumno) 
+			{
+				if(strtolower($alumno["email"]) == $this->email)
+				{
+					echo 'El email ' . $this->email . ' ya se encuentra registrado.';
+					$retorno = true;
+					break;
+				}
+			}
+		}
+		else
+		{
+			echo 'Todavia no hay alumnos registrados en el sistema';
+		}
+		return $retorno;
+	}
+
+	public static function TraerAlumno()
+	{
+		$jsonAlumnos = Alumno::TraerTodosLosAlumnos();
+		if($jsonAlumnos != NULL)
+		{
+			foreach ($jsonAlumnos as $alumno) 
+			{
+				if(strtolower($alumno["email"]) == $this->email)
+				{
+					return $alumno;
+				}
+			}
 		}
 	}
 
-//--------------------------------------------------------------------------------//
-
-//--------------------------------------------------------------------------------//
-//--METODOS DE INSTANCIA
-	public static function CargarAlumno($alumno)
-	{
-		$archivo=fopen("./archivos/alumnos.json", "a");		
-		$ahora=date("Y-m-d H:i:s"); 
-		$renglon=json_encode($alumno->jsonSerialize())."=>".$ahora."\n";
-		fwrite($archivo, $renglon); 		 
-		fclose($archivo);
-    }	
     
     public function ConsultarAlumno($apellido)
     {
@@ -156,7 +219,6 @@ class Alumno implements JsonSerializable
             return $arrFiltrado;
 		}
     }
-//--------------------------------------------------------------------------------//
 
     public function jsonSerialize()
     {
@@ -179,13 +241,14 @@ class Alumno implements JsonSerializable
 			// Output a row
 			echo "<tr>";
 			echo "<td>" . $alumno['nombre'] . "</td>";
-			//Revisar
-			echo "<td>$alumno->apellido</td>";
-			echo "<td>$alumno->email</td>";
-			echo "<td>$alumno->foto</td>";
+			echo "<td>" . $alumno['apellido'] . "</td>";
+			echo "<td>" . $alumno['email'] . "</td>";
+			echo "<td>" . $alumno['foto'] . "</td>";
 			echo "</tr>";
 		}
 		// Close the table
 		echo "</table>";
 	}
+	//--------------------------------------------------------------------------------//	
 }
+?>

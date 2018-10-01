@@ -64,123 +64,92 @@ class Materia implements JsonSerializable
 //--------------------------------------------------------------------------------//
 
 //--------------------------------------------------------------------------------//
-//--METODO DE CLASE
-	public static function TraerUnaMateria($codigo) 
-	{
-		$materia = new Materia();
-		
-		$a = fopen("./archivos/materias.json", "r");
-		
-		while(!feof($a)){
-			$arr = explode("-", fgets($a));
-
-			if(count($arr) > 1){
-				if((int)$arr[2] == $codigo){
-					$materia->SetAula($arr[3]);
-					$materia->SetCodigo($arr[2]);
-					$materia->SetNombre($arr[1]);
-					$materia->SetCupos($arr[0]);
-					break;
-				}
-			}
-		}
-		fclose($a);
-		
-		return $materia;				
-	}
+//--METODOS
 	
 	public static function TraerTodasLasMaterias()
 	{
 		// Read JSON file
 		$json = file_get_contents('./archivos/materias.json');
 
+		for ($i = 0; $i <= 31; ++$i)
+		{
+			$json = str_replace(chr($i), "", $json); 
+		}
+		$json = str_replace(chr(127), "", $json);
+
+		if (0 === strpos(bin2hex($json), 'efbbbf')) {
+			$json= substr($json, 3);
+		 }
+
 		//Decode JSON
-		$json_data = json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $json), true );
-		//$json_data = json_decode($json,true);
-
-		return $json_data;
+		$json= json_decode($json, true);
+		return $json;
 	}
-	
-	// public static function Borrar($codigo)
-	// {	
-	// 	$arrMaterias = array();
-		
-	// 	$a = fopen("./archivos/materias.json", "r");
-		
-	// 	while(!feof($a)){
-		
-	// 		$arr = explode("-", fgets($a));
 
-	// 		if(count($arr) > 1){
-	// 			if((int)$arr[2] == $codigo){
-	// 				continue;
-	// 			}
-	// 			$materia = new Materia();
-	// 			$materia->SetAula($arr[3]);
-	// 			$materia->SetCodigo($arr[2]);
-	// 			$materia->SetNombre($arr[1]);
-	// 			$materia->SetCupos($arr[0]);
-				
-	// 			array_push($arrMaterias, $materia);
-	// 		}
-	// 	}
-	// 	fclose($a);
-		
-	// 	$a = fopen("./archivos/materias.json", "w");
-	// 	fclose($a);
-		
-	// 	foreach($arrMaterias AS $p){
-	// 		$p->Insertar();
-	// 	}
-		
-	// }
-	
-	// public static function Modificar($p)
-	// {
-	// 	$arrMaterias = array();
-		
-	// 	$a = fopen("./archivos/materias.json", "r");
-		
-	// 	while(!feof($a)){
-		
-	// 		$arr = explode("-", fgets($a));
-
-	// 		if(count($arr) > 1){
-	// 			if((int)$arr[2] == $p->GetCodigo()){
-	// 				$materia = $p;
-	// 			}
-	// 			else{
-	// 				$materia = new Materia();
-	// 				$materia->SetAula($arr[3]);
-	// 				$materia->SetCodigo($arr[1]);
-	// 				$materia->SetNombre($arr[0]);
-	// 				$materia->SetCupos($arr[2] - 1);
-	// 			}
-	// 			array_push($arrMaterias, $materia);
-	// 		}
-	// 	}
-	// 	fclose($a);
-		
-	// 	$a = fopen("./archivos/materias.json", "w");
-	// 	fclose($a);
-		
-	// 	foreach($arrMaterias AS $p){
-	// 		$p->Insertar();
-	// 	}		
-	// }
-
-//--------------------------------------------------------------------------------//
-
-//--------------------------------------------------------------------------------//
-//--METODOS DE INSTANCIA
-	public static function CargarMateria($materia)
+	public function ExisteMateria()
 	{
-		$a = fopen("./archivos/materias.json", "a");
-		
-		fwrite($a, json_encode($materia->jsonSerialize()) . "\r\n");
-		
-		fclose($a);
+		$jsonMaterias = Materia::TraerTodasLasMaterias();
+		$retorno = false;
+		if($jsonMaterias != NULL)
+		{
+			foreach ($jsonMaterias as $materia) 
+			{
+				if(strtolower($materia["codigo"]) == $this->codigo)
+				{
+					echo 'Error! El codigo de materia ' . $this->codigo . ' ya se encuentra registrado.';
+					$retorno = true;
+					break;
+				}
+			}
+		}
+		else
+		{
+			echo 'Todavia no hay materias registradas en el sistema';
+		}
+		return $retorno;
+	}
+
+	public static function CargarMateria($p)
+	{
+		$newArray = array();
+		$retorno = false;
+		$jsonMaterias = Materia::TraerTodasLasMaterias();
+		$archivo=fopen("./archivos/materias.json", "w");
+		if($jsonMaterias == NULL)
+		{
+			array_push($newArray, $p);
+			fwrite($archivo, json_encode($newArray, JSON_PRETTY_PRINT));
+			fclose($archivo);
+			$retorno = true;	
+		}
+		else
+		{
+			array_push($jsonMaterias, $p);
+			fwrite($archivo, json_encode($jsonMaterias, JSON_PRETTY_PRINT));
+			fclose($archivo);
+			$retorno = true;
+		}
+		return $retorno;
 	}	
+
+	public static function BorrarMateria($p)
+	{
+		$jsonMaterias = Materia::TraerTodasLasMaterias();
+		$archivo=fopen("./archivos/materias.json", "w");
+		$i = 0;
+		foreach($jsonMaterias as $materia) 
+		{
+			$materia = json_encode($materia, true);
+			$materia = json_decode($materia, true);
+			if($materia['codigo'] == $p->GetCodigo()) 
+			{
+				unset($jsonMaterias[$i]);
+			}
+			$i++;
+		}
+		fwrite($archivo, json_encode($jsonMaterias, JSON_PRETTY_PRINT));
+		fclose($archivo);
+	}
 
 	public function jsonSerialize()
     {
@@ -209,7 +178,6 @@ class Materia implements JsonSerializable
 				}
 				else
 				{
-					echo '3';
 					echo 'Esta materia no tiene cupos disponibles!';
 					break;
 				}
@@ -221,21 +189,8 @@ class Materia implements JsonSerializable
 		}
 		return $retorno;
 	}
-
-	// 4- (2pts.) caso: inscribirmateria (get): Se recibe nombre, apellido, mail del materia, materia y código 
-	// de la materia y se guarda en el archivo inscripciones.json restando un cupo a la materia en el archivo 
-	// materias.json. Si no hay cupo o la materia no existe informar cada caso particular.
-	public static function InscribirAlumno($nombre, $apellido, $mail, $nombreMateria, $codigoMateria)
-	{
-		if(Materia::ConsultarMateria($codigoMateria))
-		{
-			$a = fopen("./archivos/inscripciones.json", "a");
-			$string = $nombre . ' ' . $apellido . ' ' . $mail . ' ' . $nombreMateria . ' ' . $codigoMateria;
-			fwrite($a, json_encode($string) . "\r\n");
-			fclose($a);
-			echo 'Alumno inscripto correctamente!';
-		}
-	}
 //--------------------------------------------------------------------------------//
 
 }
+
+?>

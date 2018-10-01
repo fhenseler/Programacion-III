@@ -1,2 +1,14 @@
-[{"nombre":"Matematica","codigo":"324","cupos":"30","aula":"101"},
-{"nombre":"Lengua","codigo":"325","cupos":"35","aula":"103"}]
+[
+    {
+        "nombre": "Lengua",
+        "codigo": "325",
+        "cupos": "35",
+        "aula": "103"
+    },
+    {
+        "nombre": "Matematica",
+        "codigo": "323",
+        "cupos": "35",
+        "aula": "105"
+    }
+]

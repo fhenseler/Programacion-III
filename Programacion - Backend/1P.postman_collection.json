@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "eda2737b-d45f-4793-95a1-5fa9ea4e0f8e",
+		"name": "1P",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "cargarAlumno",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Federico",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Henseler",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "fhenseler@outlook.com",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"value": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php?caso=consultarAlumno&apellido=hEnSeler",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "consultarAlumno"
+						},
+						{
+							"key": "apellido",
+							"value": "hEnSeler"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "cargarMateria"
+						},
+						{
+							"key": "nombre",
+							"value": "Lengua"
+						},
+						{
+							"key": "cupo",
+							"value": "35"
+						},
+						{
+							"key": "aula",
+							"value": "105"
+						},
+						{
+							"key": "codigo",
+							"value": "321"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php?nombre=Federico&apellido=Henseler&email=fhenseler@outlook.com&nombreMateria=Lengua&codigoMateria=321&caso=inscribirAlumno",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "Federico"
+						},
+						{
+							"key": "apellido",
+							"value": "Henseler"
+						},
+						{
+							"key": "email",
+							"value": "fhenseler@outlook.com"
+						},
+						{
+							"key": "nombreMateria",
+							"value": "Lengua"
+						},
+						{
+							"key": "codigoMateria",
+							"value": "321"
+						},
+						{
+							"key": "caso",
+							"value": "inscribirAlumno"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php?caso=inscripciones",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "inscripciones"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "modificarAlumno",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "Julian",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Hens",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/1P/nexo.php?caso=alumnos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1P",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "alumnos"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,1 +1,0 @@
- <table border=1><th> Nombre </th><th> Apellido </th><th> E-Mail </th><th> Materia </th><th> Codigo </th><tr> <td>  </td> <td> </td> <td>  </td><td>  </td><td>  </td></tr><tr> <td>  </td> <td> </td> <td>  </td><td>  </td><td>  </td></tr> </table>

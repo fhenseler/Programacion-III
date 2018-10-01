@@ -1,1 +1,16 @@
-"Federico Henseler fhenseler@outlook.com Matematica 324"
+[
+    {
+        "nombre": "Federico",
+        "apellido": "Henseler",
+        "email": "fhenseler@outlook.com",
+        "nombreMateria": "Matematica",
+        "codigoMateria": "323"
+    },
+    {
+        "nombre": "Julian",
+        "apellido": "Henseler",
+        "email": "jhenseler@outlook.com",
+        "nombreMateria": "Matematica",
+        "codigoMateria": "323"
+    }
+]
