@@ -1,0 +1,38 @@
+{
+    "0": {
+        "nombre": "Octavio",
+        "apellido": "Villegas",
+        "email": "fdgfdg@outlook.com",
+        "foto": {
+            "name": "Hydrangeas.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\phpF5EE.tmp",
+            "error": 0,
+            "size": 595284
+        }
+    },
+    "1": {
+        "nombre": "Federico",
+        "apellido": "Henseler",
+        "email": "ggggg@outlook.com",
+        "foto": {
+            "name": "Penguins.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php310C.tmp",
+            "error": 0,
+            "size": 777835
+        }
+    },
+    "3": {
+        "nombre": "Jeremias",
+        "apellido": "Sola",
+        "email": "mario@outlook.com",
+        "foto": {
+            "name": "Chrysanthemum.jpg",
+            "type": "image\/jpeg",
+            "tmp_name": "C:\\xampp\\tmp\\php9C2F.tmp",
+            "error": 0,
+            "size": 879394
+        }
+    }
+}

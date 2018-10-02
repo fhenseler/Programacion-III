@@ -1,0 +1,38 @@
+[
+        {
+            "emailRemitente": "mario@outlook.com",
+            "emailDestinatario": "villegas@hotmail.com",
+            "mensaje": "Holaaaaaa",
+            "foto": {
+                "name": "Desert.jpg",
+                "type": "image\/jpeg",
+                "tmp_name": "C:\\xampp\\tmp\\php2D77.tmp",
+                "error": 0,
+                "size": 845941
+            }
+        },
+        {
+            "emailRemitente": "mario@outlook.com",
+            "emailDestinatario": "villegas@hotmail.com",
+            "mensaje": "Holaaaaaa",
+            "foto": {
+                "name": "Penguins.jpg",
+                "type": "image\/jpeg",
+                "tmp_name": "C:\\xampp\\tmp\\phpECEF.tmp",
+                "error": 0,
+                "size": 777835
+            }
+        },
+        {
+            "emailRemitente": "mario@outlook.com",
+            "emailDestinatario": "villegas@hotmail.com",
+            "mensaje": "Holaaaaaa",
+            "foto": {
+                "name": "Lighthouse.jpg",
+                "type": "image\/jpeg",
+                "tmp_name": "C:\\xampp\\tmp\\php75BF.tmp",
+                "error": 0,
+                "size": 561276
+            }
+        }
+    ]
