@@ -1,0 +1,27 @@
+Login + Password
+
+Cliente --(HTTP AJAX request/response)--> Servidor(NodeJS, en Prog. vemos PHP en vez de Node.. dentro del servidor hay JSON)
+
+JSON Web Token (del lado del servidor, genera tokens de autenticación para el login)
+Petición con usuario y contraseña, si el usuario existe devuelve un token.
+Almacenar el token (Local Storage) para las peticiones siguientes.
+
+Local Storage -> Diccionario clave-valor que se guarda en el navegador, asociado a URL y puerto.
+
+JavaScript
+if(localStorage)
+{
+    localStorage.token = "a"; //clave = token, valor = "a"
+    localStorage.SetItem(token) = "a"; //es lo mismo
+    
+    var = localStorage.getItem(token);
+    var = localStorage.token; //lo mismo
+
+    localStorage.deleteItem(token);
+}
+
+localhost:3000 para el login
+ctrl + ñ -> node server para que el server escuche en el puerto que queramos (3000)
+ctrl + c -> cierra conexion
+
+INSTALAR NPM - BOWER - JQUERY
