@@ -1,0 +1,5 @@
+1er Parcial
+HTML, CSS, Javascript, Ajax, Jquery, Local Storage, MVC (modelo vista controlador)
+
+2do Parcial
+Typescript, Bootstrap, Local Storage y Map/Reduce/Filter

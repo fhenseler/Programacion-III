@@ -1,0 +1,21 @@
+PHP PDO
+Transformar base de datos en objetos.
+Traer de base de datos y usar nuestras clases.
+EJ: Traer lista de personas de base de datos y usar los métodos de la clase Persona
+
+Patrón Singleton (Clase AccesoDatos)
+Atributo privado conexión
+Método estático que devuelve el objeto conexión (si ya está instanciado), o lo instancia y lo devuelve.
+
+Para hosting gratis, se puede usar sólo 1 o 2 bases de datos, y meterle tablas adentro.
+
+fetch_all necesita un constructor q traiga todos los parametros y otro que no traiga ninguno.
+En PHP no hay constructores, pero se hace un solo constructor con parametros opcionales.
+
+API RES -> SLIM FRAMEWORK
+
+TP -> OBLIGATORIO TENERLO EN WEB! (NO LOCALHOST)
+SABADO 20/10 CLASE DE 8:30 A 12:30
+
+TP-> SE PUEDE HACER LAS TABLAS Y LAS ENTIDADES SOLAMENTE (SOLO IMPORTAN LOS CAMBIOS DE ESTADO)
+ALTA DE PRODUCTO + CAMBIO DE ESTADO SEGUN EL USUARIO
