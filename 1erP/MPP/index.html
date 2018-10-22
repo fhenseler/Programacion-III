@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <script src="./scripts/jquery.js"></script>
+    <script src="./scripts/modelo.js"></script>
+    <script src="./scripts/vista.js"></script>
+    <script src="./scripts/controlador.js"></script>
+    <script src="./scripts/despachador_server.js"></script>
+    <script src="./scripts/app.js"></script>
+    <title>ABM SuperHeroes</title>
+</head>
+
+<body>
+    <header>
+        <div class="contenedor">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo Centro de Superheroes">
+            </div>
+        </div>
+    </header>
+    <div class="contenedor2">
+    <button class="open-button" id="btnOpen">Agregar</button>
+    </div>
+
+    <main>   
+    <div class="form-popup" id="myForm">
+        <form action="#" class="form-container" id="xForm">
+                <!-- <form action="#" class="form-container"> -->
+                <h1>Menú</h1>
+                Nombre:
+                <!-- <input type="text" name="nombre" id="txtNombre" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br> -->
+                <input type="text" name="nombre" id="txtNombre" autocomplete="off" required>
+                Apellido:
+                <!-- <input type="text" name="apellido" id="txtApellido" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br> -->
+                <input type="text" name="apellido" id="txtApellido" autocomplete="off" required>
+                Alias: 
+                <!-- <input type="text" name="alias" id="txtAlias" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br> -->
+                <input type="text" name="alias" id="txtAlias" autocomplete="off" required>
+                Edad: 
+                <input type="text" name="edad" id="txtEdad" autocomplete="off" pattern="[0-9]{1,3}" title="La edad debe estar entre 0 y 999" required><br>
+                <div id="lados">
+                <label><input type="radio" name="lado" id="l1">Heroe</label>
+                <label><input type="radio" name="lado" id="l2">Villano</label><br><br>
+                </div>
+                <!-- <input type="text" name="lado" id="txtLado" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br> -->
+
+                <button type="submit"  class="btn" id="btnConfirmar">Confirmar</button>
+                <button type="submit"  class="btn" id="btnModificar">Modificar</button>
+                <button type="submit"  class="btn" id="btnEliminar" formnovalidate>Eliminar</button>
+                <!-- <input type="button" value="Confirmar" id="btnConfirmar"> -->
+                <button type="button" class="cancel" id="btnCancel" formnovalidate>Cancelar</button>
+             </form>
+            </div>
+
+            <section>
+                <table id="tblPost" class="tabla">
+                    <caption></caption>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Alias</th>
+                            <th>Edad</th>
+                            <th>Lado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </section>
+        </main>
+</body>
+</html>
