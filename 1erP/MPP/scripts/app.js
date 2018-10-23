@@ -1,4 +1,3 @@
-//Archivo agregado por mi
 const server_url = "http://localhost:3000/";
 var xhr;
 var datos = new Array();
@@ -18,7 +17,6 @@ window.addEventListener('load', AsignarManejadores, false);
 
 function AsignarManejadores() 
 {
-    //window.onload = function(){ document.getElementById("loading").style.display = "none" };
     $("#btnOpen").click(openForm);
     $("#divForm").on('load', ManejarEnvio);
     // $("#myForm").on('submit', function (event) {
@@ -31,7 +29,7 @@ function AsignarManejadores()
     //    }
     // });
     $("#btnConfirmar").click(altaPersonaje);
-    $('#btnCancel').click(closeForm);
+    $('#btnConfirmar').click(confirmarA);
 
     $("#divForm2").on('load', ManejarEnvio);
     // $("#myForm2").on('submit', function (event) {
@@ -43,22 +41,44 @@ function AsignarManejadores()
     //         return false;
     //    }
     // });
+    $('#btnCancel').click(closeForm);
     $('#btnCancel2').click(closeForm2);
     $('#btnModificar').click(modificarPersonaje);
-    // $('#btnModificar').click(confirmarM, false);
+    $('#btnModificar').on('submit', confirmarM);
+    // $('#btnModificar').on('submit', function(confirmarM){
+    //     if(confirmarM == false)
+    //     {
+    //         event.preventDefault();
+    //         event.stopPropagation(); 
+    //         return false;
+    //     }
+    // });
     $('#btnEliminar').click(eliminarPersonaje);
-    //$('#btnEliminar').click(confirmarE, false);
+    $('#btnEliminar').click(confirmarE);
+    // $('#btnEliminar').on('submit', function(){
+    //     if(confirmarM == false)
+    //     {
+    //         event.preventDefault();
+    //         event.stopPropagation(); 
+    //         return false;
+    //     }
+    // });
 
     traerListaHeroes();
 }
 
 function confirmarE() {
-    confirm("Desea eliminar el personaje?");
+    return confirm("Desea eliminar el personaje?");
 }
 
 function confirmarM() {
-    confirm("Desea modificar el personaje?");
+    return confirm("Desea modificar el personaje?");
 }
+
+function confirmarA() {
+    return confirm("Desea dar de alta el personaje?");
+}
+
 function ManejarEnvio(e)
 {
     e.preventDefault(); //Anula el evento nativo
@@ -149,13 +169,13 @@ function altaPersonaje()
 function enviarAlta(data) 
 {
     xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {    
+    xhr.onreadystatechange = function () { 
+        document.getElementById('tblPost').innerHTML = '<img src=./images/spinner.gif>';   
         if (this.readyState == 4 && this.status == 200) {
             var resp = this.response;
             traerListaHeroes();
             limpiarFormulario();
             heroe = null;
-            console.log(heroe);
         }
     };
     xhr.open("POST", "/agregar", true);
@@ -202,11 +222,12 @@ function eliminarPersonaje()
         url: "/eliminar",
         data: data,
         beforeSend: function () {
-            $("#tblPost").html('<img src="images/spinner.gif" alt="preloader">');
+            $("#tblPost").html('<img src="images/spinner.gif" alt="preloader">').fadeOut();
         },
         success: function (respuesta) {
-            $("#tblPost").html(respuesta);
             setTimeout(location.reload.bind(location), 200);
+            $("#tblPost").html(respuesta);
+            
         },
         error: function (xhr, status) {
             alert("Error " + xhr.status + " " + xhr.statusText);
@@ -226,10 +247,11 @@ function modificarPersonaje() {
     var edad = document.getElementById('txtEdad2');
     var lado = $("input[name='lado2']:checked").parent('label').text();
 
-    heroe = new Heroe(nombre.value, apellido.value, alias.value, edad.value, lado);
-    console.log(heroe);
+    heroeAux = new Heroe(nombre.value, apellido.value, alias.value, edad.value, lado);
+    heroeAux.id = heroe.id;
+
     var data = {
-        "heroe" : heroe,
+        "heroe" : heroeAux,
         "collection": "heroes",
     }
     //$('#tblPost').innerHTML = '<images src= ./images/spinner.gif>';
@@ -240,11 +262,12 @@ function enviarModificacion(data)
 {
     xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
+        document.getElementById('tblPost').innerHTML = '<img src=./images/spinner.gif>'; 
         if (this.readyState == 4 && this.status == 200) {
             var resp = this.response;
             traerListaHeroes();
             limpiarFormulario();
-            heroe = null;
+            // heroe = null;
         }
     };
     xhr.open("POST", "/modificar", true);
