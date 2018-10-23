@@ -6,25 +6,24 @@ var heroe;
 
 function Heroe(nombre, apellido, alias, edad, lado)
 {
-    this.id;
     this.nombre = nombre;
     this.apellido = apellido;
     this.alias = alias;
     this.edad = edad;
     this.lado = lado;
+    this.id;
 }
 
 window.addEventListener('load', AsignarManejadores, false);
 
 function AsignarManejadores() 
 {
-    var frm = document.getElementById('myForm');
-    frm.addEventListener('load', ManejarEnvio);
-
+    //window.onload = function(){ document.getElementById("loading").style.display = "none" };
     $("#btnOpen").click(openForm);
-    // $("#myForm").submit(function (event) {
-    //    var retorno = validateT();
-    //    if(retorno == false)
+    $("#divForm").on('load', ManejarEnvio);
+    // $("#myForm").on('submit', function (event) {
+    //    var validacion = validateT();
+    //    if(validacion == false)
     //    {
     //         event.preventDefault();
     //         event.stopPropagation(); 
@@ -33,6 +32,18 @@ function AsignarManejadores()
     // });
     $("#btnConfirmar").click(altaPersonaje);
     $('#btnCancel').click(closeForm);
+
+    $("#divForm2").on('load', ManejarEnvio);
+    // $("#myForm2").on('submit', function (event) {
+    //    var validacion = validateT();
+    //    if(validacion == false)
+    //    {
+    //         event.preventDefault();
+    //         event.stopPropagation(); 
+    //         return false;
+    //    }
+    // });
+    $('#btnCancel2').click(closeForm2);
     $('#btnModificar').click(modificarPersonaje);
     // $('#btnModificar').click(confirmarM, false);
     $('#btnEliminar').click(eliminarPersonaje);
@@ -55,11 +66,32 @@ function ManejarEnvio(e)
 }
 
 function openForm() {
-    document.getElementById("myForm").style.display = "block";
+    document.getElementById('divForm').style.display = "block";
 }
 
 function closeForm() {
-    document.getElementById("myForm").style.display = "none";
+    document.getElementById('divForm').style.display = "none";
+}
+
+function openForm2(id) {
+    document.getElementById('divForm2').style.display = "block";
+    heroe = datos.find(x => x.id === id);
+    document.getElementById('txtNombre2').value = heroe.nombre;
+    document.getElementById('txtApellido2').value = heroe.apellido;
+    document.getElementById('txtAlias2').value = heroe.alias;
+    document.getElementById('txtEdad2').value = heroe.edad;
+    if(heroe.lado == 'Heroe')
+    {
+        document.getElementById('l11').checked = true;
+    }
+    if(heroe.lado == 'Villano')
+    {
+        document.getElementById('l22').checked = true;
+    }
+}
+
+function closeForm2() {
+    document.getElementById('divForm2').style.display = "none";
 }
 
 function traerListaHeroes() 
@@ -78,43 +110,40 @@ function traerListaHeroes()
 }
 
 function cargarTabla(data) {
-    tabla = document.getElementById("tblPost");
-    var c = this.document.getElementById("tblPost").children;
-    //var c = document.getElementById("tblPost").children.length;
+    tabla = document.getElementById('tblPost');
+    var c = document.getElementById('tblPost').children;
     var nuevasFilas = "";
+
     for (var i in data) {
         nuevasFilas += "<tr>";
-        nuevasFilas += "<td class='id' id='1' onclick='modificarPersonaje(" + data[i].id + "); openForm();'>" + data[i].id + "</td>";
-        nuevasFilas += "<td id='2' onclick='modificarPersonaje(" + $('#1').find("td:first").html() + "); openForm();'>" + data[i].created_dttm + "</td>";
-        nuevasFilas += "<td id='3' onclick='modificarPersonaje(" + $('#1').find("td:first").html() + "); openForm();'>" + data[i].nombre + "</td>";
-        nuevasFilas += "<td id='4' onclick='modificarPersonaje(" + $('#1').find("td:first").html() + "); openForm();'>" + data[i].apellido + "</td>";
-        nuevasFilas += "<td id='5' onclick='modificarPersonaje(" + $('#1').find("td:first").html() + "); openForm();'>" + data[i].alias + "</td>";
-        nuevasFilas += "<td id='6' onclick='modificarPersonaje(" + $('#1').find("td:first").html() + "); openForm();'>" + data[i].edad + "</td>";
-        nuevasFilas += "<td id='7' onclick='modificarPersonaje(" + $('#1').find("td:first").html() + "); openForm();'>" + data[i].lado + "</td>";
-        //nuevasFilas += "<td> <input type='button' id='btnModificar' value='modificar' onclick='modificarPersonaje(" + data[i].id + "); openForm();'></td>";
-        // nuevasFilas += "<td> <input type='button' id='btnEliminar' style='display:inline-block' value='borrar' onclick='eliminarPersonaje(" + data[i].id + ");'></td>";
+        nuevasFilas += "<td id='1' onclick='openForm2("+ data[i].id +");'>" + data[i].id + "</td>";
+        nuevasFilas += "<td id='2' onclick='openForm2("+ data[i].id +");'>" + data[i].created_dttm + "</td>";
+        nuevasFilas += "<td id='3' onclick='openForm2("+ data[i].id +");'>" + data[i].nombre + "</td>";
+        nuevasFilas += "<td id='4' onclick='openForm2("+ data[i].id +");'>" + data[i].apellido + "</td>";
+        nuevasFilas += "<td id='5' onclick='openForm2("+ data[i].id +");'>" + data[i].alias + "</td>";
+        nuevasFilas += "<td id='6' onclick='openForm2("+ data[i].id +");'>" + data[i].edad + "</td>";
+        nuevasFilas += "<td id='7' onclick='openForm2("+ data[i].id +");'>" + data[i].lado + "</td>";
         nuevasFilas += "</tr>";
     }
     c[2].innerHTML = nuevasFilas;
-    // tabla.children[2].innerHTML = nuevasFilas;
-    //tabla.innerHTML = nuevasFilas;
 }
 
 function altaPersonaje() 
 {
-    var nombre = document.getElementById("txtNombre");
-    var apellido = document.getElementById("txtApellido");
-    var alias = document.getElementById("txtAlias");
-    var edad = document.getElementById("txtEdad");
+    var nombre = document.getElementById('txtNombre');
+    var apellido = document.getElementById('txtApellido');
+    var alias = document.getElementById('txtAlias');
+    var edad = document.getElementById('txtEdad');
     var lado = $("input[name='lado']:checked").parent('label').text();
 
     heroe = new Heroe(nombre.value, apellido.value, alias.value, edad.value, lado);
+
     var data = {
-        "heroe" : heroe,
         "collection": "heroes",
+        "heroe" : heroe,
     }
-     document.getElementById('tblPost').innerHTML = '<images src= ./images/spinner.gif>';
-     enviarAlta(data);
+    //document.getElementById('tblPost').innerHTML = '<images src= ./images/spinner.gif>';
+    enviarAlta(data);
 }
 
 function enviarAlta(data) 
@@ -125,8 +154,8 @@ function enviarAlta(data)
             var resp = this.response;
             traerListaHeroes();
             limpiarFormulario();
-            // alert("Superheroe creado!");
             heroe = null;
+            console.log(heroe);
         }
     };
     xhr.open("POST", "/agregar", true);
@@ -140,75 +169,71 @@ function limpiarFormulario()
     $("#txtApellido").value = "";
     $("#txtEdad").value = "";
     $("#txtAlias").value = "";
-    //$("#txtLado").value = "";
+    document.getElementById('l11').checked = false;
+    document.getElementById('l22').checked = false;
+    document.getElementById('l1').checked = false;
+    document.getElementById('l2').checked = false;
 }
 
-function eliminarPersonaje(id) {
-    xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var resp = JSON.parse(this.response);
-            traerListaHeroes(resp.data);
-            datos = resp.data;
-        }
-    };
-    xhr.open("POST", "/eliminar", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({ "collection": "heroes", "id": id }));
-}
-
-// function eliminarPersonaje(id)
-// {
-//     event.preventDefault();
-
-//     var data = JSON.stringify({
-//         "collection": "heroes",
-//         "id": id,
-//     });
-//         $.ajax({
-//         type: "POST",
-//         url: "/eliminar",
-//         data: data,
-//         beforeSend: function () {
-//             $("#tblPost").html('<img src="images/spinner.gif" alt="preloader">');
-//         },
-//         success: function (respuesta) {
-//             $("#tblPost").html(respuesta);
-//             setTimeout(location.reload.bind(location), 200);
-//         },
-//         error: function (xhr, status) {
-//             alert("Error " + xhr.status + " " + xhr.statusText);
-//         },
-//         complete: function (xhr, status) {
-//             console.log("Peticion realizada");
-//         },
-//         dataType: "json",
-//         contentType: "application/json"
-//     });
+// function eliminarPersonaje() {
+//     xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = function () {
+//         if (this.readyState == 4 && this.status == 200) {
+//             var resp = JSON.parse(this.response);
+//             traerListaHeroes(resp.data);
+//             datos = resp.data;
+//         }
+//     };
+//     xhr.open("POST", "/eliminar", true);
+//     xhr.setRequestHeader("Content-Type", "application/json");
+//     xhr.send(JSON.stringify({ "collection": "heroes", "id": heroe.id }));
 // }
 
-function modificarPersonaje(id) {
-    alert(id);
-    heroe = datos.find(x => x.id === id);
-    document.getElementById("txtNombre").value = heroe.nombre;
-    document.getElementById("txtApellido").value = heroe.apellido;
-    document.getElementById("txtAlias").value = heroe.alias;
-    document.getElementById("txtEdad").value = heroe.edad;
-    if(heroe.lado == 'Heroe')
-    {
-        document.getElementById("l1").checked = true;
-    }
-    if(heroe.lado == 'Villano')
-    {
-        document.getElementById("l2").checked = true;
-    }
+function eliminarPersonaje()
+{
+    event.preventDefault();
 
+    var data = JSON.stringify({
+        "collection": "heroes",
+        "id": heroe.id,
+    });
+        $.ajax({
+        type: "POST",
+        url: "/eliminar",
+        data: data,
+        beforeSend: function () {
+            $("#tblPost").html('<img src="images/spinner.gif" alt="preloader">');
+        },
+        success: function (respuesta) {
+            $("#tblPost").html(respuesta);
+            setTimeout(location.reload.bind(location), 200);
+        },
+        error: function (xhr, status) {
+            alert("Error " + xhr.status + " " + xhr.statusText);
+        },
+        complete: function (xhr, status) {
+            console.log("Peticion realizada");
+        },
+        dataType: "json",
+        contentType: "application/json"
+    });
+}
+
+function modificarPersonaje() {
+    var nombre = document.getElementById('txtNombre2');
+    var apellido = document.getElementById('txtApellido2');
+    var alias = document.getElementById('txtAlias2');
+    var edad = document.getElementById('txtEdad2');
+    var lado = $("input[name='lado2']:checked").parent('label').text();
+
+    heroe = new Heroe(nombre.value, apellido.value, alias.value, edad.value, lado);
+    console.log(heroe);
     var data = {
         "heroe" : heroe,
         "collection": "heroes",
     }
-     document.getElementById('tblPost').innerHTML = '<images src= ./images/spinner.gif>';
-     enviarModificacion(data);
+    //$('#tblPost').innerHTML = '<images src= ./images/spinner.gif>';
+    enviarModificacion(data);
 }
 
 function enviarModificacion(data)

@@ -16,6 +16,9 @@
 </head>
 
 <body>
+    <!-- <div id="loading">
+            <img id="loading-image" src="images/spinner.gif" alt="Loading..." />
+    </div> -->
     <header>
         <div class="contenedor">
             <div class="logo">
@@ -28,10 +31,10 @@
     </div>
 
     <main>   
-    <div class="form-popup" id="myForm">
-        <form action="#" class="form-container" id="xForm">
+    <div class="form-popup" id="divForm">
+        <form action="#" class="form-container" id="myForm">
                 <!-- <form action="#" class="form-container"> -->
-                <h1>Menú</h1>
+                <h1>Agregar</h1>
                 Nombre:
                 <!-- <input type="text" name="nombre" id="txtNombre" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br> -->
                 <input type="text" name="nombre" id="txtNombre" autocomplete="off" required>
@@ -50,12 +53,38 @@
                 <!-- <input type="text" name="lado" id="txtLado" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br> -->
 
                 <button type="submit"  class="btn" id="btnConfirmar">Confirmar</button>
-                <button type="submit"  class="btn" id="btnModificar">Modificar</button>
-                <button type="submit"  class="btn" id="btnEliminar" formnovalidate>Eliminar</button>
                 <!-- <input type="button" value="Confirmar" id="btnConfirmar"> -->
                 <button type="button" class="cancel" id="btnCancel" formnovalidate>Cancelar</button>
              </form>
             </div>
+
+            <div class="form-popup" id="divForm2">
+                    <form action="#" class="form-container" id="myForm2">
+                            <!-- <form action="#" class="form-container"> -->
+                            <h1>Modificar / Eliminar</h1>
+                            Nombre:
+                            <!-- <input type="text" name="nombre" id="txtNombre" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br> -->
+                            <input type="text" name="nombre" id="txtNombre2" autocomplete="off" required>
+                            Apellido:
+                            <!-- <input type="text" name="apellido" id="txtApellido" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br> -->
+                            <input type="text" name="apellido" id="txtApellido2" autocomplete="off" required>
+                            Alias: 
+                            <!-- <input type="text" name="alias" id="txtAlias" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br> -->
+                            <input type="text" name="alias" id="txtAlias2" autocomplete="off" required>
+                            Edad: 
+                            <input type="text" name="edad" id="txtEdad2" autocomplete="off" pattern="[0-9]{1,3}" title="La edad debe estar entre 0 y 999" required><br>
+                            <div id="lados2">
+                            <label><input type="radio" name="lado2" id="l11">Heroe</label>
+                            <label><input type="radio" name="lado2" id="l22">Villano</label><br><br>
+                            </div>
+                            <!-- <input type="text" name="lado" id="txtLado" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br> -->
+            
+                            <button type="submit"  class="btn" id="btnModificar">Modificar</button>
+                            <button type="submit"  class="btn" id="btnEliminar" formnovalidate>Eliminar</button>
+                            <!-- <input type="button" value="Confirmar" id="btnConfirmar"> -->
+                            <button type="button" class="cancel" id="btnCancel2" formnovalidate>Cancelar</button>
+                         </form>
+                        </div>
 
             <section>
                 <table id="tblPost" class="tabla">
