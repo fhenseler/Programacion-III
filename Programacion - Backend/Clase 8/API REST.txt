@@ -1,0 +1,23 @@
+Permite interactuar con cualquier frontend (sirve para cuatri q viene)
+
+Verbos HTTP (POST, GET, PUT, DELETE) - ver cuales soporta el frontend
+
+Interface (similar a switch q permite tomar decisiones)
+
+API REST - ya viene armada, es la parte funcional, cargada de codigo, nosotros creamos nuestras
+propias clases y validaciones e interactuamos con ella. EJEMPLO CDS
+
+API REST - SLIM FRAMEWORK
+Instalacion (2 maneras): 
+- Bajar repo de github, y despues se le puede agregar funcionalidad y plugins
+
+Primer paso - ABM (luego se le agregan capas, por ej validaciones y ver quien se conecto)
+
+
+**Base de datos (sql - store procedure)
+**Acceso a datos (guardar en database o en archivos)
+**Clases (lo que modificamos nosotros) + PDO (fetch ver)
+**Archivo nexo (switch) / Ingenieria para que el nexo se comporte de otra manera - API REST (REEMPLAZA AL NEXO)
+
+API recibe JSON y retorna JSON, le pegamos desde el frontend
+
