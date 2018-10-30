@@ -1,0 +1,33 @@
+APIREST: ABM + CLASES 
+index -> punto de entrada (le paso parametros, entran y salen peticiones)
+
+API: FUNCIONALIDADES SEPARADAS (el abm siempre es el mismo para cualquier entidad)
+
+Middleware: funciones previo/despues de las funciones de la api
+
+JSON WEB TOKEN: crear en el login solamente (o cuando queda poco tiempo)
+ENTENDER EL PROCESO DEL TOKEN (CUANDO SE CREA Y CUANDO SE PASA) 
+
+POSTMAN: LOGIN (USUARIO PASS), NOS DA EL TOKEN
+OTRA SOLAPA DE POSTMAN PARA HACER EL ALTA USANDO EL TOKEN (COPIADO Y PEGADO) SIN BASE DE DATOS
+IF EN EL MIDDLEWARE PARA VER SI EL TOKEN ES VALIDO
+EL TOKEN SE RECIBE Y SE ENVIA POR HEADER (VER EN EL EJEMPLO PPT)
+
+apirestV3-MW EJEMPLO DE UTILIZACION DE MIDDLEWARE PARA AUTENTICAR USUARIO
+
+$next puede ser la api u otro middleware (depende como los acomodemos)
+
+COMO HABILITAR CORS
+
+apirestV4-MW-POO
+
+https://github.com/guzzle/psr7
+https://github.com/oscarotero/psr7-middlewares
+
+
+PASOS DE LA API (PARCIAL): 
+
+1) ALTA DE USUARIO - REGISTRO (1ER VENTANA POSTMAN) (SIN TOKEN)
+2) LOGIN (CREA Y DEVUELVE JWT SI USER + PASS ES VALIDO)
+3) JWT -> TRAER TODOS (USUARIO/PRODUCTO) - SI JWT NO ES VALIDO -> "ERROR! TOKEN INVALIDO"
+4) JWT
