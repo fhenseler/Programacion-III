@@ -1,3 +1,5 @@
 PROGRAMACION
 1er Parcial: 1/10
 2do Parcial: 12/11
+
+2do parcial lab - bootstrap, typescript, map reduce filter

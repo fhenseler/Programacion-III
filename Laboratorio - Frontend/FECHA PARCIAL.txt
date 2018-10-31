@@ -3,3 +3,6 @@ HTML, CSS, Javascript, Ajax, Jquery, Local Storage, MVC (modelo vista controlado
 
 2do Parcial
 Typescript, Bootstrap, Local Storage y Map/Reduce/Filter
+
+
+LABORATORIO 2DO PARCIAL - ULTIMO MARTES DE NOVIEMBRE (27/11)

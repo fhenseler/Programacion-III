@@ -1,9 +1,0 @@
-"CLASES" (no existen las clases en JS) Y OBJETOS EN JAVASCRIPT
-
-Creamos una FUNCION CONSTRUCTORA para crear instancias de clase.
-
-AL ASIGNAR LOS MANEJADORES, PONERLOS SIN PARENTESIS!!
-window.addEventListener('load', AsignarManejadores, false); 
-
-
-DOM (DOCUMENT OBJECT MODEL)
