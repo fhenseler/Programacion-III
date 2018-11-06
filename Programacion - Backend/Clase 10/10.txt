@@ -1,0 +1,19 @@
+Middleware - Identifica usuario y muestra información dependiendo del tipo de usuario
+
+- Hacer login que devuelva json web token (postman)
+- Traer todos pasandole json web token por header (GET) - si el token no es valido no devuelve nada, si es devuelve todo
+- Guardar y traer de base de datos + verificar antes de entrar con json web token por postman / header (GET)
+
+1er postman - 3 datos (usuario pass sector) 
+2do postman - token pasado x header (copiado y pegado)
+3er postman - Despues del "next"(??) tomar el listado completo y mostrar solo los nombres (filtrar)
+
+ifs dentro del middleware (para verificar el tipo de usuario)
+
+API - group c/ funciones individuales
+Middleware puede afectar a toda la app o a un solo grupo. Puede ser que haga falta un middleware para
+una funcion (ej: borrar)
+
+GETHEADERLINE / GETHEADERS (VER) 
+Un middleware para verificar si esta OK el token (basico)
+Aparte otro middleware para ver que perfil tiene
