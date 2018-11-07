@@ -1,0 +1,10 @@
+getbootstrap.com
+
+Es un framework como jquery, hay que descargarlo e instalarlo.
+Formas: descargar el archivo, CDN (jquery, popper, bootstrap.js) o con bower.
+bootstrap 4 en visual studio code (extensiones)
+ctrl+ñ (que se agregue la carpeta bower_components)
+
+todo lo q hagamos en bootstrap tiene q estar en un div CONTAINER
+
+windows resizer - plugin para modificar tamaño de pantalla y probar bootstrap

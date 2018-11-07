@@ -1,0 +1,8 @@
+Es de microsoft, básicamente traduce y compila C# a js
+
+npm install -g typescript
+tsc -init
+tsc app (transpilar, crear js desde ts)
+node app (equivalente a abrir el navegador y mostrar app.ts)
+
+typescript.playground (para instalar etc)
