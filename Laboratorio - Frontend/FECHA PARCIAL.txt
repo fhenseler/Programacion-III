@@ -6,3 +6,12 @@ Typescript, Bootstrap, Local Storage y Map/Reduce/Filter
 
 
 LABORATORIO 2DO PARCIAL - ULTIMO MARTES DE NOVIEMBRE (27/11)
+bootstrap (q sea responsive)
+reduce/map/filter
+checkbox para saber si el campo entra en el map (linkeado al select), los campos checkeados entran al map
+combobox (heroe/villano) para saber por que filtrar
+
+typescript (todo el codigo en typescript) -> TODO EL PRIMER PARCIAL PASADO A TYPESCRIPT HACER!!!
+(typescript lleva herencia)
+
+BOWER SE INSTALA CON NODE!
