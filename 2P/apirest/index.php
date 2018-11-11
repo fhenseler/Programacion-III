@@ -2,7 +2,6 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-
 require '../composer/vendor/autoload.php';
 require '../composer/vendor/paragonie/random_compat/psalm-autoload.php';
 require_once './classes/AccesoDatos.php';
@@ -16,7 +15,6 @@ $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
 $app = new \Slim\App(["settings" => $config]);
-
 
 $app->group('/user', function () {
  
@@ -42,16 +40,12 @@ $app->group('/login', function () {
  })->add(\MWCORS::class . ':enableCORS');
 
 
-//   4-Ruta “Compra”(POST), se ingresa un artículo , la fecha y el precio de la compra, solo personas que estén
-// registradas en el sistema.
-
 $app->group('/compra', function () {
  
   $this->get('/', \compraApi::class . ':getAll');
 
   $this->post('/add', \compraApi::class . ':insert');
      
-})->add(\MWAuth::class . ':verifyUser')->add(\MWCORS::class . ':enableCORS');
-
+})->add(\MWAuth::class . ':verifyUserCompra')->add(\MWCORS::class . ':enableCORS');
 
 $app->run();

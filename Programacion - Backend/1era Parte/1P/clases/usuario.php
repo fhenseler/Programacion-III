@@ -123,7 +123,7 @@ class Usuario implements JsonSerializable
 		{
 			$Usuario = json_encode($usuario, true);
 			$Usuario = json_decode($usuario, true);
-			if($Uusuario['email'] == $p->GetEmail()) 
+			if($Usuario['email'] == $p->GetEmail()) 
 			{
 				unset($jsonUsuarios[$i]);
 				break;

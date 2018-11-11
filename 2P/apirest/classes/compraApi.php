@@ -38,17 +38,30 @@ class compraApi extends Compra implements IGenericDAO
 
         $newCompra = new Compra();
         $newCompra->idusuario = $newCompraData["idusuario"];
-        $newCompra->idcompra = $newCompraData["idcompra"];
         $newCompra->articulo = $newCompraData["articulo"];
         $newCompra->fecha = $newCompraData["fecha"];
         $newCompra->precio = $newCompraData["precio"];
+        
+        // $archivo = $request->getUploadedFiles();
+        // $destino = "./IMGCompras/";
+        // $nombreAnterior = $archivo['foto']->getClientFileName();
+        // $extension = explode(".", $nombreAnterior);
+        // $extension = array_reverse($extension);
+        // $archivos['foto']->moveTo($destino.$idusuario.$articulo.".".$extension[0]);
+        // $response->getBody()->write("compra");
+        
         
         if(User::getUserById($newCompra->idusuario))
         {
             $compraid = $newCompra->insertCompra();
             $rv = new stdclass();
             $rv->message = "La compra ha sido guardada exitosamente.";
-            return $response->withJson($rv, 200);
+             return $response->withJson($rv, 200);
+        }
+        else
+        {
+            $rv->message = "La compra no se realizó. Usuario inexistente";
+             return $response->withJson($rv, 200);
         }
 
 

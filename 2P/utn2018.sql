@@ -76,7 +76,7 @@ CREATE TABLE `compras` (
   `idusuario` bigint(20) NOT NULL,
   `articulo` varchar(100) NOT NULL,
   `fecha` varchar(100) NOT NULL,
-  `precio` varchar(100) NOT NULL
+  `precio` varchar(100) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -105,6 +105,52 @@ ALTER TABLE `compras`
 --
 ALTER TABLE `compras`
   MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logs`
+--
+
+CREATE TABLE `logs` (
+  `idusuario` bigint(20) NOT NULL,
+  `metodo` varchar(100) NOT NULL,
+  `ruta` varchar(100) NOT NULL,
+  `hora` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Volcado de datos para la tabla `logs`
+--
+
+-- INSERT INTO `logs` (`idusuario`, `metodo`, `ruta`, `hora`) VALUES
+-- (2, 'POST', 'remera', '11/9/2018', '123.25');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `logs`
+--
+-- ALTER TABLE `logs`
+--   ADD PRIMARY KEY (`idusuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `logs`
+--
+-- ALTER TABLE `logs`
+--   MODIFY `idlog` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

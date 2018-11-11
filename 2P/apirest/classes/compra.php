@@ -6,6 +6,7 @@ class Compra
 	public $articulo;
 	public $fecha;
 	public $precio;
+	public $foto;
 
 	public function deleteCompra()
 	{
@@ -67,8 +68,9 @@ class Compra
 		$consulta = $objetoAccesoDato->RetornarConsulta("select * from compras where idusuario = :idusuario");
 		$consulta->bindValue(':idusuario', $userid, PDO::PARAM_INT);
 		$consulta->execute();
-		$compra = $consulta->fetchObject('Compra');
-		return $compra;
+		//$compra = $consulta->fetchObject('Compra');
+		return $consulta->fetchAll(PDO::FETCH_CLASS, "compra");
+		//return $compra;
 	}
 
 	//REVISAR ESTE METODO (VER COMO HACERLO SIN PERFIL)

@@ -4,7 +4,7 @@ class Archivo
 	public static function Subir()
 	{
 	//INDICO CUAL SERA EL DESTINO DEL ARCHIVO SUBIDO
-	$destino = "archivos/" . $_FILES["foto"]["name"];
+	$destino = "img/" . $_FILES["foto"]["name"];
 
 	$uploadOk = TRUE;
 
@@ -16,7 +16,7 @@ class Archivo
 	//PATHINFO_EXTENSION - retorna solo extension
 	//PATHINFO_FILENAME - retorna solo el nombre del archivo (sin la extension)
 
-	var_dump(pathinfo($destino));
+	//var_dump(pathinfo($destino));
 	//die();
 
 	$tipoArchivo = pathinfo($destino, PATHINFO_EXTENSION);
@@ -35,7 +35,7 @@ class Archivo
 	}
 
 	//VERIFICO SI ES UNA IMAGEN O NO
-	var_dump(getimagesize($_FILES["foto"]["tmp_name"]));
+	//var_dump(getimagesize($_FILES["foto"]["tmp_name"]));
 	//die();
 
 	//OBTIENE EL TAMAÑO DE UNA IMAGEN, SI EL ARCHIVO NO ES UNA
