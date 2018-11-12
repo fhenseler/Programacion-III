@@ -10,9 +10,33 @@ class ComposerStaticInita315c7d31b95e67207e5a0ab4f373b0f
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInita315c7d31b95e67207e5a0ab4f373b0f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita315c7d31b95e67207e5a0ab4f373b0f::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

@@ -9,7 +9,7 @@ class compraApi extends Compra implements IGenericDAO
 {
     public function getById($request, $response, $args)
     {
-        $compraid = $args['compraid'];
+        $compraid = $args['idcompra'];
         $compra = Compra::getCompraById($compraid);
         if (!$compra)
             {
@@ -41,15 +41,6 @@ class compraApi extends Compra implements IGenericDAO
         $newCompra->articulo = $newCompraData["articulo"];
         $newCompra->fecha = $newCompraData["fecha"];
         $newCompra->precio = $newCompraData["precio"];
-        
-        // $archivo = $request->getUploadedFiles();
-        // $destino = "./IMGCompras/";
-        // $nombreAnterior = $archivo['foto']->getClientFileName();
-        // $extension = explode(".", $nombreAnterior);
-        // $extension = array_reverse($extension);
-        // $archivos['foto']->moveTo($destino.$idusuario.$articulo.".".$extension[0]);
-        // $response->getBody()->write("compra");
-        
         
         if(User::getUserById($newCompra->idusuario))
         {
@@ -105,65 +96,6 @@ class compraApi extends Compra implements IGenericDAO
         }
         return $response;
     }
-
-
-
-    // public function validateCompra($request, $response, $args)
-    // {
-    //     try {
-    //         $rv = new stdclass();
-    //         $compraData = $request->getParsedBody();
-    //         $idusuario = $compraData['idusuario'];
-    //         $articulo = $compraData['articulo'];
-    //         $fecha = $compraData['fecha'];
-    //         $precio = $compraData['precio'];
-    //         $compra = Compra::getCompraDataByNombrePasswordSexo($nombre, $password, $sexo, $perfil);
-    //         if ($compra != false) {
-
-    //             $jwt = AuthJWT::getToken($compra);
-    //             $rv->jwt = $jwt;
-    //             $rv->message = 'Usuario encontrado';
-    //             $response = $response->withJson($rv, 200);
-    //         }
-    //         else {
-    //             $rv->message = "El usuario no ha sido encontrado (sexo, nombre o password erroneos)";
-    //             $response = $response->withJson($rv, 404);
-    //         }
-    //         return $response;
-    //     } catch (Exception $ex) {
-    //         $rv->message = "Error desconocido. Comuniquese con el administrador de su sistema.";
-    //         $response = $response->withJson($rv, 404);
-    //         return $response;
-
-    //     }
-
-    // }
-
-    // function registercompra($request, $response, $args)
-    // {
-    //     $rv = new stdclass();
-
-    //     $compraData = $request->getParsedBody();
-    //     $password = $compraData['password'];
-    //     $nombre = $compraData['nombre'];
-
-    //     if (compra::compraAlreadyExist($nombre)) {
-    //         $rv->message = "El usuario ingresado ya existe";
-    //         $response = $response->withJson($rv, 404);
-    //     }
-    //     else {
-    //         $response = $this->insert($request, $response, $args);
-    //         $compra = new stdclass();
-    //         $compra->password = $password;
-    //         $compra->nombre = $nombre;
-    //         $jwt = AuthJWT::getToken($compra);
-    //         $rv->message = "Usuario registrado exitosamente";
-    //         $rv->jwt = $jwt;
-    //         $response = $response->withJson($rv, 200);
-    //     }
-    //     return $response;
-    // }
-
 
     // function moveUploadedFile($directory, UploadedFile $uploadedFile)
     // {
