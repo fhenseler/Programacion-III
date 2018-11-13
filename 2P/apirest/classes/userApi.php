@@ -37,10 +37,9 @@ class userApi extends User implements IGenericDAO
         $password = $newUserData["pass"];
 
         $newUser = new User();
-        $newUser->nombre = $newUserData["nombre"];
+        $newUser->email = $newUserData["email"];
         $newUser->perfil = $newUserData["perfil"];
-        $newUser->pass = $password;
-        $newUser->sexo = $newUserData["sexo"];
+        $newUser->pass = $newUserData["pass"];
         $userid = $newUser->insertUser();
 
         $rv = new stdclass();
@@ -53,10 +52,9 @@ class userApi extends User implements IGenericDAO
         $newData = $request->getParsedBody();
         $userToUpdate = new User();
         $userToUpdate->idusuario = $newData['idusuario'];
-        $userToUpdate->nombre = $newData['nombre'];
+        $userToUpdate->email = $newData['email'];
         $userToUpdate->perfil = $newData['perfil'];
         $userToUpdate->pass = $newData['pass'];
-        $userToUpdate->sexo = $newData['sexo'];
         $rv = new stdclass();
         if ($userToUpdate->updateUser()) {
             $rv->message = "El usuario ha sido actualizado con exito.";
@@ -95,16 +93,8 @@ class userApi extends User implements IGenericDAO
             $rv = new stdclass();
             $userData = $request->getParsedBody();
             $password = $userData['pass'];
-            $nombre = $userData['nombre'];
-            $sexo = $userData['sexo'];
-            // if (isset($perfil))
-            // {
-            //     $user = User::getUserDataByNombrePasswordSexoPerfil($nombre, $password, $sexo, $perfil);
-            // }
-            // else
-            // {
-                $user = User::getUserDataByNombrePasswordSexo($nombre, $password, $sexo);
-            // }
+            $email = $userData['email'];
+            $user = User::getUserDataByEmailPassword($email, $password);
             if ($user != false) {
 
                 $jwt = AuthJWT::getToken($user);
@@ -113,7 +103,15 @@ class userApi extends User implements IGenericDAO
                 $response = $response->withJson($rv, 200);
             }
             else {
-                $rv->message = "El usuario no ha sido encontrado (sexo, nombre o password erroneos)";
+                if(!(User::emailExists($email)))
+                {
+                    $rv->message = "Email inexistente";
+                }
+                if(!(User::passwordExists($password)))
+                {
+                    $rv->message = "Password erronea";
+                }
+                
                 $response = $response->withJson($rv, 404);
             }
             return $response;
@@ -132,10 +130,10 @@ class userApi extends User implements IGenericDAO
         $rv = new stdclass();
 
         $userData = $request->getParsedBody();
-        $password = $userData['password'];
-        $nombre = $userData['nombre'];
+        $password = $userData['pass'];
+        $email = $userData['email'];
 
-        if (User::userAlreadyExist($nombre)) {
+        if (User::userAlreadyExist($email)) {
             $rv->message = "El usuario ingresado ya existe";
             $response = $response->withJson($rv, 404);
         }
@@ -143,7 +141,7 @@ class userApi extends User implements IGenericDAO
             $response = $this->insert($request, $response, $args);
             $user = new stdclass();
             $user->password = $password;
-            $user->nombre = $nombre;
+            $user->email = $email;
             // $jwt = AuthJWT::getToken($user);
             $rv->message = "Usuario registrado exitosamente";
             // $rv->jwt = $jwt;

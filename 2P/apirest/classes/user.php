@@ -2,10 +2,9 @@
 class User
 {
 	public $idusuario;
-	public $nombre;
+	public $email;
 	public $perfil;
 	public $pass;
-	public $sexo;
 
 	public function deleteUser()
 	{
@@ -24,40 +23,27 @@ class User
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("
 				update usuarios
-				set nombre = :nombre,
+				set email = :email,
 				perfil =:perfil,
 				pass =:pass,
-				sexo = :sexo,
 				WHERE idusuario =:idusuario");
 		$consulta->bindValue(':idusuario', $this->idusuario, PDO::PARAM_INT);
-		$consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+		$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
 		$consulta->bindValue(':perfil', $this->perfil, PDO::PARAM_STR);
 		$consulta->bindValue(':pass', $this->pass, PDO::PARAM_STR);
-		$consulta->bindValue(':sexo', $this->sexo, PDO::PARAM_STR);
 		return $consulta->execute();
 	}
 
 	public function insertUser()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		if($this->perfil != NULL)
-		{
-			$consulta = $objetoAccesoDato->RetornarConsulta("
-			insert into usuarios 
-			(nombre,perfil,pass,sexo)
-			values (:nombre,:perfil,:pass,:sexo)");
-			$consulta->bindValue(':perfil', $this->perfil, PDO::PARAM_STR);
-		}
-		else
-		{
-			$consulta = $objetoAccesoDato->RetornarConsulta("
-			insert into usuarios 
-			(nombre,pass,sexo)
-			values (:nombre,:pass,:sexo)");
-		}
-		$consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+		$consulta = $objetoAccesoDato->RetornarConsulta("
+		insert into usuarios 
+		(email,pass,perfil)
+		values (:email,:pass,:perfil)");
+		$consulta->bindValue(':perfil', $this->perfil, PDO::PARAM_STR);
+		$consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
 		$consulta->bindValue(':pass', $this->pass, PDO::PARAM_STR);
-		$consulta->bindValue(':sexo', $this->sexo, PDO::PARAM_STR);
 		$consulta->execute();
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
@@ -81,22 +67,30 @@ class User
 		return $user;
 	}
 
-	public static function getUserDataByNombrePasswordSexo($nombre, $pass, $sexo)
+	public static function getUserDataByEmailPassword($email, $pass)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("select nombre,pass,sexo,perfil,idusuario from usuarios where nombre = :nombre and pass = :pass and sexo = :sexo");
+		$consulta = $objetoAccesoDato->RetornarConsulta("select email,pass,perfil,idusuario from usuarios where email = :email and pass = :pass");
 		$consulta->bindValue(':pass', $pass, PDO::PARAM_STR);
-		$consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
-		$consulta->bindValue(':sexo', $sexo, PDO::PARAM_STR);
+		$consulta->bindValue(':email', $email, PDO::PARAM_STR);
 		$consulta->execute();
 		return $consulta->fetchObject('User');
 	}
 
-	public static function userAlreadyExist($nombre)
+	public static function emailExists($email)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta = $objetoAccesoDato->RetornarConsulta("select nombre,pass from usuarios where nombre = :nombre");
-		$consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
+		$consulta = $objetoAccesoDato->RetornarConsulta("select email from usuarios where email = :email");
+		$consulta->bindValue(':email', $email, PDO::PARAM_STR);
+		$consulta->execute();
+		return $consulta->rowCount() > 0;
+	}
+
+	public static function passwordExists($password)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta = $objetoAccesoDato->RetornarConsulta("select pass from usuarios where pass = :pass");
+		$consulta->bindValue(':pass', $password, PDO::PARAM_STR);
 		$consulta->execute();
 		return $consulta->rowCount() > 0;
 	}

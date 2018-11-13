@@ -3,10 +3,10 @@ class Compra
 {
 	public $idusuario;
 	public $idcompra;
-	public $articulo;
+	public $marca;
 	public $fecha;
 	public $precio;
-	public $foto;
+	public $modelo;
 
 	public function deleteCompra()
 	{
@@ -26,15 +26,17 @@ class Compra
 		$consulta = $objetoAccesoDato->RetornarConsulta("
 				update compras
 				set idusuario = :idusuario,
-				articulo =:articulo,
+				marca =:marca,
 				fecha =:fecha,
-				precio = :precio
+				precio = :precio,
+				modelo = :modelo
 				WHERE idcompra =:idcompra");
 		$consulta->bindValue(':idcompra', $this->idcompra, PDO::PARAM_INT);
 		$consulta->bindValue(':idusuario', $this->idusuario, PDO::PARAM_STR);
-		$consulta->bindValue(':articulo', $this->articulo, PDO::PARAM_STR);
+		$consulta->bindValue(':marca', $this->marca, PDO::PARAM_STR);
 		$consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
 		$consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
+		$consulta->bindValue(':modelo', $this->modelo, PDO::PARAM_STR);
 		return $consulta->execute();
 	}
 
@@ -43,12 +45,14 @@ class Compra
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta = $objetoAccesoDato->RetornarConsulta("
 				insert into compras 
-				(idusuario,articulo,fecha,precio)
-				values (:idusuario,:articulo,:fecha,:precio)");
+				(idcompra,idusuario,marca,fecha,modelo,precio)
+				values (:idcompra,:idusuario,:marca,:fecha,:modelo,:precio)");
+		$consulta->bindValue(':idcompra', $this->idcompra, PDO::PARAM_STR);
 		$consulta->bindValue(':idusuario', $this->idusuario, PDO::PARAM_STR);
-		$consulta->bindValue(':articulo', $this->articulo, PDO::PARAM_STR);
+		$consulta->bindValue(':marca', $this->marca, PDO::PARAM_STR);
 		$consulta->bindValue(':fecha', $this->fecha, PDO::PARAM_STR);
 		$consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
+		$consulta->bindValue(':modelo', $this->modelo, PDO::PARAM_STR);
 		$consulta->execute();
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
@@ -69,5 +73,14 @@ class Compra
 		$consulta->bindValue(':idusuario', $userid, PDO::PARAM_INT);
 		$consulta->execute();
 		return $consulta->fetchAll(PDO::FETCH_CLASS, "compra");
+	}
+
+	public static function getModelosByMarca($marca)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta = $objetoAccesoDato->RetornarConsulta("select modelo from compras where marca = :marca");
+		$consulta->bindValue(':marca', $marca, PDO::PARAM_STR);
+		$consulta->execute();
+		return $consulta->fetchAll(PDO::FETCH_COLUMN, "modelo");
 	}
 }

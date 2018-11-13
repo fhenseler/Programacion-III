@@ -1,21 +1,21 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Psr7Middlewares\Middleware;
-use Monolog\Logger;
-use Monolog\Handler\ErrorLogHandler;
+// use Psr7Middlewares\Middleware;
+// use Monolog\Logger;
+// use Monolog\Handler\ErrorLogHandler;
 
 
 
-//Create the logger
-$logger = new Logger('access');
-$logger->pushHandler(new ErrorLogHandler());
+// //Create the logger
+// $logger = new Logger('access');
+// $logger->pushHandler(new ErrorLogHandler());
 
-$middlewares = [
+// $middlewares = [
 
-    Middleware::AccessLog($logger) //Instance of Psr\Log\LoggerInterface
-        ->combined(true)           //(optional) To use the Combined Log Format instead the Common Log Format
-];
+//     Middleware::AccessLog($logger) //Instance of Psr\Log\LoggerInterface
+//         ->combined(true)           //(optional) To use the Combined Log Format instead the Common Log Format
+// ];
 
 require '../composer/vendor/autoload.php';
 require '../composer/vendor/paragonie/random_compat/psalm-autoload.php';
@@ -25,8 +25,6 @@ require_once './classes/compraApi.php';
 require_once './classes/AuthJWT.php';
 require_once './classes/MWCORS.php';
 require_once './classes/MWAuth.php';
-
-$response = $dispatcher(ServerRequestFactory::fromGlobals(), new Response());
 
 
 $config['displayErrorDetails'] = true;
@@ -65,5 +63,12 @@ $app->group('/compra', function () {
   $this->post('/add', \compraApi::class . ':insert');
      
 })->add(\MWAuth::class . ':verifyUserCompra')->add(\MWCORS::class . ':enableCORS');
+
+
+$app->group('/compraAdmin', function () {
+ 
+  $this->get('/marca', \compraApi::class . ':getByMarca');
+     
+})->add(\MWAuth::class . ':verifyUserCompraAdmin')->add(\MWCORS::class . ':enableCORS');
 
 $app->run();

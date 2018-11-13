@@ -24,6 +24,23 @@ class compraApi extends Compra implements IGenericDAO
         return $newResponse;
     }
 
+    public function getByMarca($request, $response, $args)
+    {
+        $marca = $_GET['marca'];
+        $compras = Compra::getModelosByMarca($marca);
+        if (!$compras)
+            {
+            $rv = new stdclass();
+            $rv->message = "Recurso no encontrado";
+            $newResponse = $response->withJson($rv, 404);
+        }
+        else
+            {
+            $newResponse = $response->withJson($compras, 200);
+        }
+        return $newResponse;
+    }
+
     public function getAll($request, $response, $args)
     {
         $compras = Compra::getAllCompras();
@@ -38,9 +55,10 @@ class compraApi extends Compra implements IGenericDAO
 
         $newCompra = new Compra();
         $newCompra->idusuario = $newCompraData["idusuario"];
-        $newCompra->articulo = $newCompraData["articulo"];
+        $newCompra->marca = $newCompraData["marca"];
         $newCompra->fecha = $newCompraData["fecha"];
         $newCompra->precio = $newCompraData["precio"];
+        $newCompra->modelo = $newCompraData["modelo"];
         
         if(User::getUserById($newCompra->idusuario))
         {
@@ -64,9 +82,10 @@ class compraApi extends Compra implements IGenericDAO
         $compraToUpdate = new Compra();
         $compraToUpdate->idusuario = $newData['idusuario'];
         $compraToUpdate->idcompra = $newData['idcompra'];
-        $compraToUpdate->articulo = $newData['articulo'];
+        $compraToUpdate->marca = $newData['marca'];
         $compraToUpdate->fecha = $newData['fecha'];
         $compraToUpdate->precio = $newData['precio'];
+        $compraToUpdate->modelo = $newData['modelo'];
         $rv = new stdclass();
         if ($compraToUpdate->updateCompra()) {
             $rv->message = "La compra ha sido actualizada exitosamente.";

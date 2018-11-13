@@ -66,7 +66,7 @@ class MWAuth
 			else
 			{
 				$payload=AuthJWT::ObtenerData($jwt);
-				$user = User::getUserDataByNombrePasswordSexo($payload->nombre, $payload->pass, $payload->sexo);
+				$user = User::getUserDataByEmailPassword($payload->email, $payload->pass);
 				
 				 
 				// DELETE,PUT y DELETE sirve para todos los logeados y admin
@@ -139,28 +139,112 @@ class MWAuth
 
 		if($rv->esValido)
 		{						
-			if($request->isPost())
-			{		
-				// el post sirve para todos los logeados			    
-				$response = $next($request, $response);
-			}
-			else
-			{
+			// if($request->isPost())
+			// {		
+			// 	// el post sirve para todos los logeados			    
+			// 	$response = $next($request, $response);
+			// }
+			// else
+			// {
 				$payload=AuthJWT::ObtenerData($jwt);
-				$user = User::getUserDataByNombrePasswordSexo($payload->nombre, $payload->pass, $payload->sexo);
+				$user = User::getUserDataByEmailPassword($payload->email, $payload->pass);
 				
 				 
 				// DELETE,PUT y DELETE sirve para todos los logeados y admin
-				if($user->perfil=="administrador")
-				{
-					$response = $next($request, $response);
-				}		           	
-				if($user->perfil=="usuario")
-				{		
-					
-					$rv->respuesta= Compra::getCompraByUserId($user->idusuario);			
-				}
-			}		          
+					if($user->perfil=="administrador")
+					{
+						$response = $next($request, $response);
+					}		           	
+					if($user->perfil=="usuario")
+					{		
+						
+						$rv->respuesta= Compra::getCompraByUserId($user->idusuario);		
+						//$rv->respuesta= 'Solo administradores';	
+					}
+			// }		          
+		}    
+		else
+		{
+			//   $response->getBody()->write('<p>no tenes habilitado el ingreso</p>');
+			$rv->respuesta="Solo usuarios registrados";
+			$rv->elToken=$jwt;
+
+		}  		  
+	if($rv->respuesta!="")
+	{
+		$nueva=$response->withJson($rv, 401);  
+		return $nueva;
+	}
+
+
+		return $response;
+	}
+
+
+	public function verifyUserCompraAdmin($request, $response, $next)
+	{
+		$rv = new stdclass();
+		$rv->message = "";
+		$rv->respuesta = "";
+
+		if (isset($request->getHeader('Authorization')[0])) 
+		{
+			$jwt = $request->getHeader('Authorization')[0];
+			if (AuthJWT::verifyToken($jwt)) 
+			{
+				$response = $next($request, $response);
+			}
+			else 
+			{
+				$rv->message = "La credencial no es válida o ha expirado.";
+				$response = $response->withJson($rv, 404);
+			}
+		}
+		else 
+		{
+			$rv->message = "No se han enviado las credenciales.";
+			$response = $response->withJson($rv, 404);
+		}
+
+		$rv->esValido=true; 
+		try 
+		{
+			//$token="";
+			AuthJWT::verifyToken($jwt);
+			$rv->esValido=true;      
+		}
+		catch (Exception $e) 
+		{      
+			//guardar en un log
+			$rv->excepcion=$e->getMessage();
+			$rv->esValido=false;     
+		}
+
+		if($rv->esValido)
+		{						
+			// if($request->isPost())
+			// {		
+			// 	// el post sirve para todos los logeados			    
+			// 	$response = $next($request, $response);
+			// }
+			// else
+			// {
+				$payload=AuthJWT::ObtenerData($jwt);
+				$user = User::getUserDataByEmailPassword($payload->email, $payload->pass);
+				
+				 
+				// DELETE,PUT y DELETE sirve para todos los logeados y admin
+					if($user->perfil=="administrador")
+					{
+						$response = $next($request, $response);
+					}		           	
+					if($user->perfil=="usuario")
+					{		
+						
+						//$rv->respuesta= Compra::getCompraByUserId($user->idusuario);		
+						$rv->respuesta= 'Solo administradores';	
+					}
+			// }		          
 		}    
 		else
 		{
