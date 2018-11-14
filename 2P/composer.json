@@ -1,6 +1,0 @@
-{
-    "require": {
-        "paragonie/random_compat": "^2.0",
-        "monolog/monolog": "^1.24"
-    }
-}

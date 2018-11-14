@@ -1,4 +1,4 @@
-Es de microsoft, básicamente traduce y compila C# a js
+﻿Es de microsoft, básicamente traduce y compila C# a js
 
 npm install -g typescript
 tsc -init
@@ -6,3 +6,22 @@ tsc app (transpilar, crear js desde ts)
 node app (equivalente a abrir el navegador y mostrar app.ts)
 
 typescript.playground (para instalar etc)
+
+tsc -watch (guardar cambios automaticamente)
+
+tsconfig.json
+comentar strict = true
+
+
+Clase 10
+
+app.ts vs app.js
+TS es similar a C#, se pueden usar clases y modificadores de las variables (ej. public, private)
+Pero en el .js no se ve todo eso, porque js puro no tiene clases ni tipos (al compilar desaparece todo, JS nativo)
+
+tsc --outfile app.js enumerados animal mascota app (ver pagina typescript)
+
+
+Ej 2 jquery ts
+
+npm install --save-dev @types/jquery

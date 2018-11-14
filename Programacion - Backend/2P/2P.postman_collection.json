@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "c327292c-adc9-470d-b61b-468137e15ced",
+		"name": "2P",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "pass",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "F",
+							"type": "text"
+						},
+						{
+							"key": "perfil",
+							"value": "administrador",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/login/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"login",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "fede",
+							"type": "text"
+						},
+						{
+							"key": "pass",
+							"value": "fede",
+							"type": "text"
+						},
+						{
+							"key": "sexo",
+							"value": "F",
+							"type": "text"
+						},
+						{
+							"key": "perfil",
+							"value": "usuario",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/login/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"login",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDE3NTkzNjgsImF1ZCI6IjFkNWIwZDY0MmE2ZDliYjZhN2RlZTIyZWYwMTgxMDhhZmI3OWEwZjYiLCJkYXRhIjp7ImlkdXN1YXJpbyI6bnVsbCwibm9tYnJlIjoiZmVkZSIsInBlcmZpbCI6bnVsbCwicGFzcyI6ImZlZGUiLCJmb3RvIjpudWxsLCJzZXhvIjoiRiJ9LCJhcHAiOiJHZW5lcmljIFVzZXIgQVBJUkVTVCJ9.bcrVJv3d1QF6qnEEK3N3hCM-bTJf4JJLV47n0gqniFA",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idusuario",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "articulo",
+							"value": "bicicleta",
+							"type": "text"
+						},
+						{
+							"key": "fecha",
+							"value": "11/9/2018",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "3244.00",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/compra/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"compra",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDE3NjMyNjYsImF1ZCI6IjFkNWIwZDY0MmE2ZDliYjZhN2RlZTIyZWYwMTgxMDhhZmI3OWEwZjYiLCJkYXRhIjp7ImlkdXN1YXJpbyI6bnVsbCwibm9tYnJlIjoiZmVkZSIsInBlcmZpbCI6InVzdWFyaW8iLCJwYXNzIjoiZmVkZSIsImZvdG8iOm51bGwsInNleG8iOiJGIn0sImFwcCI6IkdlbmVyaWMgVXNlciBBUElSRVNUIn0.RjXetTuUR3FeIsxWtgqa9TGsjN1FHP1kfaru7nwbGio",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/compra/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"compra",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idusuario",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "articulo",
+							"value": "bicicleta",
+							"type": "text"
+						},
+						{
+							"key": "fecha",
+							"value": "11/9/2018",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "3244.00",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/compra/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"compra",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NDE3NjMyNjYsImF1ZCI6IjFkNWIwZDY0MmE2ZDliYjZhN2RlZTIyZWYwMTgxMDhhZmI3OWEwZjYiLCJkYXRhIjp7ImlkdXN1YXJpbyI6bnVsbCwibm9tYnJlIjoiZmVkZSIsInBlcmZpbCI6InVzdWFyaW8iLCJwYXNzIjoiZmVkZSIsImZvdG8iOm51bGwsInNleG8iOiJGIn0sImFwcCI6IkdlbmVyaWMgVXNlciBBUElSRVNUIn0.RjXetTuUR3FeIsxWtgqa9TGsjN1FHP1kfaru7nwbGio",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/2P/apirest/compra/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"2P",
+						"apirest",
+						"compra",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
