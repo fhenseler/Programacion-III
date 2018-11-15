@@ -6,8 +6,7 @@ var bodyParser = require('body-parser');
 
 //app.use(express.static(__dirname));
 
-//Faltaba ; aca
-app.use(express.static(__dirname, {index: 'index.html'}));
+app.use(express.static(__dirname, {index: 'index.html'}))
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
