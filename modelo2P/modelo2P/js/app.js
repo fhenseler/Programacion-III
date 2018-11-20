@@ -168,4 +168,10 @@ function mapearCampos() {
     tabla += "</table>";
     $('#divTabla').html(tabla);
 }
+
+function extraerMascota()
+{
+    var mascotasString = localStorage.getItem("Mascotas");
+    console.log(mascotasString);
+}
 //# sourceMappingURL=app.js.map

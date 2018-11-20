@@ -1,0 +1,11 @@
+DE UN ARRAY, AGARRAR UN OBJETO UNICO (set ecmascript 6)
+
+> let set = new Set();
+> set.add('red')
+
+> set.has('red')
+true
+> set.delete('red')
+true
+> set.has('red')
+false
