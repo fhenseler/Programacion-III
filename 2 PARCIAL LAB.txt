@@ -9,3 +9,16 @@ true
 true
 > set.has('red')
 false
+
+--------------------------------------------------------
+modelo.ts puede tener clases "personaje" y "heroe" (AMBAS)
+MVC
+
+javascript + typescript mezclados (puede haber errores de compilacion)
+
+-------------------------------------------------------
+
+TRAER PRIMER PARCIAL HECHO 100%, SE EMPIEZA DESDE AHI. 
+SI AGREGO FUNCIONALIDAD DEL 2DO, QUIZA TENGA QUE SACAR CODIGO
+
+LLEGAR TEMPRANO PARA BAJAR CODIGO!!!!!!
