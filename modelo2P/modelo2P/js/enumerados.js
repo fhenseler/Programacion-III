@@ -1,13 +1,8 @@
 var Clases;
 (function (Clases) {
-    var Tipo;
-    (function (Tipo) {
-        Tipo[Tipo["Perro"] = 0] = "Perro";
-        Tipo[Tipo["Gato"] = 1] = "Gato";
-        Tipo[Tipo["Reptil"] = 2] = "Reptil";
-        Tipo[Tipo["Roedor"] = 3] = "Roedor";
-        Tipo[Tipo["Ave"] = 4] = "Ave";
-        Tipo[Tipo["Pez"] = 5] = "Pez";
-    })(Tipo = Clases.Tipo || (Clases.Tipo = {}));
+    var tipoHeroe;
+    (function (tipoHeroe) {
+        tipoHeroe[tipoHeroe["Xmen"] = 0] = "Xmen";
+        tipoHeroe[tipoHeroe["Avenger"] = 1] = "Avenger";
+    })(tipoHeroe = Clases.tipoHeroe || (Clases.tipoHeroe = {}));
 })(Clases || (Clases = {}));
-//# sourceMappingURL=enumerados.js.map

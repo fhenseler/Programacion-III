@@ -1,67 +1,65 @@
-///<reference path="mascota.ts"/>
+///<reference path="heroe.ts"/>
 $(function () {
     // localStorage.clear();
     cargarTipos();
-    mostrarMascotas();
+    mostrarHeroes();
     $('#cmbFiltro').change(function () {
-        //filtrarMascotas(this.value);
+        //  filtrarHeroes(this.value);
     });
     $('#chkId').change(mapearCampos);
     $('#chkName').change(mapearCampos);
     $('#chkEdad').change(mapearCampos);
-    $('#chkPatas').change(mapearCampos);
-    //mapearCampos();
+    $('#chkPoderes').change(mapearCampos);
 });
-function agregarMascota() {
+function agregarHeroe() {
     var id = Number($('#txtId').val());
     var tipo = Number($('#selectTipo').val());
-    var nuevaMascota = new Clases.Mascota(id, tipo, Number($('#txtPatas').val()), Number($('#txtEdad').val()), String($('#txtNombre').val()));
-    var MascotasString = localStorage.getItem("Mascotas");
-    var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
-    console.log(nuevaMascota.toJSON());
-    MascotasJSON.push(JSON.parse(nuevaMascota.toJSON()));
-    localStorage.setItem("Mascotas", JSON.stringify(MascotasJSON));
-    alert("Mascota guardada!!!");
-    mostrarMascotas();
+    var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), Number($('#txtEdad').val()), String($('#txtPoder').val()), tipo);
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    console.log(nuevoHeroe.toJSON());
+    HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
+    localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
+    alert("Heroe guardado!!!");
+    mostrarHeroes();
     //limpiarCampos();
-    // console.log(nuevaMascota.toJSON());
+    // console.log(nuevoHeroe.toJSON());
 }
-function eliminarMascota() {
-    var storedMascotas = JSON.parse(localStorage.getItem("Mascotas"));
+function eliminarHeroe() {
+    var storedHeroes = JSON.parse(localStorage.getItem("Heroes"));
     // here you need to make a loop to find the index of item to delete
     var indexToRemove = Number($('#txtId').val());
     //remove item selected, second parameter is the number of items to delete 
-    $.each(storedMascotas, function (index, obj) {
+    $.each(storedHeroes, function (index, obj) {
         if (obj.id == indexToRemove) {
-            storedMascotas.splice(index, 1);
-            console.log(storedMascotas);
-            localStorage["Mascotas"] = JSON.stringify(storedMascotas);
+            storedHeroes.splice(index, 1);
+            console.log(storedHeroes);
+            localStorage["Heroes"] = JSON.stringify(storedHeroes);
             return false;
         }
     });
-    mostrarMascotas();
+    mostrarHeroes();
     limpiarCampos();
 }
-function modificarMascota() {
-    agregarMascota();
-    eliminarMascota();
-    mostrarMascotas();
+function modificarHeroe() {
+    agregarHeroe();
+    eliminarHeroe();
+    mostrarHeroes();
     limpiarCampos();
 }
 function limpiarCampos() {
-    $('#txtTipo').val("");
     $('#txtId').val("");
     $('#txtEdad').val("");
-    $('#txtPatas').val("");
+    $('#txtPoderes').val("");
     $('#selectTipo').val(0);
     $('#txtId').focus();
 }
-function mostrarMascotas() {
-    var MascotasString = localStorage.getItem("Mascotas");
-    var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
-    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Patas</th></tr>";
-    for (var i = 0; i < MascotasJSON.length; i++) {
-        tabla += "<tr><td>" + MascotasJSON[i].id + "</td><td>" + MascotasJSON[i].nombre + "</td><td>" + MascotasJSON[i].edad + "</td><td>" + Clases.Tipo[MascotasJSON[i].tipo] + "</td><td>" + MascotasJSON[i].patas + "</td></tr>";
+function mostrarHeroes() {
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Poderes</th></tr>";
+    for (var i = 0; i < HeroesJSON.length; i++) {
+        tabla += "<tr><td>" + HeroesJSON[i].id + "</td><td>" + HeroesJSON[i].nombre + "</td><td>" + HeroesJSON[i].edad + "</td><td>" + Clases.tipoHeroe[HeroesJSON[i].tipo] + "</td><td>" + HeroesJSON[i].poder + "</td></tr>";
     }
     tabla += "</table>";
     $('#divTabla').html(tabla);
@@ -73,39 +71,42 @@ function cargarTipos() {
      .unique()
      .sort();
  */
-    for (var i = 0; i < 5; i++) {
-        $("#cmbFiltro").append('<option value="' + i + '">' + Clases.Tipo[i] + '</option>');
+    for (var i = 0; i < 2; i++) {
+        $("#cmbFiltro").append('<option value="' + i + '">' + Clases.tipoHeroe[i] + '</option>');
     }
-    $.each(Clases.Tipo, function (value, tipo) {
-        /* $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
-             //console.log(x);
-             i++;
-             */
+    for (var i = 0; i < Object.keys(Clases.tipoHeroe).length / 2; i++) {
+        $("#selectTipo").append('<option value="' + i + '">' + Clases.tipoHeroe[i] + '</option>');
+    }
+    $.each(Clases.tipoHeroe, function (value, tipo) {
+        //     /* $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
+        //          //console.log(x);
+        //          i++;
+        //          */
     });
 }
-function filtrarMascotas(tipo) {
+function filtrarHeroes(tipo) {
     //console.log(tipo);
-    var mascotasFiltradas;
-    var MascotasString = localStorage.getItem("Mascotas");
-    var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
-    mascotasFiltradas = MascotasJSON.filter(function (mascota) {
-        return Clases.Tipo[mascota.tipo] === Clases.Tipo[tipo];
+    var HeroesFiltrados;
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    HeroesFiltrados = HeroesJSON.filter(function (Heroe) {
+        return Clases.tipoHeroe[Heroe.tipo] === Clases.tipoHeroe[tipo];
     });
-    //console.log(mascotasFiltradas);
-    mostrarMascotasPorTipo(mascotasFiltradas);
+    //console.log(HeroesFiltrados);
+    mostrarHeroesPorTipo(HeroesFiltrados);
 }
 function cleanStorage() {
     localStorage.clear();
     alert("LocalStorage Limpio");
 }
-function mostrarMascotasPorTipo(lista) {
-    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Patas</th></tr>";
+function mostrarHeroesPorTipo(lista) {
+    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Poderes</th></tr>";
     if (lista.length == 0) {
-        tabla += "<tr><td colspan='4'>No hay mascotas que mostrar</td></tr>";
+        tabla += "<tr><td colspan='4'>No hay Heroes que mostrar</td></tr>";
     }
     else {
         for (var i = 0; i < lista.length; i++) {
-            tabla += "<tr><td>" + lista[i].id + "</td><td>" + lista[i].nombre + "</td><td>" + lista[i].edad + "</td><td>" + Clases.Tipo[lista[i].tipo] + "</td><td>" + lista[i].patas + "</td></tr>";
+            tabla += "<tr><td>" + lista[i].id + "</td><td>" + lista[i].nombre + "</td><td>" + lista[i].edad + "</td>" + Clases.tipoHeroe[i] + "</td><td>" + lista[i].poder + "</td></tr>";
         }
     }
     tabla += "</table>";
@@ -116,17 +117,17 @@ function calcularPromedio() {
     var totalEdades;
     var cantidad;
     var tipo = Number($('#cmbFiltro').val());
-    var mascotasFiltradas;
-    var MascotasString = localStorage.getItem("Mascotas");
-    var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
-    mascotasFiltradas = MascotasJSON.filter(function (mascota) {
-        return Clases.Tipo[mascota.tipo] === Clases.Tipo[tipo];
+    var HeroesFiltrados;
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    HeroesFiltrados = HeroesJSON.filter(function (Heroe) {
+        return Clases.tipoHeroe[Heroe.tipo] === Clases.tipoHeroe[tipo];
     });
-    totalEdades = mascotasFiltradas.reduce(function (anterior, actual) {
+    totalEdades = HeroesFiltrados.reduce(function (anterior, actual) {
         return anterior += actual.edad;
     }, 0);
     console.log(totalEdades);
-    cantidad = mascotasFiltradas.length;
+    cantidad = HeroesFiltrados.length;
     console.log(cantidad);
     if (cantidad != 0) {
         promedio = totalEdades / cantidad;
@@ -137,10 +138,10 @@ function mapearCampos() {
     var chkId = $('#chkId')[0].checked;
     var chkName = $('#chkName')[0].checked;
     var chkEdad = $('#chkEdad')[0].checked;
-    var chkPatas = $('#chkPatas')[0].checked;
+    var chkPoderes = $('#chkPoderes')[0].checked;
     //console.log(chkId);
-    var MascotasString = localStorage.getItem("Mascotas");
-    var MascotasJSON = MascotasString == null ? [] : JSON.parse(MascotasString);
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
     var tabla = "<table class='table'><thead><tr>";
     if (chkId)
         tabla += "<th>Id</th>";
@@ -149,29 +150,22 @@ function mapearCampos() {
     if (chkEdad)
         tabla += "<th>Edad</th>";
     tabla += "<th>Tipo</th>";
-    if (chkPatas)
-        tabla += "<th>Patas</th>";
+    if (chkPoderes)
+        tabla += "<th>Poderes</th>";
     tabla += "</tr>";
-    for (var i = 0; i < MascotasJSON.length; i++) {
+    for (var i = 0; i < HeroesJSON.length; i++) {
         tabla += "<tr>";
         if (chkId)
-            tabla += "<td>" + MascotasJSON[i].id + "</td>";
+            tabla += "<td>" + HeroesJSON[i].id + "</td>";
         if (chkName)
-            tabla += "<td>" + MascotasJSON[i].nombre + "</td>";
+            tabla += "<td>" + HeroesJSON[i].nombre + "</td>";
         if (chkEdad)
-            tabla += "<td>" + MascotasJSON[i].edad + "</td>";
-        tabla += "<td>" + Clases.Tipo[MascotasJSON[i].tipo] + "</td>";
-        if (chkPatas)
-            tabla += "<td>" + MascotasJSON[i].patas + "</td>";
+            tabla += "<td>" + HeroesJSON[i].edad + "</td>";
+        tabla += "<td>" + Clases.tipoHeroe[HeroesJSON[i].tipo] + "</td>";
+        if (chkPoderes)
+            tabla += "<td>" + HeroesJSON[i].poder + "</td>";
         tabla += "</tr>";
     }
     tabla += "</table>";
     $('#divTabla').html(tabla);
 }
-
-function extraerMascota()
-{
-    var mascotasString = localStorage.getItem("Mascotas");
-    console.log(mascotasString);
-}
-//# sourceMappingURL=app.js.map

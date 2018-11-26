@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="js/app.js"></script>
     <script src="js/enumerados.js"></script>
-    <script src="js/animal.js"></script>
-    <script src="js/mascota.js"></script>
+    <script src="js/personaje.js"></script>
+    <script src="js/heroe.js"></script>
+    <script src="js/app.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilos.css">
     <title>2do Parcial Laboratorio III</title>
@@ -21,7 +21,7 @@
         <form>
         <div>
 
-        <h1 class="text-center">ABM Mascotas</h1>
+        <h1 class="text-center">ABM Heroes</h1>
         <hr>    
 
             <br>
@@ -52,18 +52,18 @@
                 <label for="controlSelect" class="col-lg-1 col-form-label">Tipo: </label>
                 <div class="col-lg-4"> 
                     <select name="" id="selectTipo" class="form-control">
-                        <option value="0">Perro</option>
-                        <option value="1">Gato</option>
-                        <option value="2">Reptil</option>
-                        <option value="3">Roedor</option>
-                        <option value="4">Ave</option>
-                        <option value="5">Pez</option>
+
                     </select>
                 </div>
 
-                <label for="" class="col-lg-2 col-form-label">Cantidad Patas: </label>
+                <!-- <label for="" class="col-lg-2 col-form-label">Poder: </label>
                 <div class="col-lg-3">
-                    <input type="number" min="0" max="4" name="" id="txtPatas" class="form-control">
+                    <input type="text" min="0" max="4" name="" id="txtPoder" class="form-control">
+                </div> -->
+
+                <label for="" class="col-lg-2 col-form-label">Poder Principal: </label>
+                <div class="col-lg-3">
+                    <input type="text" name="" id="txtPoder" class="form-control">
                 </div>
 
             </div>
@@ -71,13 +71,13 @@
             <div  class="row">
 
                 <div class="col-lg-2">
-                    <button class="btn btn-primary" id="btnAgregar" onclick="agregarMascota()">Agregar</button>
+                    <button class="btn btn-primary" id="btnAgregar" onclick="agregarHeroe()">Agregar</button>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-primary" id="btnModificar" onclick="modificarMascota()">Modificar</button>
+                    <button class="btn btn-primary" id="btnModificar" onclick="modificarHeroe()">Modificar</button>
                 </div>
                 <div class="col-lg-2">
-                    <button class="btn btn-primary" id="btnEliminar" onclick="eliminarMascota()">Eliminar</button>
+                    <button class="btn btn-primary" id="btnEliminar" onclick="eliminarHeroe()">Eliminar</button>
                 </div>
                 <div class="col-lg-4">
                     <button class="btn btn-danger" id="btnClearStorage" onclick="cleanStorage()">Limpiar LocalStorage</button>
@@ -126,13 +126,13 @@
                     <label for="chkEdad" > Edad </label>
                 </div>
                 <div class="col-lg-2">
-                    <input type="checkbox" id="chkPatas"  checked>
-                    <label for="chkPatas" > Patas </label>
+                    <input type="checkbox" id="chkPoderes"  checked>
+                    <label for="chkPoderes" > Poderes </label>
                 </div>
             </div>
 
             <hr>
-            <h2 class="text-center">Lista de Mascotas</h2>
+            <h2 class="text-center">Lista de Heroes</h2>
             <hr>
 
             <div id="divTabla" class="table table-bordered">

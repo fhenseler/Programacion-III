@@ -1,109 +1,98 @@
 
-///<reference path="mascota.ts"/>
+///<reference path="heroe.ts"/>
 
 $(function () {
     // localStorage.clear();
     cargarTipos();
-
-    mostrarMascotas();
+    mostrarHeroes();
 
     $('#cmbFiltro').change(function () {
-        //filtrarMascotas(this.value);
+        //  filtrarHeroes(this.value);
     });
 
     $('#chkId').change(mapearCampos);
     $('#chkName').change(mapearCampos);
     $('#chkEdad').change(mapearCampos);
-    $('#chkPatas').change(mapearCampos);    
-
-    //mapearCampos();
-
+    $('#chkPoderes').change(mapearCampos);    
 
 });
 
-function agregarMascota(): void {
+function agregarHeroe(): void {
     let id: number = Number($('#txtId').val());
-    let tipo: Clases.Tipo = Number($('#selectTipo').val());
-    let nuevaMascota = new Clases.Mascota(id, tipo, Number($('#txtPatas').val()), Number($('#txtEdad').val()), String($('#txtNombre').val()));
+    let tipo: Clases.tipoHeroe = Number($('#selectTipo').val());
+    let nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), Number($('#txtEdad').val()), String($('#txtPoder').val()), tipo);
 
-    let MascotasString: string | null = localStorage.getItem("Mascotas");
+    let HeroesString: string | null = localStorage.getItem("Heroes");
 
-    let MascotasJSON: JSON[] = MascotasString == null ? [] : JSON.parse(MascotasString);
+    let HeroesJSON: JSON[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
-    console.log(nuevaMascota.toJSON());
+    console.log(nuevoHeroe.toJSON());
 
-    MascotasJSON.push(JSON.parse(nuevaMascota.toJSON()));
+    HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
 
-    localStorage.setItem("Mascotas", JSON.stringify(MascotasJSON));
+    localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
 
-    alert("Mascota guardada!!!");
+    alert("Heroe guardado!!!");
 
-    mostrarMascotas();
+    mostrarHeroes();
 
     //limpiarCampos();
 
 
-    // console.log(nuevaMascota.toJSON());
+    // console.log(nuevoHeroe.toJSON());
 
 }
 
-function eliminarMascota(): void {
+function eliminarHeroe(): void {
 
-    var storedMascotas = JSON.parse(localStorage.getItem("Mascotas"));
-
+    var storedHeroes = JSON.parse(localStorage.getItem("Heroes"));
     // here you need to make a loop to find the index of item to delete
     var indexToRemove = Number($('#txtId').val());
-
     //remove item selected, second parameter is the number of items to delete 
-    $.each(storedMascotas, function(index, obj){
+    $.each(storedHeroes, function (index, obj) {
         if (obj.id == indexToRemove) {
-            storedMascotas.splice(index,1);
-            console.log(storedMascotas);
-            localStorage["Mascotas"] = JSON.stringify(storedMascotas);
+            storedHeroes.splice(index, 1);
+            console.log(storedHeroes);
+            localStorage["Heroes"] = JSON.stringify(storedHeroes);
             return false;
         }
     });
-
-    alert("Mascota eliminada!!!");
-
-    mostrarMascotas();
-
+    mostrarHeroes();
     limpiarCampos();
 }
 
-function modificarMascota(): void {
+function modificarHeroe(): void {
 
-    agregarMascota();
-    eliminarMascota();
+    agregarHeroe();
+    eliminarHeroe();
 
-    mostrarMascotas();
+    mostrarHeroes();
 
     limpiarCampos();
 }
 
 function limpiarCampos() {
-    $('#txtTipo').val("");
     $('#txtId').val("");
     $('#txtEdad').val("");
-    $('#txtPatas').val("");
+    $('#txtPoderes').val("");
     $('#selectTipo').val(0);
 
     $('#txtId').focus();
 }
 
-function mostrarMascotas() {
+function mostrarHeroes() {
 
-    let MascotasString: string | null = localStorage.getItem("Mascotas");
+    let HeroesString: string | null = localStorage.getItem("Heroes");
 
-    let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
+    let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
-    let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Patas</th></tr>";
+    let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Poderes</th></tr>";
 
 
 
-    for (let i = 0; i < MascotasJSON.length; i++) {
+    for (let i = 0; i < HeroesJSON.length; i++) {
 
-        tabla += `<tr><td>${MascotasJSON[i].id}</td><td>${MascotasJSON[i].nombre}</td><td>${MascotasJSON[i].edad}</td><td>${Clases.Tipo[MascotasJSON[i].tipo]}</td><td>${MascotasJSON[i].patas}</td></tr>`;
+        tabla += `<tr><td>${HeroesJSON[i].id}</td><td>${HeroesJSON[i].nombre}</td><td>${HeroesJSON[i].edad}</td><td>${Clases.tipoHeroe[HeroesJSON[i].tipo]}</td><td>${HeroesJSON[i].poder}</td></tr>`;
 
     }
 
@@ -120,39 +109,41 @@ function cargarTipos() {
      .unique()
      .sort();
  */
-    for (let i = 0; i < 5; i++) {
-        $("#cmbFiltro").append('<option value="' + i + '">' + Clases.Tipo[i] + '</option>');
+    for (let i = 0; i < 2; i++) {
+        $("#cmbFiltro").append('<option value="' + i + '">' + Clases.tipoHeroe[i] + '</option>');
     }
 
+    for (let i = 0; i < Object.keys(Clases.tipoHeroe).length / 2; i++) {
+        $("#selectTipo").append('<option value="' + i + '">' + Clases.tipoHeroe[i] + '</option>');
+    }
 
-
-    $.each(Clases.Tipo, function (value, tipo) {
-        /* $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
-             //console.log(x);
-             i++;
-             */
+    $.each(Clases.tipoHeroe, function (value, tipo) {
+    //     /* $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
+    //          //console.log(x);
+    //          i++;
+    //          */
 
     });
 }
 
-function filtrarMascotas(tipo: number) {
+function filtrarHeroes(tipo: number) {
     //console.log(tipo);
 
-    let mascotasFiltradas: Array<Clases.Mascota>;
+    let HeroesFiltrados: Array<Clases.Heroe>;
 
-    let MascotasString: string | null = localStorage.getItem("Mascotas");
+    let HeroesString: string | null = localStorage.getItem("Heroes");
 
-    let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
+    let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
-    mascotasFiltradas = MascotasJSON.filter(function (mascota: Clases.Mascota) {
+    HeroesFiltrados = HeroesJSON.filter(function (Heroe: Clases.Heroe) {
 
-        return Clases.Tipo[mascota.tipo] === Clases.Tipo[tipo];
+        return Clases.tipoHeroe[Heroe.tipo] === Clases.tipoHeroe[tipo];
 
     }
 
     );
-    //console.log(mascotasFiltradas);
-    mostrarMascotasPorTipo(mascotasFiltradas);
+    //console.log(HeroesFiltrados);
+    mostrarHeroesPorTipo(HeroesFiltrados);
 
 }
 
@@ -161,20 +152,20 @@ function cleanStorage() {
     alert("LocalStorage Limpio");
 }
 
-function mostrarMascotasPorTipo(lista: Array<Clases.Mascota>) {
+function mostrarHeroesPorTipo(lista: Array<Clases.Heroe>) {
 
 
-    let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Patas</th></tr>";
+    let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Poderes</th></tr>";
 
     if (lista.length == 0) {
-        tabla += "<tr><td colspan='4'>No hay mascotas que mostrar</td></tr>";
+        tabla += "<tr><td colspan='4'>No hay Heroes que mostrar</td></tr>";
     }
     else {
 
 
         for (let i = 0; i < lista.length; i++) {
 
-            tabla += `<tr><td>${lista[i].id}</td><td>${lista[i].nombre}</td><td>${lista[i].edad}</td><td>${Clases.Tipo[lista[i].tipo]}</td><td>${lista[i].patas}</td></tr>`;
+            tabla += `<tr><td>${lista[i].id}</td><td>${lista[i].nombre}</td><td>${lista[i].edad}</td>${Clases.tipoHeroe[i]}</td><td>${lista[i].poder}</td></tr>`;
 
         }
 
@@ -196,19 +187,19 @@ function calcularPromedio() {
 
 
 
-    let mascotasFiltradas: Array<Clases.Mascota>;
+    let HeroesFiltrados: Array<Clases.Heroe>;
 
-    let MascotasString: string | null = localStorage.getItem("Mascotas");
+    let HeroesString: string | null = localStorage.getItem("Heroes");
 
-    let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
+    let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
-    mascotasFiltradas = MascotasJSON.filter(function (mascota: Clases.Mascota) {
+    HeroesFiltrados = HeroesJSON.filter(function (Heroe: Clases.Heroe) {
 
-        return Clases.Tipo[mascota.tipo] === Clases.Tipo[tipo];
+        return Clases.tipoHeroe[Heroe.tipo] === Clases.tipoHeroe[tipo];
 
     });
 
-    totalEdades = mascotasFiltradas.reduce(function (anterior, actual) {
+    totalEdades = HeroesFiltrados.reduce(function (anterior, actual) {
         return anterior += actual.edad;
 
     }, 0);
@@ -216,7 +207,7 @@ function calcularPromedio() {
 
     console.log(totalEdades);
 
-    cantidad = mascotasFiltradas.length;
+    cantidad = HeroesFiltrados.length;
 
 
     console.log(cantidad);
@@ -234,14 +225,14 @@ function mapearCampos() {
         let chkId: boolean = (<HTMLInputElement> $('#chkId')[0]).checked;
         let chkName: boolean = (<HTMLInputElement> $('#chkName')[0]).checked;
         let chkEdad: boolean = (<HTMLInputElement> $('#chkEdad')[0]).checked;
-        let chkPatas: boolean = (<HTMLInputElement> $('#chkPatas')[0]).checked;
+        let chkPoderes: boolean = (<HTMLInputElement> $('#chkPoderes')[0]).checked;
 
         //console.log(chkId);
         
     
-        let MascotasString: string | null = localStorage.getItem("Mascotas");
+        let HeroesString: string | null = localStorage.getItem("Heroes");
     
-        let MascotasJSON: Clases.Mascota[] = MascotasString == null ? [] : JSON.parse(MascotasString);
+        let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
     
         let tabla: string = "<table class='table'><thead><tr>";
 
@@ -252,22 +243,22 @@ function mapearCampos() {
         if(chkEdad)
         tabla+= "<th>Edad</th>";
         tabla += "<th>Tipo</th>";
-        if(chkPatas)
-        tabla += "<th>Patas</th>";
+        if(chkPoderes)
+        tabla += "<th>Poderes</th>";
         tabla += "</tr>";   
     
-        for (let i = 0; i < MascotasJSON.length; i++) {
+        for (let i = 0; i < HeroesJSON.length; i++) {
     
             tabla += `<tr>`;
             if(chkId)
-            tabla += `<td>${MascotasJSON[i].id}</td>`;
+            tabla += `<td>${HeroesJSON[i].id}</td>`;
             if(chkName)
-            tabla += `<td>${MascotasJSON[i].nombre}</td>`;
+            tabla += `<td>${HeroesJSON[i].nombre}</td>`;
             if(chkEdad)
-            tabla+= `<td>${MascotasJSON[i].edad}</td>`;
-            tabla += `<td>${Clases.Tipo[MascotasJSON[i].tipo]}</td>`;
-            if(chkPatas)
-            tabla += `<td>${MascotasJSON[i].patas}</td>`;
+            tabla+= `<td>${HeroesJSON[i].edad}</td>`;
+            tabla += `<td>${Clases.tipoHeroe[HeroesJSON[i].tipo]}</td>`;
+            if(chkPoderes)
+            tabla += `<td>${HeroesJSON[i].poder}</td>`;
             tabla += `</tr>`;             
     
         }

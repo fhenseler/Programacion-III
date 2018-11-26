@@ -1,12 +1,8 @@
 namespace Clases{
 
-   export enum Tipo{
-        Perro,
-        Gato,
-        Reptil,
-        Roedor,
-        Ave,
-        Pez
+    export enum tipoHeroe{
+        Xmen,
+        Avenger
     }
-
+    
 }
