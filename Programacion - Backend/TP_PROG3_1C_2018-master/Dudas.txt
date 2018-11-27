@@ -1,0 +1,49 @@
+Un sector que dependa de quien se loguea
+
+El mozo funcionaria como un nexo (Cliente -> Mesa <-> MOZO <-> Comanda)
+
+ARMADO DE PEDIDO
+Vino -> Bartender
+Cerveza -> Cervecero
+Empanadas -> Cocinero
+
+Armar 3 pedidos distintos cada uno con su demora 
+
+
+LISTADO DE PEDIDOS
+- Listado de todos los pedidos
+- Listado de pendientes? (por cada sector)
+
+ENTIDADES
+
+Los 4 sectores por separado, mozo y socios + Pedidos + Mesa
+
+
+
+
+ARMADO DE ENTIDADES
+
+EMPLEADO (ABM) + MOZO + SOCIO + ADMIN
+Sector - Estado del empleado (suspendido etc) - Estado del pedido - Tiempo estimado de cada pedido (Calcular diferencia entre el estimado y cuanto tardo realmente)
+
+MENU (ABM)
+Lo divido en comida / bebida etc para asignarlo a cada sector? O pongo un menu dentro de cada sector? - Precio de cada elemento
+
+PEDIDO (ABM)
+Se le asigna una mesa - Se le asigna un elemento del menu elegido por el cliente (Armo un menu previamente y lo paso por ID?) - Contador de cuantas veces se pidió -
+Estado
+
+MESA
+Se le asigna un cliente - Estado de la mesa
+
+CLIENTE (hace falta esta entidad? o directamente hago una tabla en la DB?)
+Genera un pedido - Se le asigna una mesa - Recibe ID de pedido del mozo
+
+
+ADMINISTRADOR DEL SISTEMA = SOCIO? -> NO
+
+
+OBJETIVOS PARA 1ER FECHA DE FINAL:
+
+OBJ 2DA FECHA: 
+
