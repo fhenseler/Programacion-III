@@ -5,7 +5,7 @@
 }
 
 /* The element to apply the animation to */
-#divForm, #divForm2 {
+#divForm{
   /* animation-name: example;
   animation-duration: 5s;
   box-sizing: border-box; */
@@ -18,7 +18,7 @@
   z-index: 9;
   color: white; */
 
-  width: 40%;
+  width: 50%;
   height: 90%;
 
   background-image: url("../images/formback1.jpg");
@@ -26,7 +26,21 @@
   position: absolute;
   z-index: 1;
   left: 450px;
-  top: 20px;
+  top: 10px;
+  overflow: none;
+  border: 2px solid #888;
+}
+
+#divForm2{
+  width: 50%;
+  height: 90%;
+
+  background-image: url("../images/formback1.jpg");
+  display:none;
+  position: absolute;
+  z-index: 1;
+  left: 450px;
+  top: 500px;
   overflow: none;
   border: 2px solid #888;
 }
@@ -81,8 +95,8 @@ body
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 400px;
-  max-height: 550px;
+  max-width: 500px;
+  max-height: 600px;
   background-color:black;
   margin: 4% auto 15% auto;
   border: 1px solid #888;
@@ -98,12 +112,12 @@ body
 /* Full-width input fields */
 .form-container input[type=text], .form-container input[type=password] {
   width: 80%;
-  height: 5%;
-  padding: 15px;
+  height: 10%;
+  padding: 5px;
   margin: 5px 0 22px 0;
   border: 1px solid black;
   background: #f1f1f1;
-  box-sizing : border-box;
+  box-sizing : content-box;
   color: black;
 }
 

@@ -2,6 +2,8 @@ window.addEventListener('load', AsignarManejadores, false);
 
 function AsignarManejadores() 
 {
+    cargarSpinner();
+    setTimeout(function(){ removerSpinner(); }, 3000);
     cargarLados();
 
     $('#cmbFiltro').change(function () {
@@ -20,16 +22,14 @@ function AsignarManejadores()
     $("#btnOpen").click(openForm);
     $("#divForm").on('load', ManejarEnvio);
     $("#btnConfirmar").click(agregarHeroe);
-    $("#btnConfirmar").click(cargarSpinner);
     $("#divForm2").on('load', ManejarEnvio);
     $('#btnCancel').click(closeForm);
     $('#btnCancel2').click(closeForm2);
     $('#btnModificar').click(modificarHeroe);
-    $("#btnModificar").click(cargarSpinner);
     $('#btnEliminar').click(eliminarHeroe);
-    $("#btnEliminar").click(cargarSpinner);
 
     mostrarHeroes();
+    promedioInicial();
 
     //traerListaHeroes();
 }
@@ -58,6 +58,7 @@ function openForm2(id) {
     console.log("DATOS: " + datos);
     console.log("FIND: " + datos.find(x => x.id === id));
     heroe = datos.find(x => x.id === id);
+    document.getElementById('txtId2').value = id;
     document.getElementById('txtNombre2').value = heroe.nombre;
     document.getElementById('txtApellido2').value = heroe.apellido;
     document.getElementById('txtAlias2').value = heroe.alias;
@@ -87,4 +88,9 @@ function limpiarFormulario()
     document.getElementById('l22').checked = false;
     document.getElementById('l1').checked = false;
     document.getElementById('l2').checked = false;
+}
+
+function removerSpinner()
+{
+    document.getElementById("divSpinner").style.display = "none";
 }

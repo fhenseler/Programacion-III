@@ -1,7 +1,7 @@
 
 
 function ejecutarTransaccion(transaccion, heroe) {
-
+    
     switch (transaccion) {
 
         case "Alta":

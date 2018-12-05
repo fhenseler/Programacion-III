@@ -82,10 +82,33 @@ function agregarHeroe() {
     //limpiarCampos();
     // console.log(nuevoHeroe.toJSON());
 }
+function agregarHeroe2() {
+    var id = Number($('#txtId2').val());
+    //var lado = $("input[name='lado']:checked").parent('label').text();
+    var text = $("input[name='lado2']:checked").parent('label').text();
+    var lado;
+    if (text === "Heroe") {
+        lado = Clases.ladoHeroe.Heroe;
+    }
+    else {
+        lado = Clases.ladoHeroe.Villano;
+    }
+    var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre2').val()), String($('#txtApellido2').val()), String($('#txtAlias2').val()), Number($('#txtEdad2').val()), lado);
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    //let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
+    console.log(nuevoHeroe.toJSON());
+    HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
+    localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
+    alert("Heroe modificado!!!");
+    mostrarHeroes();
+    //limpiarCampos();
+    // console.log(nuevoHeroe.toJSON());
+}
 function eliminarHeroe() {
     var storedHeroes = JSON.parse(localStorage.getItem("Heroes"));
     // here you need to make a loop to find the index of item to delete
-    var indexToRemove = Number($('#txtId').val());
+    var indexToRemove = Number($('#txtId2').val());
     //remove item selected, second parameter is the number of items to delete 
     $.each(storedHeroes, function (index, obj) {
         if (obj.id == indexToRemove) {
@@ -99,17 +122,24 @@ function eliminarHeroe() {
     limpiarCampos();
 }
 function modificarHeroe() {
-    agregarHeroe();
+    agregarHeroe2();
     eliminarHeroe();
-    //mostrarHeroes();
+    mostrarHeroes();
     limpiarCampos();
 }
 function limpiarCampos() {
     $('#txtId').val("");
+    $('#txtNombre').val("");
+    $('#txtApellido').val("");
+    $('#txtAlias').val("");
     $('#txtEdad').val("");
-    //$('#txtAlias').val("");
+    $('#txtId2').val("");
+    $('#txtNombre2').val("");
+    $('#txtApellido2').val("");
+    $('#txtAlias2').val("");
+    $('#txtEdad2').val("");
     //$('#selectlado').val(0);
-    $('#txtId').focus();
+    //$('#txtId').focus();
 }
 function mostrarHeroes() {
     var HeroesString = localStorage.getItem("Heroes");
@@ -122,16 +152,16 @@ function mostrarHeroes() {
         tabla += "<td id='3' onclick='openForm2(" + HeroesJSON[i].id + ");'>" + HeroesJSON[i].apellido + "</td>";
         tabla += "<td id='4' onclick='openForm2(" + HeroesJSON[i].id + ");'>" + HeroesJSON[i].alias + "</td>";
         tabla += "<td id='5' onclick='openForm2(" + HeroesJSON[i].id + ");'>" + HeroesJSON[i].edad + "</td>";
-        tabla += "<td id='6' onclick='openForm2(" + HeroesJSON[i].id + ");'>" + HeroesJSON[i].lado + "</td>";
+        tabla += "<td id='6' onclick='openForm2(" + HeroesJSON[i].id + ");'>" + Clases.ladoHeroe[HeroesJSON[i].lado] + "</td>";
         tabla += "</tr>";
     }
     tabla += "</table>";
     datos = HeroesJSON;
     $('#divTabla').html(tabla);
-    var c2 = document.getElementById("divTabla").children.length;
-    console.log(c2);
-    var c = document.getElementById("divTabla").children;
-    c[2].innerHTML = tabla;
+    // var c2 = document.getElementById("divTabla").children.length;
+    // console.log(c2);
+    // var c = document.getElementById("divTabla").children;
+    // c[2].innerHTML = tabla;
 }
 function cargarLados() {
     /* var paises = HeroesJSON.map(function(p){
@@ -181,6 +211,23 @@ function mostrarHeroesPorLado(lista) {
     }
     tabla += "</table>";
     $('#divTabla').html(tabla);
+}
+function promedioInicial() {
+    var promedio = 0;
+    var totalEdades;
+    var cantidad;
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    totalEdades = HeroesJSON.reduce(function (anterior, actual) {
+        return anterior += actual.edad;
+    }, 0);
+    console.log(totalEdades);
+    cantidad = HeroesJSON.length;
+    console.log(cantidad);
+    if (cantidad != 0) {
+        promedio = totalEdades / cantidad;
+    }
+    $('#txtPromedio').val(promedio);
 }
 function calcularPromedio() {
     var promedio = 0;
