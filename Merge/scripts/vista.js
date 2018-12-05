@@ -2,17 +2,19 @@ window.addEventListener('load', AsignarManejadores, false);
 
 function AsignarManejadores() 
 {
-    cargarTipos();
+    cargarLados();
     mostrarHeroes();
 
     $('#cmbFiltro').change(function () {
-        //  filtrarHeroes(this.value);
+        filtrarHeroes(Number($('#cmbFiltro').val()));
     });
 
     $('#chkId').change(mapearCampos);
     $('#chkName').change(mapearCampos);
+    $('#chkApellido').change(mapearCampos);
+    $('#chkAlias').change(mapearCampos);
     $('#chkEdad').change(mapearCampos);
-    $('#chkPoderes').change(mapearCampos);  
+    $('#chkLado').change(mapearCampos);  
 
 //--------------------------------------------------------------------------
 
@@ -72,6 +74,7 @@ function closeForm2() {
 
 function limpiarFormulario() 
 {
+    $("#txtId").value = "";
     $("#txtNombre").value = "";
     $("#txtApellido").value = "";
     $("#txtEdad").value = "";

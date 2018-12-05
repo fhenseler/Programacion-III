@@ -13,19 +13,20 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Clases;
 (function (Clases) {
-    var tipoHeroe;
-    (function (tipoHeroe) {
-        tipoHeroe[tipoHeroe["Xmen"] = 0] = "Xmen";
-        tipoHeroe[tipoHeroe["Avenger"] = 1] = "Avenger";
-    })(tipoHeroe = Clases.tipoHeroe || (Clases.tipoHeroe = {}));
+    var ladoHeroe;
+    (function (ladoHeroe) {
+        ladoHeroe[ladoHeroe["Heroe"] = 0] = "Heroe";
+        ladoHeroe[ladoHeroe["Villano"] = 1] = "Villano";
+    })(ladoHeroe = Clases.ladoHeroe || (Clases.ladoHeroe = {}));
     var Personaje = /** @class */ (function () {
-        function Personaje(id, nombre, edad) {
+        function Personaje(id, nombre, apellido, edad) {
             this.id = id;
             this.nombre = nombre;
             this.edad = edad;
+            this.apellido = apellido;
         }
         Personaje.prototype.toJSON = function () {
-            var json = "{\"nombre\":\"" + this.nombre + "\", \"edad\":" + this.edad + "}";
+            var json = "{\"id\":\"" + this.id + "\",\"nombre\":\"" + this.nombre + "\", \"apellido\":\"" + this.apellido + "\", \"edad\":" + this.edad + "}";
             return json;
         };
         return Personaje;
@@ -33,24 +34,24 @@ var Clases;
     Clases.Personaje = Personaje;
     var Heroe = /** @class */ (function (_super) {
         __extends(Heroe, _super);
-        function Heroe(id, nombre, edad, poder, tipo) {
-            var _this = _super.call(this, id, nombre, edad) || this;
-            _this.tipo = tipo;
-            _this.poder = poder;
+        function Heroe(id, nombre, apellido, alias, edad, lado) {
+            var _this = _super.call(this, id, nombre, apellido, edad) || this;
+            _this.lado = lado;
+            _this.alias = alias;
             return _this;
         }
-        Object.defineProperty(Heroe.prototype, "Poder", {
+        Object.defineProperty(Heroe.prototype, "Alias", {
             get: function () {
-                return this.poder;
+                return this.alias;
             },
             set: function (v) {
-                this.poder = v;
+                this.alias = v;
             },
             enumerable: true,
             configurable: true
         });
         Heroe.prototype.toJSON = function () {
-            var json = "{\"id\":\"" + this.id + "\",\"nombre\":\"" + this.nombre + "\", \"edad\":" + this.edad + ", \"poder\":\"" + this.Poder + "\", \"tipo\":\"" + this.tipo + "\"}";
+            var json = "{\"id\":\"" + this.id + "\",\"nombre\":\"" + this.nombre + "\",\"apellido\":\"" + this.apellido + "\",\"alias\":\"" + this.alias + "\", \"edad\":" + this.edad + ", \"lado\":\"" + this.lado + "\"}";
             return json;
         };
         return Heroe;
@@ -59,8 +60,16 @@ var Clases;
 })(Clases || (Clases = {}));
 function agregarHeroe() {
     var id = Number($('#txtId').val());
-    var tipo = Number($('#selectTipo').val());
-    var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), Number($('#txtEdad').val()), String($('#txtPoder').val()), tipo);
+    //var lado = $("input[name='lado']:checked").parent('label').text();
+    var text = $("input[name='lado']:checked").parent('label').text();
+    var lado;
+    if (text === "Heroe") {
+        lado = Clases.ladoHeroe.Heroe;
+    }
+    else {
+        lado = Clases.ladoHeroe.Villano;
+    }
+    var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), String($('#txtApellido').val()), String($('#txtAlias').val()), Number($('#txtEdad').val()), lado);
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
     console.log(nuevoHeroe.toJSON());
@@ -96,21 +105,22 @@ function modificarHeroe() {
 function limpiarCampos() {
     $('#txtId').val("");
     $('#txtEdad').val("");
-    $('#txtPoderes').val("");
-    $('#selectTipo').val(0);
+    //$('#txtAlias').val("");
+    //$('#selectlado').val(0);
     $('#txtId').focus();
 }
 function mostrarHeroes() {
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
-    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Poderes</th></tr>";
+    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Apellido</th><th>Alias</th><th>Edad</th><th>Lado</th></tr>";
     for (var i = 0; i < HeroesJSON.length; i++) {
-        tabla += "<tr><td>" + HeroesJSON[i].id + "</td><td>" + HeroesJSON[i].nombre + "</td><td>" + HeroesJSON[i].edad + "</td><td>" + Clases.tipoHeroe[HeroesJSON[i].tipo] + "</td><td>" + HeroesJSON[i].poder + "</td></tr>";
+        //${Clases.ladoHeroe[HeroesJSON[i].lado]}
+        tabla += "<tr><td>" + HeroesJSON[i].id + "</td><td>" + HeroesJSON[i].nombre + "</td><td>" + HeroesJSON[i].apellido + "</td><td>" + HeroesJSON[i].alias + "</td><td>" + HeroesJSON[i].edad + "</td><td>" + Clases.ladoHeroe[HeroesJSON[i].lado] + "</td></tr>";
     }
     tabla += "</table>";
     $('#divTabla').html(tabla);
 }
-function cargarTipos() {
+function cargarLados() {
     /* var paises = data.map(function(p){
          return p.pais;
      })
@@ -118,41 +128,42 @@ function cargarTipos() {
      .sort();
  */
     for (var i = 0; i < 2; i++) {
-        $("#cmbFiltro").append('<option value="' + i + '">' + Clases.tipoHeroe[i] + '</option>');
+        $("#cmbFiltro").append('<option value="' + i + '">' + Clases.ladoHeroe[i] + '</option>');
     }
-    for (var i = 0; i < Object.keys(Clases.tipoHeroe).length / 2; i++) {
-        $("#selectTipo").append('<option value="' + i + '">' + Clases.tipoHeroe[i] + '</option>');
-    }
-    $.each(Clases.tipoHeroe, function (value, tipo) {
-        //     /* $("#cmbFiltro").append('<option value="'+value+'">'+tipo+'</option>');
+    // for (let i = 0; i < Object.keys(Clases.ladoHeroe).length / 2; i++) {
+    //     $("#selectlado").append('<option value="' + i + '">' + Clases.ladoHeroe[i] + '</option>');
+    // }
+    $.each(Clases.ladoHeroe, function (value, lado) {
+        //     /* $("#cmbFiltro").append('<option value="'+value+'">'+lado+'</option>');
         //          //console.log(x);
         //          i++;
         //          */
     });
 }
-function filtrarHeroes(tipo) {
-    //console.log(tipo);
+function filtrarHeroes(lado) {
+    //console.log(lado);
     var HeroesFiltrados;
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
     HeroesFiltrados = HeroesJSON.filter(function (Heroe) {
-        return Clases.tipoHeroe[Heroe.tipo] === Clases.tipoHeroe[tipo];
+        return Clases.ladoHeroe[Heroe.lado] === Clases.ladoHeroe[lado];
     });
     //console.log(HeroesFiltrados);
-    mostrarHeroesPorTipo(HeroesFiltrados);
+    mostrarHeroesPorLado(HeroesFiltrados);
 }
 function cleanStorage() {
     localStorage.clear();
     alert("LocalStorage Limpio");
 }
-function mostrarHeroesPorTipo(lista) {
-    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Edad</th><th>Tipo</th><th>Poderes</th></tr>";
+function mostrarHeroesPorLado(lista) {
+    var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Apellido</th><th>Alias</th><th>Edad</th><th>Lado</th></tr>";
     if (lista.length == 0) {
-        tabla += "<tr><td colspan='4'>No hay Heroes que mostrar</td></tr>";
+        tabla += "<tr><td colspan='6'>No hay Heroes que mostrar</td></tr>";
     }
     else {
         for (var i = 0; i < lista.length; i++) {
-            tabla += "<tr><td>" + lista[i].id + "</td><td>" + lista[i].nombre + "</td><td>" + lista[i].edad + "</td>" + Clases.tipoHeroe[i] + "</td><td>" + lista[i].poder + "</td></tr>";
+            //Clases.ladoHeroe[i]
+            tabla += "<tr><td>" + lista[i].id + "</td><td>" + lista[i].nombre + "</td><td>" + lista[i].apellido + "</td><td>" + lista[i].alias + "</td><td>" + lista[i].edad + "</td><td>" + Clases.ladoHeroe[lista[i].lado] + "</td></tr>";
         }
     }
     tabla += "</table>";
@@ -162,12 +173,12 @@ function calcularPromedio() {
     var promedio = 0;
     var totalEdades;
     var cantidad;
-    var tipo = Number($('#cmbFiltro').val());
+    var lado = Number($('#cmbFiltro').val());
     var HeroesFiltrados;
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
     HeroesFiltrados = HeroesJSON.filter(function (Heroe) {
-        return Clases.tipoHeroe[Heroe.tipo] === Clases.tipoHeroe[tipo];
+        return Clases.ladoHeroe[Heroe.lado] === Clases.ladoHeroe[lado];
     });
     totalEdades = HeroesFiltrados.reduce(function (anterior, actual) {
         return anterior += actual.edad;
@@ -183,8 +194,10 @@ function calcularPromedio() {
 function mapearCampos() {
     var chkId = $('#chkId')[0].checked;
     var chkName = $('#chkName')[0].checked;
+    var chkApellido = $('#chkApellido')[0].checked;
+    var chkLado = $('#chkLado')[0].checked;
     var chkEdad = $('#chkEdad')[0].checked;
-    var chkPoderes = $('#chkPoderes')[0].checked;
+    var chkAlias = $('#chkAlias')[0].checked;
     //console.log(chkId);
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
@@ -193,11 +206,14 @@ function mapearCampos() {
         tabla += "<th>Id</th>";
     if (chkName)
         tabla += "<th>Nombre</th>";
+    if (chkApellido)
+        tabla += "<th>Apellido</th>";
+    if (chkAlias)
+        tabla += "<th>Alias</th>";
     if (chkEdad)
         tabla += "<th>Edad</th>";
-    tabla += "<th>Tipo</th>";
-    if (chkPoderes)
-        tabla += "<th>Poderes</th>";
+    if (chkLado)
+        tabla += "<th>Lado</th>";
     tabla += "</tr>";
     for (var i = 0; i < HeroesJSON.length; i++) {
         tabla += "<tr>";
@@ -205,11 +221,14 @@ function mapearCampos() {
             tabla += "<td>" + HeroesJSON[i].id + "</td>";
         if (chkName)
             tabla += "<td>" + HeroesJSON[i].nombre + "</td>";
+        if (chkApellido)
+            tabla += "<td>" + HeroesJSON[i].apellido + "</td>";
+        if (chkAlias)
+            tabla += "<td>" + HeroesJSON[i].alias + "</td>";
         if (chkEdad)
             tabla += "<td>" + HeroesJSON[i].edad + "</td>";
-        tabla += "<td>" + Clases.tipoHeroe[HeroesJSON[i].tipo] + "</td>";
-        if (chkPoderes)
-            tabla += "<td>" + HeroesJSON[i].poder + "</td>";
+        if (chkLado)
+            tabla += "<td>" + Clases.ladoHeroe[HeroesJSON[i].lado] + "</td>";
         tabla += "</tr>";
     }
     tabla += "</table>";
