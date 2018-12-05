@@ -9,6 +9,7 @@ function traerListaHeroes()
             var resp = JSON.parse(this.response);
             cargarTabla(resp.data);
             datos = resp.data;
+            console.log(resp.data);
         }
     };
     xhr.open("GET", "/traer?collection=heroes", true);

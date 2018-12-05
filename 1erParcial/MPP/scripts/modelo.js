@@ -12,8 +12,10 @@ var heroe;
 // }
 
 function cargarTabla(data) {
-    tabla = document.getElementById('tblPost');
+    //tabla = document.getElementById('tblPost');
     var c = document.getElementById('tblPost').children;
+    var c2 = document.getElementById("tblPost").children.length;
+    console.log(c2);
     var nuevasFilas = "";
 
     for (var i in data) {

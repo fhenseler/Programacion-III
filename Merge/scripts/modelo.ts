@@ -53,6 +53,7 @@ namespace Clases{
     }
 }
 
+var datos = new Array();
 
 function agregarHeroe(): void {
     let id: number = Number($('#txtId').val());
@@ -67,11 +68,12 @@ function agregarHeroe(): void {
     {
         lado = Clases.ladoHeroe.Villano;
     }
-    let nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), String($('#txtApellido').val()), String($('#txtAlias').val()), Number($('#txtEdad').val()), lado);
+    var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), String($('#txtApellido').val()), String($('#txtAlias').val()), Number($('#txtEdad').val()), lado);
 
     let HeroesString: string | null = localStorage.getItem("Heroes");
 
     let HeroesJSON: JSON[] = HeroesString == null ? [] : JSON.parse(HeroesString);
+    //let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
     console.log(nuevoHeroe.toJSON());
 
@@ -113,7 +115,7 @@ function modificarHeroe(): void {
     agregarHeroe();
     eliminarHeroe();
 
-    mostrarHeroes();
+    //mostrarHeroes();
 
     limpiarCampos();
 }
@@ -130,24 +132,35 @@ function limpiarCampos() {
 function mostrarHeroes() {
 
     let HeroesString: string | null = localStorage.getItem("Heroes");
-
     let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
     let tabla: string = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Apellido</th><th>Alias</th><th>Edad</th><th>Lado</th></tr>";
-
+    
     for (let i = 0; i < HeroesJSON.length; i++) {
-        //${Clases.ladoHeroe[HeroesJSON[i].lado]}
-        tabla += `<tr><td>${HeroesJSON[i].id}</td><td>${HeroesJSON[i].nombre}</td><td>${HeroesJSON[i].apellido}</td><td>${HeroesJSON[i].alias}</td><td>${HeroesJSON[i].edad}</td><td>${Clases.ladoHeroe[HeroesJSON[i].lado]}</td></tr>`;
+        tabla += "<tr>";
+        tabla += "<td id='1' onclick='openForm2("+ HeroesJSON[i].id +");'>" + HeroesJSON[i].id + "</td>";
+        tabla += "<td id='2' onclick='openForm2("+ HeroesJSON[i].id +");'>" + HeroesJSON[i].nombre + "</td>";
+        tabla += "<td id='3' onclick='openForm2("+ HeroesJSON[i].id +");'>" + HeroesJSON[i].apellido + "</td>";
+        tabla += "<td id='4' onclick='openForm2("+ HeroesJSON[i].id +");'>" + HeroesJSON[i].alias + "</td>";
+        tabla += "<td id='5' onclick='openForm2("+ HeroesJSON[i].id +");'>" + HeroesJSON[i].edad + "</td>";
+        tabla += "<td id='6' onclick='openForm2("+ HeroesJSON[i].id +");'>" + HeroesJSON[i].lado + "</td>";
+        tabla += "</tr>";
     }
 
     tabla += `</table>`;
-
+    datos = HeroesJSON;
     $('#divTabla').html(tabla);
+
+    var c2 = document.getElementById("divTabla").children.length;
+    console.log(c2);
+
+    var c = document.getElementById("divTabla").children;
+    c[2].innerHTML = tabla;
 
 }
 
 function cargarLados() {
-    /* var paises = data.map(function(p){
+    /* var paises = HeroesJSON.map(function(p){
          return p.pais;
      })
      .unique()

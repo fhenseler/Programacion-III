@@ -37,6 +37,9 @@ function closeForm() {
 
 function openForm2(id) {
     document.getElementById('divForm2').style.display = "block";
+    console.log("ID: " + id);
+    console.log("DATOS: " + datos);
+    console.log("FIND: " + datos.find(x => x.id === id));
     heroe = datos.find(x => x.id === id);
     document.getElementById('txtNombre2').value = heroe.nombre;
     document.getElementById('txtApellido2').value = heroe.apellido;

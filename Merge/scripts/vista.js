@@ -3,7 +3,6 @@ window.addEventListener('load', AsignarManejadores, false);
 function AsignarManejadores() 
 {
     cargarLados();
-    mostrarHeroes();
 
     $('#cmbFiltro').change(function () {
         filtrarHeroes(Number($('#cmbFiltro').val()));
@@ -30,6 +29,8 @@ function AsignarManejadores()
     $('#btnEliminar').click(eliminarHeroe);
     $("#btnEliminar").click(cargarSpinner);
 
+    mostrarHeroes();
+
     //traerListaHeroes();
 }
 
@@ -53,6 +54,9 @@ function closeForm() {
 
 function openForm2(id) {
     document.getElementById('divForm2').style.display = "block";
+    console.log("ID: " + id);
+    console.log("DATOS: " + datos);
+    console.log("FIND: " + datos.find(x => x.id === id));
     heroe = datos.find(x => x.id === id);
     document.getElementById('txtNombre2').value = heroe.nombre;
     document.getElementById('txtApellido2').value = heroe.apellido;
