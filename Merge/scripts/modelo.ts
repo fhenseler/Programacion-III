@@ -346,6 +346,22 @@ function calcularPromedio() {
 
 }
 
+function calcularViejo() {
+
+    //let HeroesFiltrados: Array<Clases.Heroe>;
+
+    let HeroesString: string | null = localStorage.getItem("Heroes");
+
+    let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
+
+    //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
+    let masViejo = HeroesJSON.reduce((a, b) => a.edad > b.edad ? a : b);
+
+    console.log(masViejo);
+
+    $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
+}
+
 
 function mapearCampos() {
 

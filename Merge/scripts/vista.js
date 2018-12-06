@@ -30,6 +30,7 @@ function AsignarManejadores()
 
     mostrarHeroes();
     promedioInicial();
+    calcularViejo();
 
     //traerListaHeroes();
 }

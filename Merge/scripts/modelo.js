@@ -101,7 +101,7 @@ function agregarHeroe2() {
     HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
     localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
     alert("Heroe modificado!!!");
-    mostrarHeroes();
+    //mostrarHeroes();
     //limpiarCampos();
     // console.log(nuevoHeroe.toJSON());
 }
@@ -250,6 +250,15 @@ function calcularPromedio() {
         promedio = totalEdades / cantidad;
     }
     $('#txtPromedio').val(promedio);
+}
+function calcularViejo() {
+    //let HeroesFiltrados: Array<Clases.Heroe>;
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
+    var masViejo = HeroesJSON.reduce(function (a, b) { return a.edad > b.edad ? a : b; });
+    console.log(masViejo);
+    $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
 }
 function mapearCampos() {
     var chkId = $('#chkId')[0].checked;
