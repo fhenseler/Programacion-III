@@ -275,7 +275,7 @@ function mostrarHeroesPorLado(lista: Array<Clases.Heroe>) {
 
 }
 
-function promedioInicial() {
+function promedioDefault() {
 
     let promedio: number = 0;
     let totalEdades: number;
@@ -303,6 +303,20 @@ function promedioInicial() {
 
     $('#txtPromedio').val(promedio);
 
+}
+
+function viejoDefault() {
+
+    let HeroesString: string | null = localStorage.getItem("Heroes");
+
+    let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
+
+    //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
+    let masViejo = HeroesJSON.reduce((a, b) => a.edad > b.edad ? a : b);
+
+    console.log(masViejo);
+
+    $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
 }
 
 function calcularPromedio() {
@@ -348,14 +362,22 @@ function calcularPromedio() {
 
 function calcularViejo() {
 
-    //let HeroesFiltrados: Array<Clases.Heroe>;
+    let lado: number = Number($('#cmbFiltro').val());
+
+    let HeroesFiltrados: Array<Clases.Heroe>;
 
     let HeroesString: string | null = localStorage.getItem("Heroes");
 
     let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
 
+    HeroesFiltrados = HeroesJSON.filter(function (Heroe: Clases.Heroe) {
+
+        return Clases.ladoHeroe[Heroe.lado] === Clases.ladoHeroe[lado];
+
+    });
+
     //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
-    let masViejo = HeroesJSON.reduce((a, b) => a.edad > b.edad ? a : b);
+    let masViejo = HeroesFiltrados.reduce((a, b) => a.edad > b.edad ? a : b);
 
     console.log(masViejo);
 

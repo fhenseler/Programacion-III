@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="background-color: rgb(25, 190, 255)">
+    <div class="container-fluid" style="background-color: rgb(10, 149, 204)">
         <header>
             <div class="logo">
             </div>
@@ -88,7 +88,7 @@
                             <label class="text-light"><input type="radio" name="lado2" id="l22">Villano</label><br><br>
                             </div>
                             <button type="submit"  class="btn btn-success" id="btnModificar">Modificar</button>
-                            <button type="submit"  class="btn btn-danger" id="btnEliminar" formnovalidate>Eliminar</button>
+                            <button type="submit"  class="btn btn-warning" id="btnEliminar" formnovalidate>Eliminar</button>
                             <button type="button" class="btn btn-danger" id="btnCancel2" formnovalidate>Cancelar</button>
                          </form>
                         </div>
@@ -102,7 +102,7 @@
                     <div class="row">
         
                         <label for="cmbFiltro" class="col-md-2">Filtrar por:</label>
-                        <div class="col-lg-2">
+                        <div class="col-md-2">
                             <select name="" id="cmbFiltro" style="width:100px"></select>
                         </div>
         
@@ -110,16 +110,17 @@
                         <div class="col-md-2">
                             <input type="text" id="txtPromedio" style="width:100px">
                         </div>
+                            
                     </div>
                     <div class="row">
-                        <button onclick="calcularPromedio()" class="btn btn-dark" id="btn-info" class="col-md-2">Calcular Promedio</button>
+                        <button onclick="calcularPromedio()" class="btn btn-dark" id="btn-info" class="col-xs-4">Calcular Promedio</button>
                     </div>
                     <br>
         
                     <div class="row">
         
                         <label for="txtViejo" class="col-md-2">Personaje más viejo:</label>
-                        <div class="col-lg-2">
+                        <div class="col-md-2">
                             <input type="text" id="txtViejo" style="width:250px">
                         </div>
                     </div>
@@ -132,27 +133,27 @@
                     </h3>
                     <hr>
                         <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-md-1">
                             <input type="checkbox" id="chkId" checked>
                             <label for="chkId"> Id </label>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-md-1">
                             <input type="checkbox" id="chkName"  checked>
                             <label for="chkName" > Nombre </label>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-md-1">
                             <input type="checkbox" id="chkApellido"  checked>
                             <label for="chkApellido" > Apellido</label>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-md-1">
                             <input type="checkbox" id="chkAlias"  checked>
                             <label for="chkAlias" > Alias </label>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-md-1">
                             <input type="checkbox" id="chkEdad"  checked>
                             <label for="chkEdad" > Edad </label>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-md-1">
                             <input type="checkbox" id="chkLado"  checked>
                             <label for="chkLado" > Lado </label>
                         </div>
@@ -162,7 +163,7 @@
                     <h2>Lista de Heroes</h2>
                     <hr>
         
-                    <div id="divTabla" class="table-dark table-bordered">
+                    <div id="divTabla" class='table-sm table-responsive table-dark table-hover'>
                     </div>
         
             </div>

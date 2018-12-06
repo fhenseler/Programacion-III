@@ -149,9 +149,17 @@ body
   opacity: 1;
 }
 
-.divTabla
+#divTabla
 {
-  width: 80%;
+  width: 70%;
+  /* margin-left: 150px; */
+  padding: 10px;
+
+}
+
+.tabla
+{
+  width: 50%;
 }
 
 .btn

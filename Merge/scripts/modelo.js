@@ -212,7 +212,7 @@ function mostrarHeroesPorLado(lista) {
     tabla += "</table>";
     $('#divTabla').html(tabla);
 }
-function promedioInicial() {
+function promedioDefault() {
     var promedio = 0;
     var totalEdades;
     var cantidad;
@@ -228,6 +228,14 @@ function promedioInicial() {
         promedio = totalEdades / cantidad;
     }
     $('#txtPromedio').val(promedio);
+}
+function viejoDefault() {
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
+    var masViejo = HeroesJSON.reduce(function (a, b) { return a.edad > b.edad ? a : b; });
+    console.log(masViejo);
+    $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
 }
 function calcularPromedio() {
     var promedio = 0;
@@ -252,11 +260,15 @@ function calcularPromedio() {
     $('#txtPromedio').val(promedio);
 }
 function calcularViejo() {
-    //let HeroesFiltrados: Array<Clases.Heroe>;
+    var lado = Number($('#cmbFiltro').val());
+    var HeroesFiltrados;
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    HeroesFiltrados = HeroesJSON.filter(function (Heroe) {
+        return Clases.ladoHeroe[Heroe.lado] === Clases.ladoHeroe[lado];
+    });
     //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
-    var masViejo = HeroesJSON.reduce(function (a, b) { return a.edad > b.edad ? a : b; });
+    var masViejo = HeroesFiltrados.reduce(function (a, b) { return a.edad > b.edad ? a : b; });
     console.log(masViejo);
     $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
 }

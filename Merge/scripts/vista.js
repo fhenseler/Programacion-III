@@ -8,6 +8,7 @@ function AsignarManejadores()
 
     $('#cmbFiltro').change(function () {
         filtrarHeroes(Number($('#cmbFiltro').val()));
+        calcularViejo();
     });
 
     $('#chkId').change(mapearCampos);
@@ -29,8 +30,8 @@ function AsignarManejadores()
     $('#btnEliminar').click(eliminarHeroe);
 
     mostrarHeroes();
-    promedioInicial();
-    calcularViejo();
+    promedioDefault();
+    viejoDefault();
 
     //traerListaHeroes();
 }
