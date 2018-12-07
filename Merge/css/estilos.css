@@ -71,8 +71,7 @@ body
 
 #btn-calc
 {
-  margin-bottom: -15px;
-  padding-bottom: -15px;
+  margin: auto;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
