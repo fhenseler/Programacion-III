@@ -25,7 +25,7 @@
   display:none;
   position: absolute;
   z-index: 1;
-  left: 450px;
+  left: 350px;
   top: 10px;
   overflow: none;
   border: 2px solid #888;
@@ -39,8 +39,8 @@
   display:none;
   position: absolute;
   z-index: 1;
-  left: 450px;
-  top: 500px;
+  left: 350px;
+  top: 400px;
   overflow: none;
   border: 2px solid #888;
 }
@@ -67,6 +67,12 @@ body
   background-color: black;
   margin: 0 auto;
   margin-bottom: 20px;
+}
+
+#btn-calc
+{
+  margin-bottom: -15px;
+  padding-bottom: -15px;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */

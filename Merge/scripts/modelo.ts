@@ -93,6 +93,7 @@ function agregarHeroe(): void {
 }
 
 function agregarHeroe2(): void {
+
     let id: number = Number($('#txtId2').val());
     //var lado = $("input[name='lado']:checked").parent('label').text();
     let text: String = $("input[name='lado2']:checked").parent('label').text();

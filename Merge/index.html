@@ -100,21 +100,21 @@
                     <hr>
         
                     <div class="row">
-        
-                        <label for="cmbFiltro" class="col-md-2">Filtrar por:</label>
-                        <div class="col-md-2">
+                        
+                        <div class="col-sm-3">
+                        <label for="cmbFiltro">Filtrar por:</label>
                             <select name="" id="cmbFiltro" style="width:100px"></select>
                         </div>
         
-                        <label for="txtPromedio" class="col-md-2">Promedio de edad:</label>
-                        <div class="col-md-2">
+                        <div class="col-sm-3">
+                        <label for="txtPromedio">Promedio de edad:</label>
                             <input type="text" id="txtPromedio" style="width:100px">
                         </div>
-                            
+                        <div class="col-sm-6"> 
+                            <button onclick="calcularPromedio()" class="btn btn-dark" id="btn-calc">Calcular Promedio</button>
+                        </div> 
                     </div>
-                    <div class="row">
-                        <button onclick="calcularPromedio()" class="btn btn-dark" id="btn-info" class="col-xs-4">Calcular Promedio</button>
-                    </div>
+              
                     <br>
         
                     <div class="row">

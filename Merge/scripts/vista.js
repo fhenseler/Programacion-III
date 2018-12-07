@@ -54,12 +54,19 @@ function closeForm() {
     document.getElementById('divForm').style.display = "none";
 }
 
+function checkId(id) {
+    return id === id;
+}
+
 function openForm2(id) {
     document.getElementById('divForm2').style.display = "block";
     console.log("ID: " + id);
     console.log("DATOS: " + datos);
     console.log("FIND: " + datos.find(x => x.id === id));
-    heroe = datos.find(x => x.id === id);
+    
+    //heroe = datos.find(x => x.id === id); 
+    heroe = datos.find(checkId);
+    
     document.getElementById('txtId2').value = id;
     document.getElementById('txtNombre2').value = heroe.nombre;
     document.getElementById('txtApellido2').value = heroe.apellido;
