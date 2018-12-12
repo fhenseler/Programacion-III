@@ -32,7 +32,7 @@ function AsignarManejadores()
     mostrarHeroes();
     promedioDefault();
     viejoDefault();
-    // eventosDefault();
+    eventosDefault();
 
     //traerListaHeroes();
 }
@@ -55,18 +55,27 @@ function closeForm() {
     document.getElementById('divForm').style.display = "none";
 }
 
-function checkId(id) {
-    return id === id;
-}
+// function checkId(id) {
+
+//     for(let i = 0; i < datos.length; i++)
+//     {
+//         if(datos[i].id === id)
+//         {
+//             return id;
+//         }
+//     }
+// }
 
 function openForm2(id) {
     document.getElementById('divForm2').style.display = "block";
     console.log("ID: " + id);
-    console.log("DATOS: " + datos);
-    console.log("FIND: " + datos.find(x => x.id === id));
     
-    //heroe = datos.find(x => x.id === id); 
-    heroe = datos.find(checkId);
+    heroe = datos.find(x => x.id == id); 
+    console.log(typeof(datos));
+    console.log("HEROE.ID: " + heroe.id);
+    // var heroe = datos.find(function(element) {
+    //     return element.id === id;
+    //   });
     
     document.getElementById('txtId2').value = id;
     document.getElementById('txtNombre2').value = heroe.nombre;

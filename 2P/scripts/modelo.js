@@ -26,7 +26,7 @@ var Clases;
             this.fecha = fecha;
         }
         Evento.prototype.toJSON = function () {
-            var json = "{\"id\":\"" + this.id + "\",\"idHeroe\":\"" + this.idHeroe + "\", \"operacion\":\"" + this.operacion + "\", \"fecha\":" + this.fecha + "}";
+            var json = "{\"id\":\"" + this.id + "\",\"idHeroe\":\"" + this.idHeroe + "\", \"operacion\":\"" + this.operacion + "\", \"fecha\":\"" + this.fecha + "\"}";
             return json;
         };
         return Evento;
@@ -79,6 +79,7 @@ function agregarHeroe() {
     //var lado = $("input[name='lado']:checked").parent('label').text();
     var text = $("input[name='lado']:checked").parent('label').text();
     var lado;
+    var fecha = new Date().toLocaleString().toString();
     if (text === "Heroe") {
         lado = Clases.ladoHeroe.Heroe;
     }
@@ -86,7 +87,7 @@ function agregarHeroe() {
         lado = Clases.ladoHeroe.Villano;
     }
     var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), String($('#txtApellido').val()), String($('#txtAlias').val()), Number($('#txtEdad').val()), lado);
-    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Alta", new Date().toLocaleString());
+    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Alta", fecha);
     var HeroesString = localStorage.getItem("Heroes");
     var EventosString = localStorage.getItem("Eventos");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
@@ -94,7 +95,7 @@ function agregarHeroe() {
     console.log(nuevoEvento.toJSON());
     console.log(nuevoHeroe.toJSON());
     HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
-    EventosJSON.push(JSON.parse(nuevoEvento.toJSON()));
+    EventosJSON.push(nuevoEvento);
     localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
     localStorage.setItem("Eventos", JSON.stringify(EventosJSON));
     alert("Heroe guardado!!!");
@@ -114,7 +115,7 @@ function agregarHeroe2() {
         lado = Clases.ladoHeroe.Villano;
     }
     var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre2').val()), String($('#txtApellido2').val()), String($('#txtAlias2').val()), Number($('#txtEdad2').val()), lado);
-    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Alta", new Date().toLocaleString());
+    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Modificar", new Date().toLocaleString());
     var HeroesString = localStorage.getItem("Heroes");
     var EventosString = localStorage.getItem("Eventos");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
@@ -122,6 +123,7 @@ function agregarHeroe2() {
     //let HeroesJSON: Clases.Heroe[] = HeroesString == null ? [] : JSON.parse(HeroesString);
     console.log(nuevoHeroe.toJSON());
     HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
+    EventosJSON.push(nuevoEvento);
     localStorage.setItem("Eventos", JSON.stringify(EventosJSON));
     localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
     alert("Heroe modificado!!!");
@@ -130,7 +132,12 @@ function agregarHeroe2() {
     // console.log(nuevoHeroe.toJSON());
 }
 function eliminarHeroe() {
+    var id = Number($('#txtId2').val());
     var storedHeroes = JSON.parse(localStorage.getItem("Heroes"));
+    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Eliminar", new Date().toLocaleString());
+    var EventosString = localStorage.getItem("Eventos");
+    var EventosJSON = EventosString == null ? [] : JSON.parse(EventosString);
+    EventosJSON.push(nuevoEvento);
     // here you need to make a loop to find the index of item to delete
     var indexToRemove = Number($('#txtId2').val());
     //remove item selected, second parameter is the number of items to delete 
@@ -168,6 +175,7 @@ function limpiarCampos() {
 function mostrarHeroes() {
     var HeroesString = localStorage.getItem("Heroes");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    datos = HeroesJSON;
     var tabla = "<table class='table'><thead><tr><th>Id</th><th>Nombre</th><th>Apellido</th><th>Alias</th><th>Edad</th><th>Lado</th></tr>";
     for (var i = 0; i < HeroesJSON.length; i++) {
         tabla += "<tr>";
@@ -180,7 +188,6 @@ function mostrarHeroes() {
         tabla += "</tr>";
     }
     tabla += "</table>";
-    datos = HeroesJSON;
     $('#divTabla').html(tabla);
     // var c2 = document.getElementById("divTabla").children.length;
     // console.log(c2);
@@ -270,6 +277,23 @@ function viejoDefault() {
 //         console.log(masEventos);
 //         $('#txtEventos').val(masEventos.idHeroe + " " + masEventos.idHeroe);
 //     }
+function eventosDefault() {
+    var EventosString = localStorage.getItem("Eventos");
+    var EventosJSON = EventosString == null ? [] : JSON.parse(EventosString);
+    var counted = EventosJSON.reduce(function (allNumbers, number) {
+        if (number in allNumbers) {
+            allNumbers[number]++;
+        }
+        else {
+            allNumbers[number] = 1;
+        }
+        return allNumbers;
+    }, {});
+    //let mode = Object.keys(counted).reduce((a, b) => counted[a] > counted[b] ? a : b);
+    console.log(Object.keys(counted).reduce(function (a, b) { return counted[a] > counted[b] ? a : b; }));
+    var mode = JSON.parse(Object.keys(counted).reduce(function (a, b) { return counted[a] > counted[b] ? a : b; }));
+    $('#txtEventos').val(mode.idHeroe);
+}
 function calcularPromedio() {
     var promedio = 0;
     var totalEdades;
