@@ -19,14 +19,15 @@ var Clases;
         ladoHeroe[ladoHeroe["Villano"] = 1] = "Villano";
     })(ladoHeroe = Clases.ladoHeroe || (Clases.ladoHeroe = {}));
     var Evento = /** @class */ (function () {
-        function Evento(id, idHeroe, operacion, fecha) {
+        function Evento(id, idHeroe, operacion, fecha, aliasHeroe) {
             this.id = id;
             this.idHeroe = idHeroe;
             this.operacion = operacion;
             this.fecha = fecha;
+            this.aliasHeroe = aliasHeroe;
         }
         Evento.prototype.toJSON = function () {
-            var json = "{\"id\":\"" + this.id + "\",\"idHeroe\":\"" + this.idHeroe + "\", \"operacion\":\"" + this.operacion + "\", \"fecha\":\"" + this.fecha + "\"}";
+            var json = "{\"id\":\"" + this.id + "\",\"idHeroe\":\"" + this.idHeroe + "\", \"operacion\":\"" + this.operacion + "\", \"fecha\":\"" + this.fecha + "\", \"aliasHeroe\":\"" + this.aliasHeroe + "\"}";
             return json;
         };
         return Evento;
@@ -80,6 +81,7 @@ function agregarHeroe() {
     var text = $("input[name='lado']:checked").parent('label').text();
     var lado;
     var fecha = new Date().toLocaleString().toString();
+    var alias = String($('#txtAlias').val());
     if (text === "Heroe") {
         lado = Clases.ladoHeroe.Heroe;
     }
@@ -87,7 +89,7 @@ function agregarHeroe() {
         lado = Clases.ladoHeroe.Villano;
     }
     var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre').val()), String($('#txtApellido').val()), String($('#txtAlias').val()), Number($('#txtEdad').val()), lado);
-    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Alta", fecha);
+    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Alta", fecha, alias);
     var HeroesString = localStorage.getItem("Heroes");
     var EventosString = localStorage.getItem("Eventos");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
@@ -108,6 +110,7 @@ function agregarHeroe2() {
     //var lado = $("input[name='lado']:checked").parent('label').text();
     var text = $("input[name='lado2']:checked").parent('label').text();
     var lado;
+    var alias = String($('#txtAlias2').val());
     if (text === "Heroe") {
         lado = Clases.ladoHeroe.Heroe;
     }
@@ -115,7 +118,7 @@ function agregarHeroe2() {
         lado = Clases.ladoHeroe.Villano;
     }
     var nuevoHeroe = new Clases.Heroe(id, String($('#txtNombre2').val()), String($('#txtApellido2').val()), String($('#txtAlias2').val()), Number($('#txtEdad2').val()), lado);
-    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Modificar", new Date().toLocaleString());
+    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Modificar", new Date().toLocaleString(), alias);
     var HeroesString = localStorage.getItem("Heroes");
     var EventosString = localStorage.getItem("Eventos");
     var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
@@ -124,20 +127,39 @@ function agregarHeroe2() {
     console.log(nuevoHeroe.toJSON());
     HeroesJSON.push(JSON.parse(nuevoHeroe.toJSON()));
     EventosJSON.push(nuevoEvento);
+    console.log(nuevoEvento);
     localStorage.setItem("Eventos", JSON.stringify(EventosJSON));
     localStorage.setItem("Heroes", JSON.stringify(HeroesJSON));
     alert("Heroe modificado!!!");
-    //mostrarHeroes();
+    mostrarHeroes();
     //limpiarCampos();
     // console.log(nuevoHeroe.toJSON());
 }
 function eliminarHeroe() {
     var id = Number($('#txtId2').val());
+    var alias = String($('#txtAlias2').val());
     var storedHeroes = JSON.parse(localStorage.getItem("Heroes"));
-    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Eliminar", new Date().toLocaleString());
+    var nuevoEvento = new Clases.Evento(idUltimoEvento += 1, id, "Eliminar", new Date().toLocaleString(), alias);
     var EventosString = localStorage.getItem("Eventos");
     var EventosJSON = EventosString == null ? [] : JSON.parse(EventosString);
     EventosJSON.push(nuevoEvento);
+    // here you need to make a loop to find the index of item to delete
+    var indexToRemove = Number($('#txtId2').val());
+    //remove item selected, second parameter is the number of items to delete 
+    $.each(storedHeroes, function (index, obj) {
+        if (obj.id == indexToRemove) {
+            storedHeroes.splice(index, 1);
+            console.log(storedHeroes);
+            localStorage["Heroes"] = JSON.stringify(storedHeroes);
+            return false;
+        }
+    });
+    alert("Heroe eliminado!!!");
+    mostrarHeroes();
+    limpiarCampos();
+}
+function eliminarHeroe2() {
+    var storedHeroes = JSON.parse(localStorage.getItem("Heroes"));
     // here you need to make a loop to find the index of item to delete
     var indexToRemove = Number($('#txtId2').val());
     //remove item selected, second parameter is the number of items to delete 
@@ -154,7 +176,7 @@ function eliminarHeroe() {
 }
 function modificarHeroe() {
     agregarHeroe2();
-    eliminarHeroe();
+    eliminarHeroe2();
     mostrarHeroes();
     limpiarCampos();
 }
@@ -260,39 +282,27 @@ function promedioDefault() {
     }
     $('#txtPromedio').val(promedio);
 }
-function viejoDefault() {
-    var HeroesString = localStorage.getItem("Heroes");
-    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
-    //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
-    var masViejo = HeroesJSON.reduce(function (a, b) { return a.edad > b.edad ? a : b; });
-    console.log(masViejo);
-    $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
-}
-// function eventosDefault() {
-//         let EventosString: string | null = localStorage.getItem("Eventos");
-//         let EventosJSON: Clases.Evento[] = EventosString == null ? [] : JSON.parse(EventosString);
-//         //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
-//         let masEventos = EventosJSON.reduce((a, b) => a.idHeroe > b.idHeroe ? a : b);
-//         console.log(EventosJSON.length);
-//         console.log(masEventos);
-//         $('#txtEventos').val(masEventos.idHeroe + " " + masEventos.idHeroe);
-//     }
 function eventosDefault() {
     var EventosString = localStorage.getItem("Eventos");
     var EventosJSON = EventosString == null ? [] : JSON.parse(EventosString);
-    var counted = EventosJSON.reduce(function (allNumbers, number) {
-        if (number in allNumbers) {
-            allNumbers[number]++;
-        }
-        else {
-            allNumbers[number] = 1;
-        }
-        return allNumbers;
-    }, {});
-    //let mode = Object.keys(counted).reduce((a, b) => counted[a] > counted[b] ? a : b);
-    console.log(Object.keys(counted).reduce(function (a, b) { return counted[a] > counted[b] ? a : b; }));
-    var mode = JSON.parse(Object.keys(counted).reduce(function (a, b) { return counted[a] > counted[b] ? a : b; }));
-    $('#txtEventos').val(mode.idHeroe);
+    if (EventosJSON.length > 0) {
+        var counted = EventosJSON.reduce(function (allNumbers, number) {
+            if (number in allNumbers) {
+                allNumbers[number]++;
+            }
+            else {
+                allNumbers[number] = 1;
+            }
+            return allNumbers;
+        }, {});
+        //let mode = Object.keys(counted).reduce((a, b) => counted[a] > counted[b] ? a : b);
+        console.log(Object.keys(counted).reduce(function (a, b) { return counted[a] > counted[b] ? a : b; }));
+        var mode = JSON.parse(Object.keys(counted).reduce(function (a, b) { return counted[a] > counted[b] ? a : b; }));
+        $('#txtEventos').val(mode.aliasHeroe);
+    }
+    else {
+        $('#txtEventos').val("No hay eventos");
+    }
 }
 function calcularPromedio() {
     var promedio = 0;
@@ -315,6 +325,19 @@ function calcularPromedio() {
         promedio = totalEdades / cantidad;
     }
     $('#txtPromedio').val(promedio);
+}
+function viejoDefault() {
+    var HeroesString = localStorage.getItem("Heroes");
+    var HeroesJSON = HeroesString == null ? [] : JSON.parse(HeroesString);
+    var masViejo;
+    //array.reduce(function(max, x) { return (x.val > max) ? x.val : max; }, 0)
+    if (HeroesJSON.length > 0) {
+        masViejo = HeroesJSON.reduce(function (a, b) { return a.edad > b.edad ? a : b; });
+        $('#txtViejo').val(masViejo.nombre + " " + masViejo.apellido);
+    }
+    else {
+        $('#txtViejo').val("No hay personajes");
+    }
 }
 function calcularViejo() {
     var lado = Number($('#cmbFiltro').val());
