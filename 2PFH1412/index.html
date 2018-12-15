@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./scripts/jquery.js"></script>
+    <script src="./scripts/modelo.js"></script>
+    <script src="./scripts/vista.js"></script>
+    <script src="./scripts/controlador.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- <script src="./scripts/index.js"></script> -->
+    <title>ABM SuperHeroes</title>
+</head>
+
+<body>
+    <div class="container-fluid" style="background-color: rgb(10, 149, 204)">
+        <header>
+            <div class="logo">
+            </div>
+        </header>
+    
+        <div class="row" id="divAgregar">
+            <div class="col-xs-2">
+            <button class="btn btn-primary" id="btnOpen">Agregar</button>
+            </div>
+
+            <div class="col-xs-2">
+            <button class="btn btn-danger" id="btnClearStorage" onclick="cleanStorage()">Limpiar LocalStorage</button>
+            </div>
+        </div>
+
+        <div id="divSpinner" style="display:none">
+                <img src="images/spinner.gif" alt="cargando...">
+            </div>
+
+    <main>   
+    <div class="" id="divForm" method="post">
+        <form action="#" class="form-container" id="myForm">
+                <!-- <form action="#" class="form-container"> -->
+                <h5 class="text-light">Agregar</h5>
+                <label class="text-light">
+                ID: 
+                </label>
+                <input type="text" name="id" id="txtId" autocomplete="off" pattern="[0-9]{1,3}" title="El ID debe estar entre 0 y 999" required><br>
+                <label class="text-light">
+                Nombre:
+                </label>
+                <input type="text" name="nombre" id="txtNombre" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br>
+                <label class="text-light">
+                Apellido:
+                </label>
+                <input type="text" name="apellido" id="txtApellido" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br>
+                <label class="text-light">
+                Alias: 
+                </label>
+                <input type="text" name="alias" id="txtAlias" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br>
+                <label class="text-light">
+                Edad: 
+                </label>
+                <input type="text" name="edad" id="txtEdad" autocomplete="off" pattern="[0-9]{1,3}" title="La edad debe estar entre 0 y 999" required><br>
+                <div id="lados">
+                <label class="text-light"><input type="radio" name="lado" id="l1">Heroe</label>
+                <label class="text-light"><input type="radio" name="lado" id="l2">Villano</label><br><br>
+                </div>
+                <button type="submit"  class="btn btn-success" id="btnConfirmar">Confirmar</button>
+                <button class="btn btn-danger" id="btnCancel" formnovalidate>Cancelar</button>
+             </form>
+            </div>
+
+            <div class="form-popup" id="divForm2" method="post">
+                    <form action="#" class="form-container" id="myForm2">
+                            <h5 class="text-light">Modificar / Eliminar</h5>
+                            <label class="text-light">ID:  </label>
+                            <input type="text" name="id" id="txtId2" autocomplete="off" pattern="[0-9]{1,3}" title="El ID debe estar entre 0 y 999" required><br>
+                            <label class="text-light">Nombre:</label>
+                            <input type="text" name="nombre" id="txtNombre2" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br>
+                            <label class="text-light">Apellido:</label>
+                            <input type="text" name="apellido" id="txtApellido2" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required> <br>
+                            <label class="text-light">Alias:</label> 
+                            <input type="text" name="alias" id="txtAlias2" autocomplete="off" pattern="[a-zA-Z]{3,10}" title="Solo caracteres y longitud entre 3 y 10." required><br>
+                            <label class="text-light">Edad:</label> 
+                            <input type="text" name="edad" id="txtEdad2" autocomplete="off" pattern="[0-9]{1,3}" title="La edad debe estar entre 0 y 999" required><br>
+                            <div id="lados2">
+                            <label class="text-light"><input type="radio" name="lado2" id="l11">Heroe</label>
+                            <label class="text-light"><input type="radio" name="lado2" id="l22">Villano</label><br><br>
+                            </div>
+                            <button type="submit"  class="btn btn-success" id="btnModificar">Modificar</button>
+                            <button type="submit"  class="btn btn-warning" id="btnEliminar" formnovalidate>Eliminar</button>
+                            <button type="button" class="btn btn-danger" id="btnCancel2" formnovalidate>Cancelar</button>
+                         </form>
+                        </div>
+        </main>
+        
+        
+                    <hr>
+                    <h2>Filtros</h2>
+                    <hr>
+        
+                    <div class="row">
+                        
+                            <label for="cmbFiltro" class="col-md-1">Filtrar por:</label>
+                            <div class="col-lg-2">
+                                <select name="" id="cmbFiltro" style="width:100px"></select>
+                            </div>
+        
+                            <label for="txtPromedio" class="col-md-2">Promedio de edad:</label>
+                            <div class="col-md-2"> 
+                                <input type="text" id="txtPromedio" style="width:100px">
+                            </div>
+
+                        <div class="col-lg-2"> 
+                            <label>&nbsp;</label>
+                            <button onclick="calcularPromedio()" class="btn btn-dark" id="btn-calc" class="col-md-2">Calcular Promedio</button>
+                        </div> 
+                    </div>
+              
+                    <br>
+        
+                    <div class="row">
+        
+                        <label for="txtViejo" class="col-md-2">Personaje más viejo:</label>
+                        <div class="col-md-2">
+                            <input type="text" id="txtViejo" style="width:250px">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    <label for="txtEventos" class="col-md-2">Personaje con más eventos:</label>
+                    <div class="col-md-2">
+                        <input type="text" id="txtEventos" style="width:250px">
+                    </div>
+                </div>
+                    <br>
+        
+        
+        
+                    <h3>Campos mostrados
+                        <small>Tildar los campos a mostrar</small>
+                    </h3>
+                    <hr>
+                        <div class="row">
+                        <div class="col-md-1">
+                            <input type="checkbox" id="chkId" checked>
+                            <label for="chkId"> Id </label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" id="chkName"  checked>
+                            <label for="chkName" > Nombre </label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" id="chkApellido"  checked>
+                            <label for="chkApellido" > Apellido</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" id="chkAlias"  checked>
+                            <label for="chkAlias" > Alias </label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" id="chkEdad"  checked>
+                            <label for="chkEdad" > Edad </label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" id="chkLado"  checked>
+                            <label for="chkLado" > Lado </label>
+                        </div>
+                    </div>
+        
+                    <hr>
+                    <h2>Lista de Heroes</h2>
+                    <hr>
+        
+                    <div id="divTabla" class='table-sm table-responsive table-dark table-hover'>
+                    </div>
+        
+            </div>
+    </div>
+</body>
+</html>
