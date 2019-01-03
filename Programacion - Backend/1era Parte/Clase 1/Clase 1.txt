@@ -1,5 +1,5 @@
 ﻿Prog orientada a objetos + comunicación a servidor (PHP)
-Backend API RES - JSON
+Backend API REST - JSON
 Aprendemos a programar en PHP (basado en la POO de C#). -> php.net y w3schools
 
 PARCIALES en etapas: ABM y listado de una entidad en particular
