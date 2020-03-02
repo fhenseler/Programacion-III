@@ -1,1 +1,0 @@
-var saludo = "Hola Mundo";
